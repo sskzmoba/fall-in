@@ -10,7 +10,8 @@ function tick() {
   if (ms <= 0) {
     cd.classList.add("closed");
     cd.querySelector(".countdown__label").textContent = "Booking deadline passed";
-    cdTime.textContent = "WhatsApp a coordinator for waitlist seats";
+    cdTime.textContent = "WhatsApp a coordinator for waitlist slots";
+    document.getElementById("dock-label").textContent = "Bookings closed · ask a coordinator for the waitlist";
     return;
   }
   const d = Math.floor(ms / 864e5);
@@ -37,7 +38,7 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "FALL IN, KAZAKS! 🏍️ Malabar Days bike ride (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. Book by 31 Oct:";
+const shareText = "FALL IN, KAZAKS! 🏍️ Malabar Days bike ride (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. #KazakWanderlust · Book by 31 Oct:";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Fall In, Kazaks!", text: shareText, url: SITE_URL }); return; }
@@ -45,3 +46,22 @@ document.getElementById("share-btn").addEventListener("click", async () => {
   }
   window.open("https://wa.me/?text=" + encodeURIComponent(shareText + " " + SITE_URL), "_blank", "noopener");
 });
+
+// ---- Promo film: opens full screen on tap, closes on ✕, Esc or when it ends ----
+const film = document.getElementById("film");
+const filmVideo = document.getElementById("film-video");
+function closeFilm() {
+  filmVideo.pause();
+  film.hidden = true;
+  document.body.style.overflow = "";
+  document.getElementById("film-btn").focus();
+}
+document.getElementById("film-btn").addEventListener("click", () => {
+  film.hidden = false;
+  document.body.style.overflow = "hidden";
+  filmVideo.currentTime = 0;
+  filmVideo.play().catch(() => {}); // a tap counts as a user gesture, so sound is allowed
+});
+document.getElementById("film-close").addEventListener("click", closeFilm);
+filmVideo.addEventListener("ended", closeFilm);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && !film.hidden) closeFilm(); });

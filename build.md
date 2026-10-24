@@ -9,9 +9,11 @@ WhatsApp.
 
 ## Theme (decided 2026-10-24)
 - Name: **FALL IN, KAZAKS — Adventures 2026–27**
+- Series label (decided 2026-10-24): **Kazak Wanderlust** (not used elsewhere before; meant to
+  last beyond this season). Payoff line: site "The bugle is calling again — for the Kazak Wanderlust that never left us."; video "The Kazak Wanderlust never left us." Hashtag #KazakWanderlust.
 - Story: bonding across generations of batches; relive school-day dawns and
   adventures, or join the veterans; stop waiting, step out.
-- Devices: bugle/reveille, roll numbers + batch years, "26 seats only" (trek).
+- Devices: bugle/reveille, roll numbers + batch years, "26 slots" (trek).
 - Colours from OBA logo: navy, red, black, white. Copy says "Kazaks", not "boys".
 
 ## Events
@@ -22,7 +24,7 @@ WhatsApp.
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
 | Form | https://forms.gle/KUhAgv8AGcXqcKAm6 | https://forms.gle/ZjN7RkG1J6H9Q6247 |
-| Contact | Manu Mohan (3873/06) 9809944833 | Appumon Joseph K (2633/96) 9535733200; EC: Col Pramod M (3006/99) 8588843998 |
+| Contact | Manu Mohan (3873/06) 9809944833; EC: MS Prakash (1262/82) 9895236686 | Appumon Joseph K (2633/96) 9535733200; EC: Col Pramod M (3006/99) 8588843998 |
 
 Ride is shown **first** everywhere (site, video, preview image): it has fewer
 enrolments (decided 2026-10-24). General contact in footer: Gp Capt Padmaraj
@@ -56,29 +58,41 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
 - [ ] Move UPI IDs into Google Form descriptions (EC/organisers)
 - [x] Promo video v1 rendered (2026-10-24): 1080×1920, 45 s, 13 MB,
       `video/out/fall-in-kazaks.mp4` (not committed; re-render with `npm run render` in `video/`)
-- [ ] Video v2 (end card URL → adventures.sskzmoba.org): swap in old school photos + real event photos (edit image names in
-      `video/src/FallIn.tsx`, files in `video/public/`)
-- [ ] Swap stock photos for real OBA photos
+- [x] Video v2 built locally (2026-10-24): real SSKZM school photos, Ooty ride + trek clips,
+      bugle plays to its end, 47.5 s. Outputs in `video/out/`: master (30 MB), `-share` (12.4 MB,
+      for WhatsApp), `-720` (6.2 MB, copied to `film/` for the site)
+- [x] Site v2 built locally (2026-10-24): all stock photos replaced with real ones; opt-in
+      "Watch the film" full-screen player (`preload="none"`, closes on ✕/Esc/end); new OG image
+- [x] v2 revisions (2026-10-24): destination stock shots (Wayanad Churam day/night,
+      Kolukkumalai peak/cliff) lead the ride/trek scenes and site cards; siren opens on the
+      school aircraft graded to pre-dawn, then the garlanded memorial at sunrise; football
+      photo swapped for campus aerial; film now 48.9 s (share 10.9 MB, web 5.5 MB)
+- [x] Review pass (2026-10-24): hero = school gate aerial; button "Watch the video"; film opens
+      on the aircraft at dawn (graded from a day photo) → memorial plaza at dawn → archive parade
+      print → PT bars → running track → lights out; "calling again" over today's parade ground;
+      film 47.3 s (share 10.5 MB). Site "Remember?" is one swipeable row of 4 captioned photos.
+      Trek card adds EC coordinator MS Prakash (1262/82).
+- [x] v2 published (2026-10-24) — https://adventures.sskzmoba.org/
 - [ ] After 31 Oct: switch cards to "Bookings closed / waitlist"
 
-## Real photo shortlist (scouted 2026-10-24, not yet used)
+## Real photo shortlist (scouted 2026-10-24, used in v2)
 Ooty ride 2026 folder: https://drive.google.com/drive/folders/197tRfhEDl_GYwYrPWDDa9j_i6gKxDp9O
 (owner sreejithpspillai; link-shared, so thumbnails/downloads work without the connector)
 | Use | File | Drive id |
 |---|---|---|
-| Past→present bridge: riders at the SSKZM gate | IMG-20260115-WA0004 | 1evf5rOa1VIatWgY9UGdg5mjAyg0zdg2I |
-| Ride card / hero: riders on hilltop road | IMG-20260117-WA0009 | 1RhOA6dLqJEmNvUniRKfNJRtIuRD5mXgm |
-| Helmet group selfie on the road | IMG-20260117-WA0119 | 1t4Xmg_3teunqxqfefuqa1KERx2Gf7i1O |
-| Full group line-up ("Every batch") | IMG-20260116-WA0012 | 13e282V1l9Ic0f5fgr5YtSeztmMzDnHPE |
-| B&W group laughing, Ooty street | IMG-20260116-WA0144 | 1AKL40ExiEZ192FoM89wXvk9Ut3ifSjVk |
-| Bikes lined up (Dry Fruit House) | IMG-20260115-WA0111 | 16kX-tkU5o6OBQqaMOWI2Xan4zaRQk3qH |
-| Dinner table ("stories long after") | IMG-20260116-WA0015 | 1tyj7daaDvclR8DTv7LI8I-Z180si2SRZ |
-| Spouse/pillion welcome (3 in red tees) | IMG-20260118-WA0121 | 1HVYEy38iHtcrYpNV69EB83GX3j_utUyV |
+| Past→present bridge: riders at the SSKZM gate | sheet #04 | 1evf5rOa1VIatWgY9UGdg5mjAyg0zdg2I |
+| Ride card / hero: riders on hilltop road | sheet #27 | 1IrVaVXXfnCFbdDkBRsbkMc7-ZGkpRtmz |
+| Helmet group selfie on the road | sheet #29 | 11tEPhm8J52NbuxG9t-K-9ItBLaEyRUFJ |
+| Full group line-up ("Every batch") | sheet #14 | 1f37O6GCvmOiCC7h4Dc528_1I-whzW9_A |
+| B&W group laughing, Ooty street | sheet #23 | 1GivBBHW6-oO20_L6bzeQ0aXuiuaFDx3c |
+| Bikes lined up (Dry Fruit House) | sheet #20 | 1MpsPb3ocx4jx4Qn46kYNBz6kiBzVbBUd |
+| Dinner table ("stories long after") | sheet #21 | 1U1E0xxqrgAqry7ZBedECfHeQvFF8iKz9 |
+| Spouse/pillion welcome (3 in red tees) | sheet #33 | 1RhOA6dLqJEmNvUniRKfNJRtIuRD5mXgm |
 | Video clip: open road, rider with luggage | VID-20260116-WA0108 (≈16–22 s) | 1ph8Z1ty7atUQ39sV92_JeiC2d-103li1 |
 | Video clip: pillion pair passing | VID-20260116-WA0110 (0–4 s) | 1eB0mhh4r8sSI3MJMHb-oO6vzDc8Pwyjn |
 | Video clip: departure from above ("step out") | VID-20260115-WA0087 (0–6 s) | 1AYnXIofjNqVN1AsZQ43B02VPoRiXDEAz |
-Consent: Rider group has given permission. Credit line: "Photos: Kazak Rider
-Group & SSKZM OBA" (2026-10-24).
+Consent: Rider group and Trekking Club have both given permission (2026-10-24).
+Credit line: "Photos: Kazak Rider Group, Kazaks Trekking Club & SSKZM OBA".
 
 Batch 2 (scouted 2026-10-24). Folders: bike2 `1Gmc5QLNjF06Zw5lwTvfMAHqTV-ytzwZc`,
 trek `1jiDFoyfMnByYhoPhloeH8k70AqElz04i` (Neyyar/Agasthyamala, 15–16 Nov 2025 — not
@@ -114,12 +128,6 @@ Kolukkumalai, caption accordingly), school `1eaeCZnPQqW6vqhpDNcM4697kZgo06eKs`.
 | Trek video: boat across reservoir, 103 MB (TCv014) | 1NX90Kqpkhi7T0VBJm_hc-PcrAr2rODTE |
 Avoided: shirtless swimming close-ups (public promo), duplicates, blurry clips.
 
-Copy change pending (site + video): "The bugle on the drill square" →
-"The bugle across the parade ground."
-
-Planned video tweak (not rendered yet): let the bugle "Assembly" call play to its
-natural end (~9.5 s) instead of fading early; extend the school scene ~1.5 s
-(video ≈ 46.5 s).
 
 ## Video (decided 2026-10-24)
 - Built with Remotion 4.0.538 (React → MP4) in `video/`. Free for non-profits /
@@ -127,8 +135,12 @@ natural end (~9.5 s) instead of fading early; extend the school scene ~1.5 s
 - Audio: mess siren "Folha de S. Paulo 6pm Siren" (CC0), bugle "Assembly" (public
   domain); music "Intended Force", Kevin
   MacLeod (CC BY 3.0 — credit must stay on the end card).
-- School photo `SSKZM.jpg` (CC BY-SA 4.0, TheInnocentBystander) and NCC cadets
-  (CC0), both from Wikimedia Commons, as nostalgia placeholders.
+- v2 mixes OBA photos/clips with 4 Wikimedia destination shots (decided 2026-10-24:
+  the venues must be shown prominently). Their credits stay in the footer and end card.
+  Real footage is tagged on screen ("Kazak Rider Group · Ooty, Jan 2026",
+  "Kazaks Trekking Club · Nov 2025") so it isn't mistaken for the new venues.
+- Clips are pre-trimmed to 1080×1920 / 30 fps / no audio in `video/public/`
+  (source originals stay in Drive). Video file for the site lives in `film/`.
 
 ## Maintenance / handover
 - Edit `index.html` (event details are in plain text in the cards); push to

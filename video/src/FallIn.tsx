@@ -3,6 +3,7 @@ import {
   AbsoluteFill,
   Audio,
   Img,
+  OffthreadVideo,
   Sequence,
   interpolate,
   spring,
@@ -34,15 +35,15 @@ const C = {
 // Scene timeline (frames @ 30fps)
 const S = {
   bugle: [0, 150],
-  school: [150, 180],
-  life: [330, 90],
+  school: [150, 195],
+  life: [345, 75],
   calling: [420, 90],
-  ride: [510, 270],
-  trek: [780, 270],
-  gens: [1050, 150],
-  end: [1200, 150],
+  ride: [510, 290],
+  trek: [800, 290],
+  gens: [1090, 180],
+  end: [1270, 150],
 } as const;
-export const TOTAL_FRAMES = 1350;
+export const TOTAL_FRAMES = 1420;
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
@@ -56,26 +57,75 @@ const KenBurns: React.FC<{
   y?: [number, number];
   filter?: string;
   position?: string;
-}> = ({ src, from = 1.05, to = 1.2, x = [0, 0], y = [0, 0], filter, position = "center" }) => {
+  video?: boolean;
+  band?: boolean;
+  print?: boolean;
+  wide?: boolean;
+}> = ({ src, from = 1.05, to = 1.2, x = [0, 0], y = [0, 0], filter, position = "center", video, band, print, wide }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const p = interpolate(frame, [0, durationInFrames], [0, 1], clamp);
   const scale = from + (to - from) * p;
   const tx = x[0] + (x[1] - x[0]) * p;
   const ty = y[0] + (y[1] - y[0]) * p;
+  const style: React.CSSProperties = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: position,
+    transform: `scale(${scale}) translate(${tx}%, ${ty}%)`,
+    filter,
+  };
+  // An old photograph laid on screen as a print, so the whole wide frame stays visible
+  // A wide banner photo shown full-width, so it is never stretched to fill the frame
+  if (wide) {
+    return (
+      <AbsoluteFill style={{ overflow: "hidden", background: C.night }}>
+        <Img src={staticFile(src)} style={{ ...style, transform: "scale(1.4)", filter: `blur(40px) brightness(.5) ${filter ?? ""}` }} />
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingBottom: 480 }}>
+          <Img src={staticFile(src)} style={{ width: "100%", filter, boxShadow: "0 30px 80px rgba(0,0,0,.6)", transform: `scale(${scale})` }} />
+        </AbsoluteFill>
+      </AbsoluteFill>
+    );
+  }
+  if (print) {
+    return (
+      <AbsoluteFill style={{ overflow: "hidden", background: C.night }}>
+        <Img src={staticFile(src)} style={{ ...style, transform: "scale(1.4)", filter: "blur(40px) brightness(.45)" }} />
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingBottom: 520 }}>
+          <Img
+            src={staticFile(src)}
+            style={{
+              width: 980,
+              border: "18px solid #efe6d2",
+              borderBottomWidth: 40,
+              boxShadow: "0 30px 80px rgba(0,0,0,.7)",
+              transform: `scale(${scale}) rotate(-2deg)`,
+            }}
+          />
+        </AbsoluteFill>
+      </AbsoluteFill>
+    );
+  }
+  if (band) {
+    return (
+      <AbsoluteFill style={{ overflow: "hidden", background: C.night }}>
+        <Img src={staticFile(src)} style={{ ...style, transform: "scale(1.3)", filter: "blur(40px) brightness(.55) saturate(1.2)" }} />
+        <AbsoluteFill
+          style={{
+            height: 1250,
+            WebkitMaskImage: "linear-gradient(180deg, #000 70%, transparent 100%)",
+            maskImage: "linear-gradient(180deg, #000 70%, transparent 100%)",
+          }}
+        >
+          <Img src={staticFile(src)} style={{ ...style, objectPosition: position, filter: "brightness(1.12) saturate(1.1)" }} />
+        </AbsoluteFill>
+      </AbsoluteFill>
+    );
+  }
   return (
     <AbsoluteFill style={{ overflow: "hidden" }}>
-      <Img
-        src={staticFile(src)}
-        style={{
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
-          objectPosition: position,
-          transform: `scale(${scale}) translate(${tx}%, ${ty}%)`,
-          filter,
-        }}
-      />
+      {video ? <OffthreadVideo src={staticFile(src)} muted style={style} /> : <Img src={staticFile(src)} style={style} />}
     </AbsoluteFill>
   );
 };
@@ -198,29 +248,71 @@ const Pad: React.FC<{ children: React.ReactNode; justify?: "flex-end" | "center"
   <AbsoluteFill style={{ padding: "160px 90px 260px", justifyContent: justify, gap: 28 }}>{children}</AbsoluteFill>
 );
 
-// A slideshow of photos inside one scene, crossfading
-const Slides: React.FC<{ items: { src: string; filter?: string; position?: string }[]; each: number; overlap?: number }> = ({
-  items,
-  each,
-  overlap = 12,
-}) => (
-  <>
-    {items.map((it, i) => (
-      <Sequence key={it.src} from={i * each} durationInFrames={each + overlap}>
-        <Fade edge={overlap} inOnly={i === 0 ? false : true}>
-          <KenBurns src={it.src} filter={it.filter} position={it.position} x={i % 2 ? [-2, 2] : [2, -2]} />
-        </Fade>
-      </Sequence>
-    ))}
-  </>
+// A slideshow of photos/clips inside one scene, crossfading. `dur` overrides `each` per item.
+type Slide = { src: string; filter?: string; position?: string; video?: boolean; band?: boolean; print?: boolean; wide?: boolean; dur?: number; tag?: string };
+const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ items, each, overlap = 12 }) => {
+  let at = 0;
+  return (
+    <>
+      {items.map((it, i) => {
+        const from = at;
+        const dur = it.dur ?? each;
+        at += dur;
+        return (
+          <Sequence key={it.src} from={from} durationInFrames={dur + overlap}>
+            <Fade edge={overlap} inOnly>
+              <KenBurns
+                src={it.src}
+                filter={it.filter}
+                position={it.position}
+                video={it.video}
+                band={it.band}
+                print={it.print}
+                wide={it.wide}
+                from={it.video || it.band || it.print || it.wide ? 1 : 1.05}
+                to={it.video ? 1.06 : it.band || it.print || it.wide ? 1.08 : 1.2}
+                x={it.video ? [0, 0] : i % 2 ? [-2, 2] : [2, -2]}
+              />
+              {it.tag && <Tag>{it.tag}</Tag>}
+            </Fade>
+          </Sequence>
+        );
+      })}
+    </>
+  );
+};
+
+// Small corner tag so real footage from past events isn't mistaken for the venue
+const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <AbsoluteFill style={{ alignItems: "flex-start", padding: "250px 90px", justifyContent: "flex-start" }}>
+    <div style={{ fontFamily: inter, fontWeight: 600, fontSize: 26, color: "rgba(244,239,230,.85)", background: "rgba(7,11,20,.55)", padding: "8px 16px", borderRadius: 8 }}>
+      {children}
+    </div>
+  </AbsoluteFill>
 );
 
 // ---------- Scenes ----------
 
 const SEPIA = "sepia(.85) contrast(1.1) brightness(.85) saturate(.9)";
+// Faded, warm "memory" grade for the real school photos
+const MEMORY = "sepia(.4) contrast(1.05) brightness(.95) saturate(.85)";
 
-const BugleScene: React.FC = () => (
+const BugleScene: React.FC = () => {
+  const frame = useCurrentFrame();
+  const light = interpolate(frame, [0, 30], [0, 1], clamp);
+  return (
   <AbsoluteFill style={{ background: "#000" }}>
+    <AbsoluteFill style={{ opacity: light }}>
+      <Slides
+        each={80}
+        overlap={20}
+        items={[
+          { src: "sc-plane-dawn.jpg" },
+          { src: "sc-plaza-dawn.jpg", dur: 70 },
+        ]}
+      />
+    </AbsoluteFill>
+    <Shade strength={0.55} from="top" />
     <Pad justify="center">
       <Rise delay={20}>
         <Body size={58} color={C.muted} weight={400}>
@@ -236,30 +328,33 @@ const BugleScene: React.FC = () => (
       </Rise>
     </Pad>
   </AbsoluteFill>
-);
+  );
+};
 
 const SchoolScene: React.FC = () => (
   <AbsoluteFill>
     <Slides
-      each={90}
+      each={48}
       items={[
-        { src: "cadets.jpg", filter: SEPIA, position: "center 40%" },
-        { src: "school.jpg", filter: SEPIA, position: "30% center" },
+        { src: "old-parade.jpg", print: true },
+        { src: "sc-ptbars.jpg", filter: MEMORY },
+        { src: "sc-run.jpg", filter: MEMORY, wide: true },
+        { src: "sc-lightsout.jpg", filter: MEMORY + " brightness(.8)", dur: 51 },
       ]}
     />
     <OldFilm />
-    <Shade strength={0.8} />
+    <Shade strength={0.7} />
     <Pad>
       <Rise delay={10}>
-        <Body size={64}>The bugle on the drill square.</Body>
+        <Body size={64}>The bugle across the parade ground.</Body>
       </Rise>
-      <Rise delay={95}>
+      <Rise delay={56}>
         <Body size={64}>Morning PT.</Body>
       </Rise>
-      <Rise delay={110}>
+      <Rise delay={104}>
         <Body size={64}>Cross-country over trails and roads.</Body>
       </Rise>
-      <Rise delay={125}>
+      <Rise delay={152}>
         <Body size={64} color={C.amber}>
           Lights out — and stories long after.
         </Body>
@@ -271,15 +366,15 @@ const SchoolScene: React.FC = () => (
 const LifeScene: React.FC = () => {
   const frame = useCurrentFrame();
   const words = ["Deadlines.", "Traffic.", "Screens.", "Someday…"];
-  const idx = Math.min(words.length - 1, Math.floor(interpolate(frame, [30, 90], [0, words.length], clamp)));
-  const shake = frame > 30 ? Math.sin(frame * 3) * 4 : 0;
+  const idx = Math.min(words.length - 1, Math.floor(interpolate(frame, [22, 70], [0, words.length], clamp)));
+  const shake = frame > 22 ? Math.sin(frame * 3) * 4 : 0;
   return (
     <AbsoluteFill style={{ background: "#1a1d23" }}>
       <Pad justify="center">
         <Body size={60} color={C.muted} weight={400}>
           Then life happened.
         </Body>
-        {frame > 30 && (
+        {frame > 22 && (
           <div style={{ transform: `translateX(${shake}px)` }}>
             <Big size={140} color="#5d6573">
               {words[idx]}
@@ -298,7 +393,7 @@ const CallingScene: React.FC = () => {
   const flash = interpolate(frame, [0, 6, 20], [0.9, 0.6, 0], clamp);
   return (
     <AbsoluteFill>
-      <KenBurns src="hero.jpg" from={1.25} to={1.08} filter={`sepia(${sep})`} position="center 35%" />
+      <KenBurns src="parade-now.jpg" wide from={1} to={1.06} filter={`sepia(${sep})`} />
       <Shade strength={0.85} from="both" />
       <AbsoluteFill style={{ background: "#fff", opacity: flash }} />
       <Pad>
@@ -308,6 +403,11 @@ const CallingScene: React.FC = () => {
             calling again.
           </Big>
         </Rise>
+        <Rise delay={34}>
+          <Body size={46} weight={400}>
+            <i style={{ whiteSpace: "nowrap" }}>The Kazak Wanderlust never left us.</i>
+          </Body>
+        </Rise>
       </Pad>
     </AbsoluteFill>
   );
@@ -316,19 +416,20 @@ const CallingScene: React.FC = () => {
 const TrekScene: React.FC = () => (
   <AbsoluteFill>
     <Slides
-      each={68}
+      each={60}
       items={[
-        { src: "trek.jpg", position: "65% center" },
-        { src: "stars.jpg" },
-        { src: "reach.jpg", position: "center 30%" },
-        { src: "trail.jpg" },
+        { src: "kolu-peak.jpg", band: true, tag: "Where we’re going · Kolukkumalai" },
+        { src: "kolu-cliff.jpg", position: "center 30%", dur: 50, tag: "Where we’re going · Kolukkumalai" },
+        { src: "trek-trailwalk.mp4", video: true, dur: 75, tag: "Kazaks Trekking Club · Nov 2025" },
+        { src: "trek-hand.jpg", dur: 45, tag: "Kazaks Trekking Club · Nov 2025" },
+        { src: "trek-cheer.mp4", video: true, tag: "Kazaks Trekking Club · Nov 2025" },
       ]}
     />
     <Shade strength={0.88} from="both" />
     <AbsoluteFill style={{ padding: "150px 90px", justifyContent: "flex-start" }}>
       <Rise delay={6}>
         <Pill bg={C.amber} color="#1b1200">
-          26 seats
+          26 slots
         </Pill>
       </Rise>
     </AbsoluteFill>
@@ -347,19 +448,19 @@ const TrekScene: React.FC = () => (
       <Rise delay={24}>
         <Body size={56}>5–6 December · Munnar</Body>
       </Rise>
-      <Rise delay={80}>
+      <Rise delay={40}>
+        <Body size={50} weight={400}>
+          Sunrise above the clouds.
+        </Body>
+      </Rise>
+      <Rise delay={100}>
         <Body size={50} weight={400}>
           A night under the stars.
         </Body>
       </Rise>
-      <Rise delay={140}>
+      <Rise delay={160}>
         <Body size={50} weight={400}>
           4 AM wake-up — earlier than the mess siren!
-        </Body>
-      </Rise>
-      <Rise delay={200}>
-        <Body size={50} weight={400}>
-          Sunrise above the clouds.
         </Body>
       </Rise>
     </Pad>
@@ -369,12 +470,13 @@ const TrekScene: React.FC = () => (
 const RideScene: React.FC = () => (
   <AbsoluteFill>
     <Slides
-      each={68}
+      each={60}
       items={[
-        { src: "ride.jpg" },
-        { src: "churam-night.jpg" },
-        { src: "bikes.jpg", position: "70% center" },
-        { src: "tea.jpg" },
+        { src: "wayanad-churam.jpg", band: true, tag: "Where we’re going · Wayanad Churam" },
+        { src: "churam-night.jpg", band: true, dur: 50, tag: "Where we’re going · Wayanad Churam" },
+        { src: "ooty-gate.jpg", position: "center 30%", dur: 55, tag: "Kazak Rider Group · Ooty, Jan 2026" },
+        { src: "ooty-road.mp4", video: true, dur: 75, tag: "Kazak Rider Group · Ooty, Jan 2026" },
+        { src: "ooty-pillion.mp4", video: true, dur: 50, tag: "Kazak Rider Group · Ooty, Jan 2026" },
       ]}
     />
     <Shade strength={0.88} from="both" />
@@ -398,17 +500,17 @@ const RideScene: React.FC = () => (
       <Rise delay={24}>
         <Body size={56}>23–25 January · Wayanad</Body>
       </Rise>
-      <Rise delay={80}>
-        <Body size={50} weight={400}>
-          Bangalore &amp; Kochi groups meet in Wayanad.
-        </Body>
-      </Rise>
-      <Rise delay={140}>
+      <Rise delay={40}>
         <Body size={50} weight={400}>
           Misty hills. Winding ghat roads.
         </Body>
       </Rise>
-      <Rise delay={200}>
+      <Rise delay={100}>
+        <Body size={50} weight={400}>
+          Bangalore &amp; Kochi groups meet in Wayanad.
+        </Body>
+      </Rise>
+      <Rise delay={160}>
         <Body size={50} weight={400}>
           After Ooty 2026 — the roads are calling again.
         </Body>
@@ -435,8 +537,12 @@ const GensScene: React.FC = () => {
   const { fps } = useVideoConfig();
   return (
     <AbsoluteFill style={{ background: `radial-gradient(120% 70% at 50% 30%, ${C.navy}, ${C.night} 75%)` }}>
+      <AbsoluteFill style={{ top: 560, height: 608, overflow: "hidden" }}>
+        <OffthreadVideo src={staticFile("ride-drone.mp4")} muted style={{ width: "100%", height: "100%", objectFit: "cover", opacity: interpolate(frame, [10, 30], [0, 1], clamp) }} />
+        <AbsoluteFill style={{ background: `linear-gradient(180deg, ${C.night} 0%, rgba(7,11,20,0) 18%, rgba(7,11,20,0) 82%, ${C.night} 100%)` }} />
+      </AbsoluteFill>
       <AbsoluteFill
-        style={{ padding: "170px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", gap: "18px 40px" }}
+        style={{ padding: "150px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", gap: "10px 36px" }}
       >
         {BATCHES.map(({ b, gold }, i) => {
           const s = spring({ frame: frame - i * 4, fps, config: { damping: 12 } });
@@ -446,7 +552,7 @@ const GensScene: React.FC = () => {
               style={{
                 fontFamily: oswald,
                 fontWeight: 700,
-                fontSize: 120,
+                fontSize: 104,
                 color: gold ? C.amber : "rgba(255,255,255,.85)",
                 opacity: s,
                 transform: `scale(${0.6 + 0.4 * s})`,
@@ -458,13 +564,10 @@ const GensScene: React.FC = () => {
         })}
       </AbsoluteFill>
       <Pad>
-        <Rise delay={40}>
-          <Body size={58}>Relive your school years.</Body>
+        <Rise delay={50}>
+          <Body size={52}>Relive your school years. Or ride with the veterans.</Body>
         </Rise>
-        <Rise delay={65}>
-          <Body size={58}>Or ride with the veterans.</Body>
-        </Rise>
-        <Rise delay={95}>
+        <Rise delay={90}>
           <Big size={112}>Every batch.</Big>
           <Big size={112} color={C.red}>
             One squad.
@@ -486,6 +589,9 @@ const EndScene: React.FC = () => {
           src={staticFile("oba-logo.png")}
           style={{ width: 300, height: 300, transform: `scale(${logo}) rotate(${(1 - logo) * -40}deg)` }}
         />
+        <Rise delay={8}>
+          <Eyebrow>Kazak Wanderlust · 2026–27</Eyebrow>
+        </Rise>
         <Rise delay={12}>
           <Big size={136}>Fall in,</Big>
           <Big size={136} color={C.amber}>
@@ -505,7 +611,7 @@ const EndScene: React.FC = () => {
         </Rise>
         <Rise delay={58}>
           <Body size={46} color={C.amber}>
-            sskzmoba.github.io/fall-in
+            adventures.sskzmoba.org
           </Body>
         </Rise>
       </AbsoluteFill>
@@ -515,7 +621,8 @@ const EndScene: React.FC = () => {
           <br />
           Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0 · Bugle “Assembly” (public domain) · Siren (CC0)
           <br />
-          Photos: Wikimedia Commons contributors (CC0 / CC BY / CC BY-SA)
+          Photos &amp; clips: Kazak Rider Group, Kazaks Trekking Club &amp; SSKZM OBA · Destination photos via Wikimedia Commons:
+          Musheer1999 (CC BY-SA 4.0), Karthick Gopalakrishnan (CC0), Sreeraj PS (CC BY-SA 3.0), Dhruvaraj S (CC BY 2.0)
         </Body>
       </AbsoluteFill>
     </AbsoluteFill>
@@ -563,7 +670,7 @@ export const FallIn: React.FC = () => (
       </Fade>
     </Sequence>
 
-    {/* 05:30 mess siren winds up over black, then hands over to the bugle on the drill square */}
+    {/* 05:30 mess siren winds up in the dark, then hands over to the bugle across the parade ground */}
     <Sequence from={0} durationInFrames={185}>
       <Audio
         src={staticFile("siren.wav")}
@@ -571,10 +678,10 @@ export const FallIn: React.FC = () => (
         volume={(f) => interpolate(f, [0, 20, 135, 185], [0, 1, 1, 0], clamp)}
       />
     </Sequence>
-    <Sequence from={140} durationInFrames={280}>
+    <Sequence from={140} durationInFrames={330}>
       <Audio
         src={staticFile("assembly.mp3")}
-        volume={(f) => interpolate(f, [0, 10, 230, 280], [0, 0.9, 0.9, 0], clamp)}
+        volume={(f) => interpolate(f, [0, 10, 300, 330], [0, 0.9, 0.9, 0], clamp)}
       />
     </Sequence>
     {/* Music bed: quiet under the nostalgia, full from the "calling again" moment, fades at the end */}
