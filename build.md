@@ -32,13 +32,15 @@ WhatsApp.
 - Privacy: no data collected on the site (forms do that). Phone numbers only
   behind WhatsApp buttons; UPI IDs **not** on the site — to be put in each Google
   Form description (EC action). Site has `noindex` (spreads via WhatsApp).
-- Stock photos (Unsplash licence) for v1; replace with real OBA photos later.
+- Stock photos for v1 from Wikimedia Commons (CC0 / CC BY / CC BY-SA; credits in
+  the page footer, keep them while those photos are used). Replace with real OBA
+  photos later. Logo master: `img/oba-logo.png` (cut out of checkerboard).
 - Suggested to EC: extend ride booking to ~15 Nov; longer-term use an OBA
   account instead of personal UPI IDs.
 
 ## Work
 - [x] Theme + plan agreed (2026-10-24)
-- [ ] Website v1 live with stock photos
+- [x] Website v1 live with stock photos — https://sskzmoba.github.io/fall-in/ (2026-10-24)
 - [ ] Move UPI IDs into Google Form descriptions (EC/organisers)
 - [ ] Promo video v1 (9:16, ~40 s, Remotion) — needs old school photos
 - [ ] Swap stock photos for real OBA photos
