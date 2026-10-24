@@ -42,9 +42,20 @@ WhatsApp.
 - [x] Theme + plan agreed (2026-10-24)
 - [x] Website v1 live with stock photos — https://sskzmoba.github.io/fall-in/ (2026-10-24)
 - [ ] Move UPI IDs into Google Form descriptions (EC/organisers)
-- [ ] Promo video v1 (9:16, ~40 s, Remotion) — needs old school photos
+- [x] Promo video v1 rendered (2026-10-24): 1080×1920, 45 s, 13 MB,
+      `video/out/fall-in-kazaks.mp4` (not committed; re-render with `npm run render` in `video/`)
+- [ ] Video v2: swap in old school photos + real event photos (edit image names in
+      `video/src/FallIn.tsx`, files in `video/public/`)
 - [ ] Swap stock photos for real OBA photos
 - [ ] After 31 Oct: switch cards to "Bookings closed / waitlist"
+
+## Video (decided 2026-10-24)
+- Built with Remotion 4.0.538 (React → MP4) in `video/`. Free for non-profits /
+  orgs ≤3 staff; OBA qualifies. Requires Node; `npm install` then `npm run render`.
+- Audio: Reveille, US Army Band (public domain); music "Intended Force", Kevin
+  MacLeod (CC BY 3.0 — credit must stay on the end card).
+- School photo `SSKZM.jpg` (CC BY-SA 4.0, TheInnocentBystander) and NCC cadets
+  (CC0), both from Wikimedia Commons, as nostalgia placeholders.
 
 ## Maintenance / handover
 - Edit `index.html` (event details are in plain text in the cards); push to
