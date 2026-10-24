@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SSKZM OBA//Fall In//EN
+BEGIN:VEVENT
+UID:ride-malabar-days-2027@sskzmoba
+DTSTAMP:20261024T000000Z
+DTSTART;VALUE=DATE:20270123
+DTEND;VALUE=DATE:20270126
+SUMMARY:Malabar Days - Kazak Bike Ride
+LOCATION:Wayanad\, Kerala
+DESCRIPTION:Bangalore & Kochi groups meet in Wayanad. Full safety gear a must. Ride lead: Appumon Joseph K. https://sskzmoba.github.io/fall-in/
+END:VEVENT
+END:VCALENDAR

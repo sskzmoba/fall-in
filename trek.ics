@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SSKZM OBA//Fall In//EN
+BEGIN:VEVENT
+UID:trek-kolukkumalai-2026@sskzmoba
+DTSTAMP:20261024T000000Z
+DTSTART:20261205T000000Z
+DTEND:20261206T163000Z
+SUMMARY:Dawn @ Kolukkumalai - Kazaks Trekking Club
+LOCATION:Departs Vivekananda Park\, Kowdiar\, Thiruvananthapuram (5:30 AM)
+DESCRIPTION:Sunrise trek & tent stay\, Kolukkumalai\, Munnar. Trek lead: Manu. https://sskzmoba.github.io/fall-in/
+END:VEVENT
+END:VCALENDAR
