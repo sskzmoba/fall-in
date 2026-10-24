@@ -37,8 +37,8 @@ const S = {
   school: [150, 180],
   life: [330, 90],
   calling: [420, 90],
-  trek: [510, 270],
-  ride: [780, 270],
+  ride: [510, 270],
+  trek: [780, 270],
   gens: [1050, 150],
   end: [1200, 150],
 } as const;
@@ -229,9 +229,9 @@ const BugleScene: React.FC = () => (
       </Rise>
       <Rise delay={45}>
         <Big size={120}>Remember</Big>
-        <Big size={120}>the bugle</Big>
+        <Big size={120}>the mess</Big>
         <Big size={120} color={C.amber}>
-          at dawn?
+          siren?
         </Big>
       </Rise>
     </Pad>
@@ -243,21 +243,21 @@ const SchoolScene: React.FC = () => (
     <Slides
       each={90}
       items={[
-        { src: "school.jpg", filter: SEPIA, position: "30% center" },
         { src: "cadets.jpg", filter: SEPIA, position: "center 40%" },
+        { src: "school.jpg", filter: SEPIA, position: "30% center" },
       ]}
     />
     <OldFilm />
     <Shade strength={0.8} />
     <Pad>
       <Rise delay={10}>
-        <Body size={64}>Dawn PT.</Body>
-      </Rise>
-      <Rise delay={40}>
-        <Body size={64}>The parade ground.</Body>
+        <Body size={64}>The bugle on the drill square.</Body>
       </Rise>
       <Rise delay={95}>
-        <Body size={64}>Cross-country through the hills.</Body>
+        <Body size={64}>Morning PT.</Body>
+      </Rise>
+      <Rise delay={110}>
+        <Body size={64}>Cross-country over trails and roads.</Body>
       </Rise>
       <Rise delay={125}>
         <Body size={64} color={C.amber}>
@@ -328,7 +328,7 @@ const TrekScene: React.FC = () => (
     <AbsoluteFill style={{ padding: "150px 90px", justifyContent: "flex-start" }}>
       <Rise delay={6}>
         <Pill bg={C.amber} color="#1b1200">
-          Only 26 seats
+          26 seats
         </Pill>
       </Rise>
     </AbsoluteFill>
@@ -354,7 +354,7 @@ const TrekScene: React.FC = () => (
       </Rise>
       <Rise delay={140}>
         <Body size={50} weight={400}>
-          4 AM reveille — just like old times.
+          4 AM wake-up — earlier than the mess siren!
         </Body>
       </Rise>
       <Rise delay={200}>
@@ -410,14 +410,25 @@ const RideScene: React.FC = () => (
       </Rise>
       <Rise delay={200}>
         <Body size={50} weight={400}>
-          After Ooty — the roads are calling again.
+          After Ooty 2026 — the roads are calling again.
         </Body>
       </Rise>
     </Pad>
   </AbsoluteFill>
 );
 
-const BATCHES = ["’66", "’71", "’77", "’83", "’88", "’92", "’96", "’99", "’03", "’06", "’11", "’15", "’20"];
+// Gold = batches with Kazaks already registered
+const BATCHES: { b: string; gold?: boolean }[] = [
+  { b: "’65" },
+  { b: "’82", gold: true },
+  { b: "’93" },
+  { b: "’96", gold: true },
+  { b: "’98", gold: true },
+  { b: "’99" },
+  { b: "’06" },
+  { b: "’11", gold: true },
+  { b: "’16", gold: true },
+];
 
 const GensScene: React.FC = () => {
   const frame = useCurrentFrame();
@@ -425,18 +436,18 @@ const GensScene: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: `radial-gradient(120% 70% at 50% 30%, ${C.navy}, ${C.night} 75%)` }}>
       <AbsoluteFill
-        style={{ padding: "170px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", gap: "18px 26px" }}
+        style={{ padding: "170px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", gap: "18px 40px" }}
       >
-        {BATCHES.map((b, i) => {
-          const s = spring({ frame: frame - i * 3, fps, config: { damping: 12 } });
+        {BATCHES.map(({ b, gold }, i) => {
+          const s = spring({ frame: frame - i * 4, fps, config: { damping: 12 } });
           return (
             <div
               key={b}
               style={{
                 fontFamily: oswald,
                 fontWeight: 700,
-                fontSize: 92,
-                color: i % 3 === 2 ? C.amber : "rgba(255,255,255,.85)",
+                fontSize: 120,
+                color: gold ? C.amber : "rgba(255,255,255,.85)",
                 opacity: s,
                 transform: `scale(${0.6 + 0.4 * s})`,
               }}
@@ -483,8 +494,8 @@ const EndScene: React.FC = () => {
         </Rise>
         <Rise delay={28}>
           <div style={{ display: "flex", gap: 22, justifyContent: "center", flexWrap: "wrap" }}>
-            <Pill bg="#2f9e5b">🥾 Trek · 5–6 Dec</Pill>
             <Pill bg={C.red}>🏍️ Ride · 23–25 Jan</Pill>
+            <Pill bg="#2f9e5b">🥾 Trek · 5–6 Dec</Pill>
           </div>
         </Rise>
         <Rise delay={44}>
@@ -500,9 +511,9 @@ const EndScene: React.FC = () => {
       </AbsoluteFill>
       <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 60px 70px", textAlign: "center" }}>
         <Body size={22} weight={400} color="rgba(169,179,196,.75)">
-          SSKZM OBA · ज्ञान · अनुशासन · सहयोग
+          SSKZM OBA Communications Cell
           <br />
-          Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0 · Reveille: US Army Band (public domain)
+          Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0 · Bugle “Assembly” (public domain) · Siren (CC0)
           <br />
           Photos: Wikimedia Commons contributors (CC0 / CC BY / CC BY-SA)
         </Body>
@@ -552,22 +563,29 @@ export const FallIn: React.FC = () => (
       </Fade>
     </Sequence>
 
-    {/* Reveille opens the film, and returns briefly when "the bugle is calling again" */}
-    <Sequence from={0} durationInFrames={170}>
+    {/* 05:30 mess siren winds up over black, then hands over to the bugle on the drill square */}
+    <Sequence from={0} durationInFrames={185}>
       <Audio
-        src={staticFile("reveille.mp3")}
-        volume={(f) => interpolate(f, [0, 130, 170], [0.9, 0.9, 0], clamp)}
+        src={staticFile("siren.wav")}
+        startFrom={60}
+        volume={(f) => interpolate(f, [0, 20, 135, 185], [0, 1, 1, 0], clamp)}
+      />
+    </Sequence>
+    <Sequence from={140} durationInFrames={280}>
+      <Audio
+        src={staticFile("assembly.mp3")}
+        volume={(f) => interpolate(f, [0, 10, 230, 280], [0, 0.9, 0.9, 0], clamp)}
       />
     </Sequence>
     {/* Music bed: quiet under the nostalgia, full from the "calling again" moment, fades at the end */}
-    <Sequence from={140}>
+    <Sequence from={300}>
       <Audio
         src={staticFile("music.mp3")}
         volume={(f) =>
           interpolate(
             f,
-            [0, 40, S.calling[0] - 160, S.calling[0] - 140, TOTAL_FRAMES - 140 - 45, TOTAL_FRAMES - 140],
-            [0, 0.35, 0.35, 0.85, 0.85, 0],
+            [0, 30, S.calling[0] - 300, S.calling[0] - 280, TOTAL_FRAMES - 300 - 45, TOTAL_FRAMES - 300],
+            [0, 0.4, 0.4, 0.95, 0.95, 0],
             { ...clamp, easing: Easing.inOut(Easing.ease) }
           )
         }

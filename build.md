@@ -22,7 +22,17 @@ WhatsApp.
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
 | Form | https://forms.gle/KUhAgv8AGcXqcKAm6 | https://forms.gle/ZjN7RkG1J6H9Q6247 |
-| Contact | Manu (3873/06) 9809944833 | Appumon Joseph K (2633/96) 9535733200; EC: Col Pramod M (3006/99) 8588843998 |
+| Contact | Manu Mohan (3873/06) 9809944833 | Appumon Joseph K (2633/96) 9535733200; EC: Col Pramod M (3006/99) 8588843998 |
+
+Ride is shown **first** everywhere (site, video, preview image): it has fewer
+enrolments (decided 2026-10-24). General contact in footer: Gp Capt Padmaraj
+(2298/93), Communications Cell, 9846552298.
+
+Batch years shown (site marquee + video): '65 '82 '93 '96 '98 '99 '06 '11 '16.
+Gold = batches with registered participants ('82 '96 '98 '11 '16). Use only batches
+known to exist (there is no '71 or '78 batch).
+
+Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning PT".
 
 ## Decisions
 - Hosting: GitHub Pages, public repo `sskzmoba/fall-in`, URL
@@ -52,7 +62,8 @@ WhatsApp.
 ## Video (decided 2026-10-24)
 - Built with Remotion 4.0.538 (React → MP4) in `video/`. Free for non-profits /
   orgs ≤3 staff; OBA qualifies. Requires Node; `npm install` then `npm run render`.
-- Audio: Reveille, US Army Band (public domain); music "Intended Force", Kevin
+- Audio: mess siren "Folha de S. Paulo 6pm Siren" (CC0), bugle "Assembly" (public
+  domain); music "Intended Force", Kevin
   MacLeod (CC BY 3.0 — credit must stay on the end card).
 - School photo `SSKZM.jpg` (CC BY-SA 4.0, TheInnocentBystander) and NCC cadets
   (CC0), both from Wikimedia Commons, as nostalgia placeholders.

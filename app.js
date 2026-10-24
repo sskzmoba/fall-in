@@ -37,7 +37,7 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "FALL IN, KAZAKS! 🥾 Dawn @ Kolukkumalai trek (5–6 Dec) & 🏍️ Malabar Days bike ride (23–25 Jan). Every batch, one trail. Book by 31 Oct:";
+const shareText = "FALL IN, KAZAKS! 🏍️ Malabar Days bike ride (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. Book by 31 Oct:";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Fall In, Kazaks!", text: shareText, url: SITE_URL }); return; }
