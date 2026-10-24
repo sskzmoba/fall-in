@@ -1,6 +1,6 @@
 // Booking deadline: 31 Oct 2026, 11:59 PM IST
 const DEADLINE = new Date("2026-10-31T23:59:59+05:30");
-const SITE_URL = "https://sskzmoba.github.io/fall-in/";
+const SITE_URL = "https://adventures.sskzmoba.org/";
 
 // ---- Countdown ----
 const cd = document.getElementById("countdown");
