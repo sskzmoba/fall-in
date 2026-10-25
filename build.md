@@ -20,7 +20,7 @@ WhatsApp.
 | | Trek — Dawn @ Kolukkumalai | Ride — Malabar Days |
 |---|---|---|
 | Dates | 5–6 Dec 2026 | 23–25 Jan 2027 |
-| Book by | 31 Oct 2026 (balance by 7 Nov) | 31 Oct 2026 |
+| Book by | 31 Oct 2026 (balance by 7 Nov) | Shown as "Booking open", no date (decided 2026-10-25; form unchanged) |
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
 | Form | https://forms.gle/KUhAgv8AGcXqcKAm6 | https://forms.gle/ZjN7RkG1J6H9Q6247 |
@@ -73,7 +73,31 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       film 47.3 s (share 10.5 MB). Site "Remember?" is one swipeable row of 4 captioned photos.
       Trek card adds EC coordinator MS Prakash (1262/82).
 - [x] v2 published (2026-10-24) — https://adventures.sskzmoba.org/
-- [ ] After 31 Oct: switch cards to "Bookings closed / waitlist"
+- [x] Registration sheets fixed (2026-10-25): forms ask Roll number + Batch year (4-digit, validated)
+      separately; response sheet auto-numbers column A; family count ignores "None/Nil";
+      Organiser tracker auto-fills from the form (organisers type only Verified paid ₹, UTR,
+      Verified by, date, notes); public list rebuilt (see "Registration sheets" below)
+- [x] v3 built locally (2026-10-25): ride has no deadline ("Booking open"; trek keeps 31 Oct);
+      Coonoor Quarter Guard photo (site "every batch" photo + 2 s pan in the film); Ooty tags →
+      "Nilgiris, Jan 2026"; trek film shots from last year's Neyyar video (boat, trail line); film 51.3 s;
+      Trek card: "See who's coming →" (green, opens public list) + "Last year's trek" 2:40 video tile
+      (9.6 MB, opt-in); end-card logo gets one amber halo + pop; share copy 12.5 MB
+- [x] v3 published (2026-10-25) — https://adventures.sskzmoba.org/
+- [ ] Ride public list (later, same pattern as the trek)
+- [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
+
+## Registration sheets (trek, set up 2026-10-25)
+- Form responses: workbook `1JqRSsMf_n9MePiLzTsrc-KPZ4M_pqlTBrKXJB6yMJUA` (tab "Form Responses 1";
+  col A auto-number, L = Batch year). Never share it.
+- Organiser workbook `10PBwTpfYA0d_7jxTs80RbbwkR69-phMZFKZh_b8vjco` (organisers only):
+  *Live form responses* (IMPORTRANGE A:L) → *Registration status* (organisers set **Status** in col F,
+  optional party-size correction in G) → *Organiser tracker* (auto rows; organisers fill J Verified paid,
+  M UTR, N Verified by, O date, Q confirmation date, R notes) and *Public export*.
+  Manual tracker cells are tied to row position, so never delete or re-sort form responses.
+- Public list (view only, link-shared): `1VO0rb67mPiYVoLBIng9vbGu57101F0qloMHJQ-IpZWU` —
+  https://docs.google.com/spreadsheets/d/1VO0rb67mPiYVoLBIng9vbGu57101F0qloMHJQ-IpZWU/htmlview
+  Shows name, roll no., batch, family joining (relationship only, never names), status; totals
+  exclude Cancelled/Withdrawn/Duplicate. Expected total ₹ = party size × ₹5,000 (TVM bus) or ₹3,600 (direct).
 
 ## Real photo shortlist (scouted 2026-10-24, used in v2)
 Ooty ride 2026 folder: https://drive.google.com/drive/folders/197tRfhEDl_GYwYrPWDDa9j_i6gKxDp9O

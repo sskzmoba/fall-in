@@ -38,12 +38,12 @@ const S = {
   school: [150, 195],
   life: [345, 75],
   calling: [420, 90],
-  ride: [510, 290],
-  trek: [800, 290],
-  gens: [1090, 180],
-  end: [1270, 150],
+  ride: [510, 350],
+  trek: [860, 350],
+  gens: [1210, 180],
+  end: [1390, 150],
 } as const;
-export const TOTAL_FRAMES = 1420;
+export const TOTAL_FRAMES = 1540;
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
@@ -61,7 +61,8 @@ const KenBurns: React.FC<{
   band?: boolean;
   print?: boolean;
   wide?: boolean;
-}> = ({ src, from = 1.05, to = 1.2, x = [0, 0], y = [0, 0], filter, position = "center", video, band, print, wide }) => {
+  lift?: number;
+}> = ({ src, from = 1.05, to = 1.2, x = [0, 0], y = [0, 0], filter, position = "center", video, band, print, wide, lift = 480 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
   const p = interpolate(frame, [0, durationInFrames], [0, 1], clamp);
@@ -77,12 +78,12 @@ const KenBurns: React.FC<{
     filter,
   };
   // An old photograph laid on screen as a print, so the whole wide frame stays visible
-  // A wide banner photo shown full-width, so it is never stretched to fill the frame
+  // A wide banner photo shown full-width, so it is never stretched to fill the frame; `lift` raises it above the text
   if (wide) {
     return (
       <AbsoluteFill style={{ overflow: "hidden", background: C.night }}>
         <Img src={staticFile(src)} style={{ ...style, transform: "scale(1.4)", filter: `blur(40px) brightness(.5) ${filter ?? ""}` }} />
-        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingBottom: 480 }}>
+        <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingBottom: lift }}>
           <Img src={staticFile(src)} style={{ width: "100%", filter, boxShadow: "0 30px 80px rgba(0,0,0,.6)", transform: `scale(${scale})` }} />
         </AbsoluteFill>
       </AbsoluteFill>
@@ -249,7 +250,7 @@ const Pad: React.FC<{ children: React.ReactNode; justify?: "flex-end" | "center"
 );
 
 // A slideshow of photos/clips inside one scene, crossfading. `dur` overrides `each` per item.
-type Slide = { src: string; filter?: string; position?: string; video?: boolean; band?: boolean; print?: boolean; wide?: boolean; dur?: number; tag?: string };
+type Slide = { src: string; filter?: string; position?: string; video?: boolean; band?: boolean; print?: boolean; wide?: boolean; lift?: number; dur?: number; tag?: string };
 const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ items, each, overlap = 12 }) => {
   let at = 0;
   return (
@@ -269,6 +270,7 @@ const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ 
                 band={it.band}
                 print={it.print}
                 wide={it.wide}
+                lift={it.lift}
                 from={it.video || it.band || it.print || it.wide ? 1 : 1.05}
                 to={it.video ? 1.06 : it.band || it.print || it.wide ? 1.08 : 1.2}
                 x={it.video ? [0, 0] : i % 2 ? [-2, 2] : [2, -2]}
@@ -420,9 +422,10 @@ const TrekScene: React.FC = () => (
       items={[
         { src: "kolu-peak.jpg", band: true, tag: "Where we’re going · Kolukkumalai" },
         { src: "kolu-cliff.jpg", position: "center 30%", dur: 50, tag: "Where we’re going · Kolukkumalai" },
-        { src: "trek-trailwalk.mp4", video: true, dur: 75, tag: "Kazaks Trekking Club · Nov 2025" },
-        { src: "trek-hand.jpg", dur: 45, tag: "Kazaks Trekking Club · Nov 2025" },
-        { src: "trek-cheer.mp4", video: true, tag: "Kazaks Trekking Club · Nov 2025" },
+        { src: "trek-boat.mp4", video: true, tag: "Kazaks Trekking Club · Neyyar, Nov 2025" },
+        { src: "trek-line.mp4", video: true, dur: 75, tag: "Kazaks Trekking Club · Neyyar, Nov 2025" },
+        { src: "trek-hand.jpg", dur: 45, tag: "Kazaks Trekking Club · Neyyar, Nov 2025" },
+        { src: "trek-cheer.mp4", video: true, tag: "Kazaks Trekking Club · Neyyar, Nov 2025" },
       ]}
     />
     <Shade strength={0.88} from="both" />
@@ -474,9 +477,10 @@ const RideScene: React.FC = () => (
       items={[
         { src: "wayanad-churam.jpg", band: true, tag: "Where we’re going · Wayanad Churam" },
         { src: "churam-night.jpg", band: true, dur: 50, tag: "Where we’re going · Wayanad Churam" },
-        { src: "ooty-gate.jpg", position: "center 30%", dur: 55, tag: "Kazak Rider Group · Ooty, Jan 2026" },
-        { src: "ooty-road.mp4", video: true, dur: 75, tag: "Kazak Rider Group · Ooty, Jan 2026" },
-        { src: "ooty-pillion.mp4", video: true, dur: 50, tag: "Kazak Rider Group · Ooty, Jan 2026" },
+        { src: "coonoor.jpg", wide: true, lift: 900, tag: "Kazak Bikers · Ride to Coonoor, Jan 2026" },
+        { src: "ooty-gate.jpg", position: "center 30%", dur: 55, tag: "Kazak Rider Group · Nilgiris, Jan 2026" },
+        { src: "ooty-road.mp4", video: true, dur: 75, tag: "Kazak Rider Group · Nilgiris, Jan 2026" },
+        { src: "ooty-pillion.mp4", video: true, dur: 50, tag: "Kazak Rider Group · Nilgiris, Jan 2026" },
       ]}
     />
     <Shade strength={0.88} from="both" />
@@ -512,7 +516,7 @@ const RideScene: React.FC = () => (
       </Rise>
       <Rise delay={160}>
         <Body size={50} weight={400}>
-          After Ooty 2026 — the roads are calling again.
+          After the Nilgiris 2026 — the roads are calling again.
         </Body>
       </Rise>
     </Pad>
@@ -582,13 +586,29 @@ const EndScene: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const logo = spring({ frame, fps, config: { damping: 11, stiffness: 90 } });
+  // Once the logo has landed: one soft amber halo blooms behind it, and the logo gives one gentle pop
+  const halo = interpolate(frame, [36, 50, 78], [0, 1, 0], clamp);
+  const haloSize = interpolate(frame, [36, 78], [0.8, 1.7], clamp);
+  const pop = 1 + 0.06 * interpolate(frame, [36, 45, 60], [0, 1, 0], { ...clamp, easing: Easing.inOut(Easing.quad) });
   return (
     <AbsoluteFill style={{ background: `radial-gradient(100% 60% at 50% 100%, rgba(227,27,35,.35), ${C.night} 70%)` }}>
       <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", gap: 34, padding: "0 70px", textAlign: "center" }}>
-        <Img
-          src={staticFile("oba-logo.png")}
-          style={{ width: 300, height: 300, transform: `scale(${logo}) rotate(${(1 - logo) * -40}deg)` }}
-        />
+        <div style={{ position: "relative", width: 300, height: 300 }}>
+          <div
+            style={{
+              position: "absolute",
+              inset: -110,
+              borderRadius: "50%",
+              background: `radial-gradient(circle, rgba(255,196,110,1) 0%, rgba(255,182,72,.6) 38%, rgba(255,182,72,0) 70%)`,
+              opacity: halo,
+              transform: `scale(${haloSize})`,
+            }}
+          />
+          <Img
+            src={staticFile("oba-logo.png")}
+            style={{ position: "relative", width: 300, height: 300, transform: `scale(${logo * pop}) rotate(${(1 - logo) * -40}deg)` }}
+          />
+        </div>
         <Rise delay={8}>
           <Eyebrow>Kazak Wanderlust · 2026–27</Eyebrow>
         </Rise>
@@ -606,8 +626,9 @@ const EndScene: React.FC = () => {
         </Rise>
         <Rise delay={44}>
           <Big size={84} color={C.cream}>
-            Book by 31 Oct
+            Book your slot
           </Big>
+          <Body size={44}>Ride: booking open · Trek: by 31 Oct</Body>
         </Rise>
         <Rise delay={58}>
           <Body size={46} color={C.amber}>
