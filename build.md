@@ -83,6 +83,21 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       Trek card: "See who's coming →" (green, opens public list) + "Last year's trek" 2:40 video tile
       (9.6 MB, opt-in); end-card logo gets one amber halo + pop; share copy 12.5 MB
 - [x] v3 published (2026-10-25) — https://adventures.sskzmoba.org/
+- [x] Forest Trail route teaser (2026-10-25): standalone 15 s map animation (`RouteTeaser`
+      composition, `video/src/RouteTeaser.tsx`), share copy `video/out/route-teaser-share.mp4`;
+      web copy `film/forest-trail.mp4`. Veerappan is never named in public material.
+- [x] Ghats Ride, two trails (decided 2026-10-25): one "Kazak Ghats Ride", 23–25 Jan, riders pick
+      **Forest Trail** (new, lead: Coimbatore → Sathyamangalam → Dhimbam → Bandipur → Gudalur →
+      Nilambur) or **Malabar Days** (Wayanad, option to Kannur). Same dates, same form, same ₹2,500
+      advance. Organiser's figures: Day 2 ≈ 215–225 km, 5–6 h riding (7–8 h with stops).
+      Flagged to Appumon: night traffic bans (Bandipur–Mudumalai ~9 pm–6 am, Dhimbam) and the long
+      Day 1 (Bengaluru → Coimbatore ≈ 360 km).
+- [x] v3 archived at https://adventures.sskzmoba.org/v1/ (film `film/fall-in-kazaks-v1.mp4`);
+      v4 preview at https://adventures.sskzmoba.org/v2/ (two-trail ride card, Forest Trail tile,
+      film v4 `film/fall-in-kazaks-v2.mp4`, 56.7 s: ride section 17 s). Built with
+      `subsite.js`-style copy: same files with `../` asset paths. (2026-10-25)
+- [ ] Switch the main page to v2 after the user approves (copy `v2/` changes into root files,
+      point the film at the v4 file)
 - [ ] Ride public list (later, same pattern as the trek)
 - [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
 
@@ -163,6 +178,11 @@ Avoided: shirtless swimming close-ups (public promo), duplicates, blurry clips.
   the venues must be shown prominently). Their credits stay in the footer and end card.
   Real footage is tagged on screen ("Kazak Rider Group · Ooty, Jan 2026",
   "Kazaks Trekking Club · Nov 2025") so it isn't mistaken for the new venues.
+- Forest Trail map photos (`video/public/route/`, Wikimedia; credits on the teaser end card
+  and the film): Sathyamangalam landscape — Murugavel.T (CC BY-SA 4.0); Sathyamangalam TR
+  panoramio — Jaseem Hamza (CC BY 3.0); Bandipur road — L. Shyamal (CC BY-SA 3.0); chital herd
+  at Bandipur — Dineshkannambadi (CC BY-SA 3.0); Gudalur tea estate — LakshmiNaresh
+  (CC BY-SA 4.0); Conolly Plot, Nilambur — PP Yoonus (CC BY-SA 3.0).
 - Clips are pre-trimmed to 1080×1920 / 30 fps / no audio in `video/public/`
   (source originals stay in Drive). Video file for the site lives in `film/`.
 
