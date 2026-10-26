@@ -172,6 +172,22 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
 - [x] Ride film published (2026-10-27): web copy film/ride-forest-trail.mp4 (720p, 6.1 MB, opt-in); /ride hero button
       "Watch the ride video · 61 s"; ride card tile "The ride film" (img/ride-film-thumb.jpg, poster film/ride-film-poster.jpg),
       the 15 s route teaser stays as the second tile.
+- [x] Ride film v4 (2026-10-27, local; "classy" pass): 63.1 s, Playfair italic titles + Barlow kickers, one grade + moving grain.
+      Opens tight on the redrawn Kazak Riders sticker on the bike (`RideKit.tsx` Sticker over ride/headlamp.jpg) and pulls back inside
+      the photo → misty road from the group's ride sample (ride-photos/bike-sample.mp4; never use its 24–32 s info screen: UPI/phone)
+      → kit drawn clean and animated (bandana, scarf, tee, waving flag, sticker fan; riders art cut from the banner) → Jan 2026:
+      flat banner, gate roll-out (Drive drone video 1_zPe7VeGEMEI_VYcTBCFwjIHd5ejMdv0, 13 s+), red shirts at Coonoor, group
+      → three riders in the mist + NEW ROUTE → map → chital, elephant, peacocks panning right→left, one hairpin beat counting
+      to 27, viewfinder → riders → slow end card that fades with the music. SFX in public/sfx/ (ezwa, Ke4roh PD; தகவலுழவன் CC0;
+      Mk170101 CC BY 4.0). Two versions via props: `bigrock` (one continuous take from the kit into the track's own fade) and
+      `sample` (the ride sample's music, looped on its 13.70 s phrase). Share copies video/out/Kazak-Ride-Forest-Trail-v4-bigrock.mp4
+      and -sample.mp4. Not published. Banner typo "Saink School" is in the group's artwork.
+      Revised same day (feedback): bandana, scarf, tee and flag back to the group's own photos as framed prints (drawn versions
+      looked artificial; redrawn sticker, sticker fan, waving flag behind "Squad ready" and the flat banner kept); "The forest roads
+      are calling."; "January 2027 · Kazak Bike Ride"; orange glow and halo back on the end crest; end line "Let’s ride."
+- [x] Ride film v4 (Big Rock) published on /ride (2026-10-27): web copy film/ride-forest-trail.mp4 (720p, 6.6 MB), new poster +
+      thumbnail from the sticker opening, labels "63 s". Sample-music version kept for group sharing only (music source unknown;
+      ride-music-sample.mp3 and the unused sample clips are git-ignored).
 - [x] Main page updated and published (2026-10-26): Forest Trail ride card (from v2), trek film v3,
       trek badge "Under 10 slots left", "nobody left behind" wording gone, batch strip gold = registered
       batches ('76 '82 '96 '98 '06 '07 '11 '16), new `img/og.jpg` (trek | ride split). Old versions moved to
