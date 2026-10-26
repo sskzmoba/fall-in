@@ -473,7 +473,7 @@ const TrekScene: React.FC = () => (
 );
 
 // Ride: the Forest Trail, a new route chosen by the riders (510 frames)
-const Stamp: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
+export const Stamp: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const s = spring({ frame: frame - delay, fps, config: { damping: 9, stiffness: 160 } });
@@ -527,7 +527,7 @@ const RideIntro: React.FC = () => (
 
 const FILM_ROUTE_T: Times = { d1: [8, 46], d2: [56, 136], d3: [140, 196], d4: [202, 236], zoom: [50, 78, 196, 218] };
 
-const ForestTrail: React.FC = () => (
+export const ForestTrail: React.FC = () => (
   <AbsoluteFill style={{ background: C.night }}>
     <RouteMap T={FILM_ROUTE_T} />
     <MapShade />

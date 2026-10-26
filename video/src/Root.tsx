@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { FallIn, TOTAL_FRAMES } from "./FallIn";
 import { RouteTeaser, ROUTE_FRAMES } from "./RouteTeaser";
 import { TrekFilm, TREK_FRAMES } from "./TrekFilm";
+import { RideFilm, RIDE_FRAMES } from "./RideFilm";
 
 export const Root: React.FC = () => (
   <>
@@ -26,6 +27,15 @@ export const Root: React.FC = () => (
       id="TrekFilm"
       component={TrekFilm}
       durationInFrames={TREK_FRAMES}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="RideFilm"
+      component={RideFilm}
+      defaultProps={{ music: "bigrock" as const }}
+      durationInFrames={RIDE_FRAMES}
       fps={30}
       width={1080}
       height={1920}

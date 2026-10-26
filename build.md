@@ -142,9 +142,36 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       ("We’ve done this before") → all batch years with booked ones ('76 '82 '98 '06 '07) lit gold + ✓, "Nearly 20
       already booked" count-up → pulsing red "Under 10 slots left" + BOOK FAST → 7 s end card, credits 15 px.
       46.5 s. Share video/out/Kazak-Trek-Kolukkumalai-film-v3.mp4 (11.2 MB); published as film/trek-kolukkumalai.mp4.
-- [ ] Ride film (45 s): no school intro; Kazak Riders logo, banner, bandana, stickers, flag from
-      `ride-photos/` (not committed); wildlife/sunflower stock; easy-rider style royalty-free music
-      (suggested "Neo Western", Kevin MacLeod); ends by pointing to the trek too
+- [x] Ride film v1 (2026-10-27, local): `RideFilm` composition (`video/src/RideFilm.tsx`), 46 s, no school
+      intro: engine start in the dark → Kazak Riders headlamp sticker → "Gear up" (bandana, scarf, tee, flag,
+      stickers from ride-photos/, the group's own) → "Squad ready" → last January (Coonoor banner, drone clip)
+      → NEW ROUTE The Forest Trail → route map (reused from FallIn) → "Spot them all" 6 animals → Ooty rider
+      clips "Seniors lead. Juniors keep pace." → trek nod (/trek) → "Ride with us · Booking open" (/ride).
+      Music "Twisted" (Kevin MacLeod, CC BY 4.0); engine "Kawasaki ER-5" start-up by OllemanW (CC BY-SA 3.0).
+      The user's wildlife/sunflower photos were internet copies, not used; tiger at Bandipur by Harish Garg and
+      sloth bear by Giles Laurent (CC BY-SA 4.0) instead. Sunflowers left out (bloom season in Jan unconfirmed).
+      Easy Rider songs are copyrighted; not usable. Share copy `video/out/Kazak-Ride-Forest-Trail-film.mp4`
+      (9.2 MB); web copy `film/ride-forest-trail.mp4` not yet published.
+- [x] Ride film v2 (2026-10-27, local; feedback: kit looked shabby, ticks amateurish, tagline weak, music flat):
+      gear = gallery-print reveals (blurred backdrop, push-in, light sweep, 01/05 counter) → five-slice "Squad ready";
+      wildlife = camera viewfinder, one sighting at a time (focus box locks, shutter flash, REC); tagline "Lead. Or
+      keep pace."; music Motherlode (Kevin MacLeod, CC BY 4.0) from 22 s. Rock options in music-previews/ride/
+      (Gearhead, Big Rock, Exhilarate, Montauk Point, Twisted); swap via MUSIC in RideFilm.tsx. Wildlife photos now
+      ride/spot-*.jpg (larger Commons originals, same authors). Share copy video/out/Kazak-Ride-Forest-Trail-film-v2.mp4 (10.8 MB).
+- [x] Ride film v3 (2026-10-27, local), 60.8 s: Kazak Riders sticker as a lit emblem (cut-out ride/sticker.png, glow, sweep,
+      ring; visible from frame 0 for the WhatsApp thumbnail) → "Engines on." → slower gear (40 frames each) → last January:
+      banner, whole drone clip (uncropped), whole group photo → Forest Trail → map → trail moments: "Ride along the chital"
+      (Pexels, Karnataka), "Stop. Elephants first." (Pexels, Karnataka), "Ride past the dancers" (peacock on a road, Pench,
+      Rohit Sharma, CC BY-SA 4.0), "27 hairpins. Take them all." (Pexels: Indian hill road + a Sri Lanka hairpin stack,
+      illustrative, not tagged as the route) → "If you’re lucky" viewfinder (tiger, sloth bear, gaur) → "Lead. Or keep pace." → end.
+      Trek nod removed. Two music cuts via props (`--props={"music":"chf"|"bigrock"}`): Cool Hard Facts / Big Rock (Kevin
+      MacLeod, CC BY 4.0, loudnorm), each ending on the track’s own finish (part B cut in on a bar line). Share copies
+      video/out/Kazak-Ride-Forest-Trail-film-v3-Cool-Hard-Facts.mp4 and -Big-Rock.mp4 (13 MB each, crf 30).
+      **Chosen (2026-10-27): Big Rock** (now the default prop). Final share copy
+      video/out/Kazak-Ride-Forest-Trail-film-v3-Big-Rock.mp4.
+- [x] Ride film published (2026-10-27): web copy film/ride-forest-trail.mp4 (720p, 6.1 MB, opt-in); /ride hero button
+      "Watch the ride video · 61 s"; ride card tile "The ride film" (img/ride-film-thumb.jpg, poster film/ride-film-poster.jpg),
+      the 15 s route teaser stays as the second tile.
 - [x] Main page updated and published (2026-10-26): Forest Trail ride card (from v2), trek film v3,
       trek badge "Under 10 slots left", "nobody left behind" wording gone, batch strip gold = registered
       batches ('76 '82 '96 '98 '06 '07 '11 '16), new `img/og.jpg` (trek | ride split). Old versions moved to
