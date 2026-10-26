@@ -42,7 +42,8 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 20px 20px calc(72px + env(safe-area-inset-bottom));
+  /* top padding keeps the absolutely placed logo clear of the text on short screens */
+  padding: calc(96px + env(safe-area-inset-top)) 20px calc(72px + env(safe-area-inset-bottom));
   overflow: hidden;
   isolation: isolate;
 }
