@@ -41,7 +41,7 @@
   <div class="hero__body">
     <p class="eyebrow">Kazak Wanderlust · 2026–27</p>
     <h1 class="stencil">Fall in,<br><span class="amber">Kazaks!</span></h1>
-    <p class="hero__tag">Six decades of batches. One trail. One road.</p>
+    <p class="hero__tag">Two adventures: a December trek and a January bike ride. Join one, or both.</p>
 
     <div class="countdown" id="countdown" aria-live="polite">
       <span class="countdown__label">Trek bookings close 31 Oct in</span>
@@ -52,7 +52,7 @@
       <a class="btn btn--ride" href="#ride">🏍️ Ride<small>23–25 Jan</small></a>
       <a class="btn btn--trek" href="#trek">🥾 Trek<small>5–6 Dec</small></a>
     </div>
-    <button class="film-btn" type="button" data-film="../film/fall-in-kazaks-v2.mp4" data-poster="../film/poster.jpg"><span aria-hidden="true">▶</span> Watch the video · 57 s</button>
+    <button class="film-btn" type="button" data-film="../film/fall-in-kazaks-v2.mp4" data-poster="../film/poster.jpg"><span aria-hidden="true">▶</span> Watch the video · 59 s</button>
   </div>
   <a class="scroll-cue" href="#remember" aria-label="Scroll down">⌄</a>
 </header>
@@ -99,7 +99,13 @@
 
 <!-- ============ EVENTS ============ -->
 <section class="events" id="events">
-  <h2 class="section-title reveal">Pick your adventure</h2>
+  <h2 class="section-title reveal">Two adventures · join one or both</h2>
+  <div class="season reveal">
+    <a class="season__item season__item--trek" href="#trek"><b>🥾 Trek</b><span>5–6 Dec</span></a>
+    <span class="season__line" aria-hidden="true"></span>
+    <a class="season__item season__item--ride" href="#ride"><b>🏍️ Ride</b><span>23–25 Jan</span></a>
+  </div>
+  <p class="season__note reveal">Booked separately · each has its own form and trip lead</p>
 
   <!-- RIDE -->
   <article class="card card--ride reveal" id="ride">
@@ -108,6 +114,7 @@
       <span class="badge badge--hot">Republic Day weekend</span>
     </div>
     <div class="card__body">
+      <p class="adv">Adventure 1 · Bike ride</p>
       <span class="trail__tag">New route</span>
       <h3 class="stencil">The Forest Trail</h3>
       <p class="card__sub">Coimbatore · Sathyamangalam · Bandipur · Gudalur</p>
@@ -147,6 +154,7 @@
         </a>
       </div>
       <a class="cal" href="../forest-trail.ics" download>＋ Add to calendar</a>
+      <a class="cross" href="#trek">Separate booking. Coming on the trek too? <b>Book it here →</b></a>
     </div>
   </article>
 
@@ -157,6 +165,7 @@
       <span class="badge badge--hot">26 slots</span>
     </div>
     <div class="card__body">
+      <p class="adv">Adventure 2 · Trek</p>
       <h3 class="stencil">Dawn @ Kolukkumalai</h3>
       <p class="card__sub">Sunrise trek &amp; tent stay · Munnar</p>
       <ul class="facts">
@@ -216,6 +225,7 @@
         </a>
       </div>
       <a class="cal" href="../trek.ics" download>＋ Add to calendar</a>
+      <a class="cross" href="#ride">Separate booking. Riding with us too? <b>Book the ride →</b></a>
     </div>
   </article>
 </section>
@@ -281,7 +291,7 @@
 
 <!-- Sticky booking bar (appears after the hero) -->
 <nav class="dock" id="dock" aria-label="Book your slot">
-  <p class="dock__label" id="dock-label">Book your slot · trek closes 31 Oct</p>
+  <p class="dock__label" id="dock-label">Book one or both · trek closes 31 Oct</p>
   <a href="https://forms.gle/ZjN7RkG1J6H9Q6247" target="_blank" rel="noopener" class="dock__ride">🏍️ Kazak Ride</a>
   <a href="https://forms.gle/KUhAgv8AGcXqcKAm6" target="_blank" rel="noopener" class="dock__trek">🥾 Kazak Trek</a>
 </nav>

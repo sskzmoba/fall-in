@@ -106,6 +106,13 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       "Spot them all" wildlife checklist → "Chosen by the riders" over the drone clip; teaser
       redone for the same route. Form text drafted for the form owner (title, route note,
       Calicut group, return-plan question).
+- [x] "Two separate adventures" clarity pass on /v2/ (2026-10-26): hero "Two adventures: a December
+      trek and a January bike ride. Join one, or both."; season strip (Trek 5–6 Dec ··· Ride 23–25 Jan,
+      "Booked separately · each has its own form and trip lead"); card labels "Adventure 1 · Bike ride" /
+      "Adventure 2 · Trek"; cross-links between cards; dock "Book one or both". Film 59.3 s: new
+      "Two adventures · Join one, or both" split card after "calling again", chapter eyebrows,
+      red→green wipe into the trek, end card "Book one, or both · Separate forms on the site".
+      Avoid calling the trek a "trail" (the ride is the Forest Trail).
 - [ ] Ride form updated by its owner (text drafted 2026-10-26)
 - [ ] Message riders already registered for the Wayanad plan (change or withdraw)
 - [ ] Switch the main page to v2 after the user approves; also refresh `img/og.jpg` (copy `v2/` changes into root files,

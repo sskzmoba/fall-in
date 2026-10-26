@@ -234,6 +234,20 @@ details > *:not(summary) { margin-top: 0; color: #d9d4ca; font-size: .95rem; }
 .clip-tile img { width: 54px; height: 96px; object-fit: cover; border-radius: 8px; }
 .clip-tile b { color: var(--amber); }
 .clip-tile small { display: block; color: var(--muted); font-size: .8rem; }
+/* Season strip: the two separate trips in date order */
+.season { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; }
+.season__item { flex: 0 0 auto; display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; color: #fff; text-decoration: none; line-height: 1.2; }
+.season__item b { font: 700 1rem var(--head); letter-spacing: 1px; text-transform: uppercase; }
+.season__item span { font-size: .85rem; opacity: .9; }
+.season__item--trek { background: linear-gradient(135deg, #2f9e5b, #1f7a43); }
+.season__item--ride { background: linear-gradient(135deg, #e31b23, #a90f15); }
+.season__line { flex: 1; height: 0; border-top: 2px dashed rgba(255,255,255,.35); }
+.season__note { margin: 0 0 18px; font-size: .9rem; color: var(--muted); }
+.adv { margin: 14px 0 6px; font: 700 .8rem var(--head); letter-spacing: 2px; text-transform: uppercase; }
+.card--ride .adv { color: #ff7a7f; }
+.card--trek .adv { color: #8fe0ae; }
+.cross { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: .9rem; color: var(--muted); text-decoration: none; }
+.cross b { color: var(--amber); }
 .cal { display: inline-block; margin-top: 14px; font-size: .9rem; color: var(--amber); text-decoration: none; }
 
 /* ---------- Steps ---------- */

@@ -39,12 +39,13 @@ const S = {
   school: [150, 195],
   life: [345, 75],
   calling: [420, 90],
-  ride: [510, 510],
-  trek: [1020, 350],
-  gens: [1370, 180],
-  end: [1550, 150],
+  two: [510, 80],
+  ride: [590, 510],
+  trek: [1100, 350],
+  gens: [1450, 180],
+  end: [1630, 150],
 } as const;
-export const TOTAL_FRAMES = 1700;
+export const TOTAL_FRAMES = 1780;
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
@@ -439,7 +440,7 @@ const TrekScene: React.FC = () => (
     </AbsoluteFill>
     <Pad>
       <Rise delay={0}>
-        <Eyebrow color={C.trek}>Kazaks Trekking Club</Eyebrow>
+        <Eyebrow color={C.trek}>Adventure 2 · Trek</Eyebrow>
       </Rise>
       <Rise delay={10}>
         <Big size={124} color={C.trek}>
@@ -506,7 +507,7 @@ const RideIntro: React.FC = () => (
     <Shade strength={0.92} from="bottom" />
     <Pad>
       <Rise delay={0}>
-        <Eyebrow color={C.ride}>Kazak Bike Ride · 23–25 Jan</Eyebrow>
+        <Eyebrow color={C.ride}>Adventure 1 · Ride · 23–25 Jan</Eyebrow>
       </Rise>
       <div style={{ margin: "26px 0 6px" }}>
         <Stamp delay={8} />
@@ -752,9 +753,10 @@ const EndScene: React.FC = () => {
         </Rise>
         <Rise delay={44}>
           <Big size={84} color={C.cream}>
-            Book your slot
+            Book one, or both
           </Big>
-          <Body size={44}>Ride: booking open · Trek: by 31 Oct</Body>
+          <Body size={44}>Separate forms on the site</Body>
+          <Body size={40} weight={400}>Ride: booking open · Trek: by 31 Oct</Body>
         </Rise>
         <Rise delay={58}>
           <Body size={46} color={C.amber}>
@@ -774,6 +776,50 @@ const EndScene: React.FC = () => {
         </Body>
       </AbsoluteFill>
     </AbsoluteFill>
+  );
+};
+
+// Two separate trips this season: ride panel slides in from the left, trek from the right (80 frames)
+const TwoPanel: React.FC<{ src: string; tint: string; title: string; date: string; from: "left" | "right"; delay: number; top: number }> = ({ src, tint, title, date, from, delay, top }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame: frame - delay, fps, config: { damping: 16, stiffness: 110 } });
+  const x = (1 - s) * (from === "left" ? -1100 : 1100);
+  return (
+    <AbsoluteFill style={{ top, height: 820, overflow: "hidden", transform: `translateX(${x}px)` }}>
+      <Img src={staticFile(src)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      <AbsoluteFill style={{ background: tint }} />
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center", gap: 6 }}>
+        <Big size={150}>{title}</Big>
+        <Body size={60} weight={800}>
+          {date}
+        </Body>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+const TwoScene: React.FC = () => (
+  <AbsoluteFill style={{ background: C.night }}>
+    <TwoPanel src="elephants-tall.jpg" tint="rgba(227,27,35,.62)" title="🏍️ Ride" date="23–25 Jan 2027" from="left" delay={0} top={0} />
+    <TwoPanel src="kolu-peak.jpg" tint="rgba(31,122,67,.66)" title="🥾 Trek" date="5–6 Dec 2026" from="right" delay={6} top={1100} />
+    <AbsoluteFill style={{ top: 820, height: 280, alignItems: "center", justifyContent: "center", textAlign: "center" }}>
+      <Rise delay={14}>
+        <Big size={92}>Two adventures.</Big>
+        <Body size={56} color={C.amber} weight={800}>
+          Join one, or both.
+        </Body>
+      </Rise>
+    </AbsoluteFill>
+  </AbsoluteFill>
+);
+
+// Red-to-green sweep marking the change from the ride to the trek
+const Wipe: React.FC = () => {
+  const frame = useCurrentFrame();
+  const x = interpolate(frame, [0, 24], [-140, 140], { ...clamp, easing: Easing.inOut(Easing.cubic) });
+  return (
+    <AbsoluteFill style={{ transform: `translateX(${x}%)`, background: `linear-gradient(90deg, transparent, ${C.red} 25%, #2f9e5b 75%, transparent)` }} />
   );
 };
 
@@ -803,12 +849,18 @@ export const FallIn: React.FC = () => (
     <Scene at={S.calling} edge={4}>
       <CallingScene />
     </Scene>
+    <Scene at={S.two} edge={8}>
+      <TwoScene />
+    </Scene>
     <Scene at={S.trek}>
       <TrekScene />
     </Scene>
     <Scene at={S.ride}>
       <RideScene />
     </Scene>
+    <Sequence from={S.trek[0] - 12} durationInFrames={26}>
+      <Wipe />
+    </Sequence>
     <Scene at={S.gens}>
       <GensScene />
     </Scene>
