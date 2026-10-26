@@ -126,13 +126,34 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       torch-lit climb, sunrise) → last year at Neyyar → batches already in → end card with /trek link.
       Music "Americana" (Kevin MacLeod, CC BY 4.0) after the siren. Share copy
       `video/out/Kazak-Trek-Kolukkumalai-film.mp4` (9.3 MB); web copy `film/trek-kolukkumalai.mp4` (4.7 MB),
-      the hero button and the trek-card tile play it. Batch/slot counts are from the public list on 26 Oct;
-      re-render if they go stale.
+      the hero button and the trek-card tile play it.
+- [x] Trek film v2 (2026-10-26, local; feedback: music too sad, "Nobody left behind" off, Neyyar vs
+      Kolukkumalai confusing, counts go stale): order is now school → "Last year · a snapshot" (Neyyar,
+      old-film look) → "This year ⏩ Munnar" 0400 hrs → Kolukkumalai order of the day → "Nearly 20 already in ·
+      All ages. All batches. One team." → "Tents are limited · Under 10 slots left · BOOK FAST" → end.
+      Music "Nonstop" (Kevin MacLeod, CC BY 4.0), from 26 s so its peak lands on BOOK FAST (swap via `MUSIC` in TrekFilm.tsx; Scandinavianz "Seychelles" (Pixabay) passed over: beach feel, Content ID risk on reposts; options
+      Heroic Age / Nonstop / Hot Pursuit in `music-previews/`). Only free-licence photos (the user's
+      camp photos were internet copies, not used): Kolukkumalai by Yahya and Musheer1999, Triund
+      campsite tents by Alok Kumar (tagged "Tent stay"), Chokramudi clouds by NjaanAnoop (all CC BY-SA 4.0).
+      Share copy `video/out/Kazak-Trek-Kolukkumalai-film-v2.mp4` (11 MB); web copy re-rendered locally,
+      not yet published.
+- [x] Trek film v3 (2026-10-26, local): order fixed for continuity: "Remember?" 0530 siren → 0400 HRS "This
+      December" (music hits on the strike-out) → Kolukkumalai → order of the day → "Last year · a snapshot" Neyyar
+      ("We’ve done this before") → all batch years with booked ones ('76 '82 '98 '06 '07) lit gold + ✓, "Nearly 20
+      already booked" count-up → pulsing red "Under 10 slots left" + BOOK FAST → 7 s end card, credits 15 px.
+      46.5 s. Share video/out/Kazak-Trek-Kolukkumalai-film-v3.mp4 (11.2 MB); published as film/trek-kolukkumalai.mp4.
 - [ ] Ride film (45 s): no school intro; Kazak Riders logo, banner, bandana, stickers, flag from
       `ride-photos/` (not committed); wildlife/sunflower stock; easy-rider style royalty-free music
       (suggested "Neo Western", Kevin MacLeod); ends by pointing to the trek too
-- [ ] Ride section redesign with the Kazak Riders artefacts; switch the main ride card to the Forest Trail
-      after the user approves (v2 has the card); also refresh `img/og.jpg`
+- [x] Main page updated and published (2026-10-26): Forest Trail ride card (from v2), trek film v3,
+      trek badge "Under 10 slots left", "nobody left behind" wording gone, batch strip gold = registered
+      batches ('76 '82 '96 '98 '06 '07 '11 '16), new `img/og.jpg` (trek | ride split). Old versions moved to
+      /old/v1/ (v3 combined, Wayanad) and /old/v2/ (Forest Trail preview); /v1/ and /v2/ forward there.
+- [x] One page, three views (decided 2026-10-26, instead of separate copies, so there is one file to edit):
+      / shows both; /trek and /trekking open `?a=trek#trek` (ride section, ride buttons and season strip hidden;
+      switcher "Trek · Ride · Both"); /ride and /bike open `?a=ride#ride` (countdown hidden, hero plays the
+      Forest Trail route teaser). CSS classes: `both-only`, `trek-only`, `ride-only`, `not-trek`, `not-ride`.
+- [ ] Ride section redesign with the Kazak Riders artefacts (ride-photos/)
 - [ ] Ride public list (later, same pattern as the trek)
 - [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
 

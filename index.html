@@ -11,7 +11,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Fall In, Kazaks! — Trek &amp; Ride 2026–27">
-<meta property="og:description" content="Two adventures, join one or both: Dawn @ Kolukkumalai trek · 5–6 Dec (book by 31 Oct)  |  Kazak bike ride · 23–25 Jan (booking open).">
+<meta property="og:description" content="Two adventures, join one or both: Dawn @ Kolukkumalai trek · 5–6 Dec (book by 31 Oct)  |  Forest Trail bike ride · 23–25 Jan (booking open).">
 <meta property="og:image" content="https://adventures.sskzmoba.org/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -41,18 +41,21 @@
   <div class="hero__body">
     <p class="eyebrow">Kazak Wanderlust · 2026–27</p>
     <h1 class="stencil">Fall in,<br><span class="amber">Kazaks!</span></h1>
-    <p class="hero__tag">Two adventures: a December trek and a January bike ride. Join one, or both.</p>
+    <p class="hero__tag both-only">Two adventures: a December trek and a January bike ride. Join one, or both.</p>
+    <p class="hero__tag trek-only">Dawn @ Kolukkumalai: a sunrise trek and tent stay in Munnar for Kazaks of every batch. 5–6 December.</p>
+    <p class="hero__tag ride-only">The Forest Trail: three days through the Ghats for Kazaks of every batch. 23–25 January.</p>
 
-    <div class="countdown" id="countdown" aria-live="polite">
+    <div class="countdown not-ride" id="countdown" aria-live="polite">
       <span class="countdown__label">Trek bookings close 31 Oct in</span>
       <span class="countdown__time" id="cd-time">—</span>
     </div>
 
     <div class="hero__ctas">
-      <a class="btn btn--trek" href="#trek">🥾 Trek<small>5–6 Dec</small></a>
-      <a class="btn btn--ride" href="#ride">🏍️ Ride<small>23–25 Jan</small></a>
+      <a class="btn btn--trek not-ride" href="#trek">🥾 Trek<small>5–6 Dec</small></a>
+      <a class="btn btn--ride not-trek" href="#ride">🏍️ Ride<small>23–25 Jan</small></a>
     </div>
-    <button class="film-btn" type="button" data-film="film/trek-kolukkumalai.mp4" data-poster="film/trek-film-poster.jpg"><span aria-hidden="true">▶</span> Watch the trek video · 45 s</button>
+    <button class="film-btn ride-only" type="button" data-film="film/forest-trail.mp4" data-poster="film/forest-poster.jpg"><span aria-hidden="true">▶</span> See the Forest Trail route · 15 s</button>
+    <button class="film-btn not-ride" type="button" data-film="film/trek-kolukkumalai.mp4" data-poster="film/trek-film-poster.jpg"><span aria-hidden="true">▶</span> Watch the trek video · 46 s</button>
   </div>
   <a class="scroll-cue" href="#remember" aria-label="Scroll down">⌄</a>
 </header>
@@ -78,8 +81,8 @@
 <section class="gens">
   <div class="marquee" aria-hidden="true">
     <div class="marquee__track">
-      <span>Batch ’65</span><span class="gold">’82</span><span>’93</span><span class="gold">’96</span><span class="gold">’98</span><span>’99</span><span>’06</span><span class="gold">’11</span><span class="gold">’16</span>
-      <span>Batch ’65</span><span class="gold">’82</span><span>’93</span><span class="gold">’96</span><span class="gold">’98</span><span>’99</span><span>’06</span><span class="gold">’11</span><span class="gold">’16</span>
+      <span>Batch ’65</span><span class="gold">’76</span><span class="gold">’82</span><span>’93</span><span class="gold">’96</span><span class="gold">’98</span><span>’99</span><span class="gold">’06</span><span class="gold">’07</span><span class="gold">’11</span><span class="gold">’16</span>
+      <span>Batch ’65</span><span class="gold">’76</span><span class="gold">’82</span><span>’93</span><span class="gold">’96</span><span class="gold">’98</span><span>’99</span><span class="gold">’06</span><span class="gold">’07</span><span class="gold">’11</span><span class="gold">’16</span>
     </div>
   </div>
   <figure class="gens__photo reveal">
@@ -88,7 +91,7 @@
   </figure>
   <div class="gens__copy">
     <h2 class="reveal">Every batch. <span class="red">One squad.</span></h2>
-    <p class="reveal">Some of us will be reliving our school years. Some will be riding with the veterans for the first time. Seniors lead, juniors keep pace, and <strong>nobody is left behind</strong>, just like the old days.</p>
+    <p class="reveal">Some of us will be reliving our school years. Some will be riding with the veterans for the first time. Seniors lead, juniors keep pace, and <strong>we finish together</strong>, just like the old days.</p>
     <ul class="pillars reveal">
       <li><b>Bond</b>across generations of Kazaks</li>
       <li><b>Relive</b>the dawns and the adventures</li>
@@ -99,13 +102,18 @@
 
 <!-- ============ TWO ADVENTURES ============ -->
 <section class="events" id="events">
-  <h2 class="section-title reveal">Two adventures · join one or both</h2>
-  <div class="season reveal">
+  <h2 class="section-title reveal both-only">Two adventures · join one or both</h2>
+  <nav class="switcher" aria-label="Choose an adventure">
+    <a class="switcher__trek" href="?a=trek#trek">🥾 Trek</a>
+    <a class="switcher__ride" href="?a=ride#ride">🏍️ Ride</a>
+    <a class="switcher__both" href="./#events">Both</a>
+  </nav>
+  <div class="season reveal both-only">
     <a class="season__item season__item--trek" href="#trek"><b>🥾 Trek</b><span>5–6 Dec</span></a>
     <span class="season__line" aria-hidden="true"></span>
     <a class="season__item season__item--ride" href="#ride"><b>🏍️ Ride</b><span>23–25 Jan</span></a>
   </div>
-  <p class="season__note reveal">Booked separately · each has its own form and trip lead</p>
+  <p class="season__note reveal both-only">Booked separately · each has its own form and trip lead</p>
 </section>
 
 <!-- ============ TREK (short link: /trek) ============ -->
@@ -115,7 +123,7 @@
   <article class="card card--trek reveal">
     <div class="card__media" style="background-image:url(img/trek.jpg)">
       <span class="badge">Kazaks Trekking Club</span>
-      <span class="badge badge--hot">26 slots</span>
+      <span class="badge badge--hot">Under 10 slots left</span>
     </div>
     <div class="card__body">
       <h3 class="stencil">Dawn @ Kolukkumalai</h3>
@@ -164,7 +172,7 @@
       <a class="see-list" href="https://docs.google.com/spreadsheets/d/1VO0rb67mPiYVoLBIng9vbGu57101F0qloMHJQ-IpZWU/htmlview" target="_blank" rel="noopener">See who’s coming →</a>
       <button class="clip-tile" type="button" data-film="film/trek-kolukkumalai.mp4" data-poster="film/trek-film-poster.jpg">
         <img src="img/trek-film-thumb.jpg" alt="" loading="lazy" width="54" height="96">
-        <span><b>▶ The trek film</b><small>Dawn @ Kolukkumalai · 45 s</small></span>
+        <span><b>▶ The trek film</b><small>Dawn @ Kolukkumalai · 46 s</small></span>
       </button>
       <button class="clip-tile" type="button" data-film="film/trek-neyyar.mp4" data-poster="film/trek-poster.jpg">
         <img src="img/trek-thumb.jpg" alt="" loading="lazy" width="54" height="96">
@@ -181,7 +189,7 @@
         </a>
       </div>
       <a class="cal" href="trek.ics" download>＋ Add to calendar</a>
-      <a class="cross" href="#ride">Separate booking. Riding with us in January too? <b>See the ride →</b></a>
+      <a class="cross" href="?a=ride#ride">Separate booking. Riding with us in January too? <b>See the ride →</b></a>
     </div>
   </article>
 </section>
@@ -191,26 +199,32 @@
   <h2 class="adv-head reveal"><span>🏍️ Kazak Bike Ride</span><small>January 2027</small></h2>
   <!-- RIDE -->
   <article class="card card--ride reveal">
-    <div class="card__media" style="background-image:url(img/ride.jpg)">
+    <div class="card__media" style="background-image:url(img/ride-forest.jpg)">
       <span class="badge">Kazak Bike Ride</span>
       <span class="badge badge--hot">Republic Day weekend</span>
     </div>
     <div class="card__body">
-      <h3 class="stencil">Malabar Days</h3>
-      <p class="card__sub">Misty hills, winding roads · Wayanad</p>
+      <span class="trail__tag">New route</span>
+      <h3 class="stencil">The Forest Trail</h3>
+      <p class="card__sub">Coimbatore · Sathyamangalam · Bandipur · Gudalur</p>
+      <p>Where the Western &amp; Eastern Ghats meet: Bhavanisagar dam, Sathyamangalam’s forest villages and their stories, the 27 hairpins of Dhimbam Ghat, and elephant, gaur and deer country through Bandipur.</p>
+      <button class="clip-tile" type="button" data-film="film/forest-trail.mp4" data-poster="film/forest-poster.jpg">
+        <img src="img/forest-thumb.jpg" alt="" loading="lazy" width="54" height="96">
+        <span><b>▶ See the route</b><small>On the map · 15 s</small></span>
+      </button>
+
       <ul class="facts">
-        <li><span>📅</span>23–25 January 2027</li>
-        <li><span>🧭</span>Bangalore &amp; Kochi groups meet in Wayanad · join en route</li>
-        <li><span>🏕️</span>Resort cottages near Bathery / Mananthavady</li>
+        <li><span>📅</span>23–25 January 2027<br><small>+1 optional day on Republic Day, 26 Jan</small></li>
+        <li><span>🧭</span>Bangalore, Kochi &amp; Calicut groups meet at Coimbatore · join en route</li>
         <li><span>💰</span>~₹13,000–15,000 per person<br><small>Stay, food &amp; fuel · self-funded · ₹2,500 token advance</small></li>
         <li><span>⏳</span>Booking open</li>
       </ul>
-      <p class="card__pitch">After our first Kazak ride to the Nilgiris in 2026, the roads are calling again. Day 3 is the riders’ call: more of Wayanad, or on to Kannur.</p>
+      <p class="card__pitch">After our first Kazak ride to the Nilgiris in 2026, the roads are calling again — on a route the riders chose themselves.</p>
 
       <details>
         <summary>Who can join</summary>
         <ul class="plain">
-          <li>Kazaks with long-distance riding experience, joining at Bangalore, Kochi or en route.</li>
+          <li>Kazaks with long-distance riding experience, joining at Bangalore, Kochi, Calicut or en route.</li>
           <li>One accompanying person (18+) as pillion or on another bike.</li>
           <li><b>Full safety gear is a must.</b></li>
           <li>Final costs and arrangements are shared in the riders’ group.</li>
@@ -219,17 +233,17 @@
 
       <a class="btn btn--block btn--ride" href="https://forms.gle/ZjN7RkG1J6H9Q6247" target="_blank" rel="noopener">Book your slot – Kazak Ride</a>
       <div class="contacts">
-        <a class="wa" href="https://wa.me/919535733200?text=Hi%20Appumon%2C%20I%27m%20a%20Kazak%20interested%20in%20the%20Malabar%20Days%20ride%20(23%E2%80%9325%20Jan).%20Roll%20No.%2FBatch%3A%20" target="_blank" rel="noopener">
+        <a class="wa" href="https://wa.me/919535733200?text=Hi%20Appumon%2C%20I%27m%20a%20Kazak%20interested%20in%20the%20Forest%20Trail%20ride%20(23%E2%80%9325%20Jan).%20Roll%20No.%2FBatch%3A%20" target="_blank" rel="noopener">
           <span class="wa__icon" aria-hidden="true"></span>
           <span>WhatsApp <b>Appumon Joseph K</b><small>Ride lead &amp; payments · 2633/96</small></span>
         </a>
-        <a class="wa" href="https://wa.me/918588843998?text=Hello%20Sir%2C%20query%20about%20the%20Malabar%20Days%20Kazak%20bike%20ride%3A%20" target="_blank" rel="noopener">
+        <a class="wa" href="https://wa.me/918588843998?text=Hello%20Sir%2C%20query%20about%20the%20Forest%20Trail%20ride%3A%20" target="_blank" rel="noopener">
           <span class="wa__icon" aria-hidden="true"></span>
           <span>WhatsApp <b>Col Pramod M</b><small>EC coordination · 3006/99</small></span>
         </a>
       </div>
-      <a class="cal" href="ride.ics" download>＋ Add to calendar</a>
-      <a class="cross" href="#trek">Separate booking. Trekking with us in December too? <b>See the trek →</b></a>
+      <a class="cal" href="forest-trail.ics" download>＋ Add to calendar</a>
+      <a class="cross" href="?a=trek#trek">Separate booking. Trekking with us in December too? <b>See the trek →</b></a>
     </div>
   </article>
 </section>
@@ -250,7 +264,7 @@
   <div class="gallery__strip">
     <figure><img src="img/g-hilltop.jpg" alt="A Kazak rider and his motorcycle on a hilltop road during the Nilgiris ride" loading="lazy"><figcaption>Nilgiris ride, 2026</figcaption></figure>
     <figure><img src="img/g-trekgroup.jpg" alt="Kazaks Trekking Club members smiling together by a forest stream" loading="lazy"><figcaption>Trekking Club, 2025</figcaption></figure>
-    <figure><img src="img/g-hand.jpg" alt="A Kazak trekker reaching out a hand to help another across a river" loading="lazy"><figcaption>Nobody left behind</figcaption></figure>
+    <figure><img src="img/g-hand.jpg" alt="A Kazak trekker reaching out a hand to help another across a river" loading="lazy"><figcaption>One team</figcaption></figure>
     <figure><img src="img/g-helmets.jpg" alt="Kazak riders in helmets taking a group selfie by the road" loading="lazy"><figcaption>Helmets on</figcaption></figure>
     <figure><img src="img/g-veterans.jpg" alt="Senior Kazaks sitting on rocks at a waterfall" loading="lazy"><figcaption>Veterans lead</figcaption></figure>
     <figure><img src="img/g-trail.jpg" alt="Trekkers walking single file into the forest" loading="lazy"><figcaption>Into the forest</figcaption></figure>
@@ -291,8 +305,8 @@
 <!-- Sticky booking bar (appears after the hero) -->
 <nav class="dock" id="dock" aria-label="Book your slot">
   <p class="dock__label" id="dock-label">Book one or both · trek closes 31 Oct</p>
-  <a href="https://forms.gle/KUhAgv8AGcXqcKAm6" target="_blank" rel="noopener" class="dock__trek">🥾 Kazak Trek</a>
-  <a href="https://forms.gle/ZjN7RkG1J6H9Q6247" target="_blank" rel="noopener" class="dock__ride">🏍️ Kazak Ride</a>
+  <a href="https://forms.gle/KUhAgv8AGcXqcKAm6" target="_blank" rel="noopener" class="dock__trek not-ride">🥾 Kazak Trek</a>
+  <a href="https://forms.gle/ZjN7RkG1J6H9Q6247" target="_blank" rel="noopener" class="dock__ride not-trek">🏍️ Kazak Ride</a>
 </nav>
 
 <!-- Opt-in video player: nothing downloads until someone taps a [data-film] button -->

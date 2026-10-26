@@ -32,6 +32,14 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+// ---- One adventure at a time: ?a=trek or ?a=ride (from /trek and /ride) hides the other one ----
+const only = new URLSearchParams(location.search).get("a");
+if (only === "trek" || only === "ride") {
+  document.body.classList.add("only-" + only);
+  if (only === "ride") document.getElementById("dock-label").textContent = "Forest Trail · booking open";
+  else if (DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "Under 10 slots left · trek closes 31 Oct";
+}
+
 // ---- Short links (/trek, /ride) land on /#trek or /#ride: make sure we scroll there,
 // some in-app browsers (WhatsApp) skip the jump ----
 function goToHash() {

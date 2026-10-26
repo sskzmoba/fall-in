@@ -2,17 +2,23 @@ import React from "react";
 import { AbsoluteFill, Audio, Img, Sequence, interpolate, spring, staticFile, useCurrentFrame, useVideoConfig, Easing } from "remotion";
 import { Big, Body, C, Eyebrow, Fade, KenBurns, MEMORY, OldFilm, Pad, Pill, Rise, Shade, Slides, Tag, clamp, oswald, stencil, inter } from "./FallIn";
 
-// 45 s trek-only film: school dawns → 4 AM by choice → Kolukkumalai "order of the day" → last year → book
+// ~46 s trek-only film: "Remember the siren?" → this December, 4 AM by choice → Kolukkumalai → order of the day
+// → last year's snapshot (we've done this before) → every batch, ~20 in → under 10 slots → book
 const T = {
   intro: [0, 210],
   turn: [210, 90],
-  title: [300, 120],
-  orders: [420, 370],
-  last: [790, 300],
-  batches: [1090, 120],
-  end: [1210, 140],
+  title: [300, 110],
+  orders: [410, 400],
+  last: [810, 135],
+  batches: [945, 140],
+  hurry: [1085, 100],
+  end: [1185, 210],
 } as const;
-export const TREK_FRAMES = 1350;
+export const TREK_FRAMES = 1395;
+
+// Music: swap the file here (Kevin MacLeod, incompetech.com, CC BY 4.0); `from` skips a slow intro (seconds)
+// "Nonstop" gets loudest ~60 s in; starting at 30 s puts that peak on the slots/book beat and the end card
+const MUSIC = { src: "trek-music.mp3", title: "Nonstop", from: 30 };
 
 const TREK = "#8fe0ae";
 const GREEN = "#2f9e5b";
@@ -44,7 +50,10 @@ const Intro: React.FC = () => {
       <OldFilm />
       <Shade strength={0.75} />
       <Pad>
-        <Rise delay={18}>
+        <Rise delay={8}>
+          <Eyebrow>Remember?</Eyebrow>
+        </Rise>
+        <Rise delay={20}>
           <Body size={58} color={C.muted} weight={400}>
             0530 hrs.
           </Body>
@@ -83,6 +92,9 @@ const Turn: React.FC = () => {
         <div style={{ fontFamily: stencil, fontSize: 170, lineHeight: 1, whiteSpace: "nowrap", color: C.amber, opacity: s, transform: `scale(${0.6 + 0.4 * s})`, transformOrigin: "left center" }}>0400 HRS</div>
       </AbsoluteFill>
       <Pad>
+        <Rise delay={30}>
+          <Eyebrow color={TREK}>This year ⏩ Munnar</Eyebrow>
+        </Rise>
         <Rise delay={34}>
           <Big size={104}>This December,</Big>
           <Body size={58}>we wake at 4. By choice.</Body>
@@ -100,13 +112,13 @@ const Title: React.FC = () => (
     <AbsoluteFill style={{ padding: "150px 90px", justifyContent: "flex-start" }}>
       <Rise delay={8}>
         <Pill bg={C.amber} color="#1b1200">
-          26 slots · 8 left
+          New destination · 2026
         </Pill>
       </Rise>
     </AbsoluteFill>
     <Pad>
       <Rise delay={0}>
-        <Eyebrow color={TREK}>Adventure · Kazak Trek</Eyebrow>
+        <Eyebrow color={TREK}>This year · Kazak Trek</Eyebrow>
       </Rise>
       <Rise delay={8}>
         <Big size={124} color={TREK}>
@@ -125,11 +137,12 @@ const Title: React.FC = () => (
 
 // "Order of the day": each photo gets a time stamp and one line, like drill orders
 const ORDERS = [
-  { src: "trek/tea-wide.jpg", band: true, dur: 70, tag: KOLU, when: "Day 1 · 05:30", what: "Bus rolls out of Kowdiar, TVM" },
-  { src: "trek/jeep.jpg", dur: 70, tag: "Jeeps in Munnar", when: "Day 1", what: "Jeeps up the world’s highest tea estate" },
-  { src: "trek/tent-stars.jpg", dur: 70, tag: "Tent stay", when: "Night", what: "Tents under the stars" },
-  { src: "trek/trail-dawn.jpg", filter: "brightness(1.35) contrast(1.05)", dur: 70, tag: KOLU, when: "Day 2 · 04:00", what: "Torch-lit climb to the viewpoint" },
-  { src: "trek/sunrise-wide.jpg", band: true, dur: 90, tag: KOLU, when: "Day 2 · sunrise", what: "The sun breaks over the clouds", gold: true },
+  { src: "trek/tea-wide.jpg", band: true, dur: 60, tag: KOLU, when: "Day 1 · 05:30", what: "Bus rolls out of Kowdiar, TVM" },
+  { src: "trek/k-jeep-track.jpg", dur: 70, tag: KOLU, when: "Day 1", what: "Jeeps up the world’s highest tea estate" },
+  { src: "trek/k-tents-night.jpg", band: true, dur: 65, tag: "Tent stay", when: "Night", what: "Tents under the stars" },
+  { src: "trek/k-dawn-walk.jpg", band: true, position: "center 88%", dur: 70, tag: KOLU, when: "Day 2 · 04:00", what: "Torch-lit climb to the viewpoint" },
+  { src: "trek/k-peak-sun.jpg", band: true, dur: 75, tag: KOLU, when: "Day 2 · sunrise", what: "The sun breaks over the clouds", gold: true },
+  { src: "trek/k-clouds-tall.jpg", dur: 60, tag: "Munnar hills", when: "Day 2", what: "Above the clouds. Then home." },
 ];
 
 const Order: React.FC<{ when: string; what: string; gold?: boolean }> = ({ when, what, gold }) => (
@@ -173,72 +186,134 @@ const Orders: React.FC = () => {
 const LastYear: React.FC = () => (
   <AbsoluteFill>
     <Slides
-      each={75}
+      each={45}
       items={[
-        { src: "trek/stream.jpg", band: true, dur: 55, tag: NEYYAR },
-        { src: "trek-boat.mp4", video: true, dur: 60, tag: NEYYAR },
-        { src: "trek-line.mp4", video: true, dur: 60, tag: NEYYAR },
-        { src: "trek-hand.jpg", dur: 60, tag: NEYYAR },
-        { src: "trek-cheer.mp4", video: true, dur: 65, tag: NEYYAR },
+        { src: "trek/stream.jpg", band: true, dur: 45, tag: NEYYAR },
+        { src: "trek-line.mp4", video: true, dur: 45, tag: NEYYAR },
+        { src: "trek-cheer.mp4", video: true, dur: 45, tag: NEYYAR },
       ]}
     />
+    <OldFilm />
     <Shade strength={0.88} from="both" />
-    <Sequence durationInFrames={175}>
-      <Fade edge={10}>
-        <Pad>
-          <Rise delay={4}>
-            <Eyebrow color={TREK}>Last November</Eyebrow>
-          </Rise>
-          <Rise delay={10}>
-            <Big size={120}>Neyyar.</Big>
-            <Body size={52}>Forest streams, a boat crossing, a waterfall.</Body>
-          </Rise>
-        </Pad>
-      </Fade>
-    </Sequence>
-    <Sequence from={175}>
-      <Fade edge={10} inOnly>
-        <Pad>
-          <Rise delay={4}>
-            <Big size={120}>Nobody</Big>
-            <Big size={120} color={C.amber}>
-              left behind.
-            </Big>
-          </Rise>
-        </Pad>
-      </Fade>
-    </Sequence>
+    <AbsoluteFill style={{ padding: "150px 90px 0" }}>
+      <Rise delay={2}>
+        <Pill bg="rgba(7,11,20,.7)" color={C.cream}>
+          ⏪ Last year · a snapshot
+        </Pill>
+      </Rise>
+    </AbsoluteFill>
+    <Pad>
+      <Rise delay={6}>
+        <Eyebrow color={TREK}>Kazak Trek 2025</Eyebrow>
+      </Rise>
+      <Rise delay={12}>
+        <Big size={120}>Neyyar.</Big>
+        <Body size={52}>We’ve done this before.</Body>
+      </Rise>
+    </Pad>
   </AbsoluteFill>
 );
 
-// Batches already registered (from the public list, 26 Oct)
-const IN_BATCHES = ["’76", "’82", "’98", "’06", "’07"];
+// Batch years on screen: those already registered for the trek (public list, 26 Oct) light up in gold.
+// Only batches known to exist (see build.md).
+const ALL_BATCHES = ["’65", "’76", "’82", "’93", "’96", "’98", "’99", "’06", "’07", "’11", "’16"];
+const IN_BATCHES = new Set(["’76", "’82", "’98", "’06", "’07"]);
 
 const Batches: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const lit = spring({ frame: frame - 30, fps, config: { damping: 14 } });
+  const count = Math.round(interpolate(frame, [48, 78], [1, 20], { ...clamp, easing: Easing.out(Easing.cubic) }));
+  const countPop = spring({ frame: frame - 78, fps, config: { damping: 8, stiffness: 180 } });
   return (
     <AbsoluteFill style={{ background: `radial-gradient(120% 70% at 50% 30%, #123d2a, ${C.night} 75%)` }}>
-      <AbsoluteFill style={{ padding: "260px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", gap: "10px 40px" }}>
-        {IN_BATCHES.map((b, i) => {
-          const s = spring({ frame: frame - i * 5, fps, config: { damping: 12 } });
+      <AbsoluteFill style={{ padding: "230px 70px 0", flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", justifyContent: "center", gap: "18px 64px" }}>
+        {ALL_BATCHES.map((b, i) => {
+          const s = spring({ frame: frame - i * 2, fps, config: { damping: 14 } });
+          const on = IN_BATCHES.has(b);
           return (
-            <div key={b} style={{ fontFamily: oswald, fontWeight: 700, fontSize: 128, color: C.amber, opacity: s, transform: `scale(${0.6 + 0.4 * s})` }}>
+            <div
+              key={b}
+              style={{
+                position: "relative",
+                fontFamily: oswald,
+                fontWeight: 700,
+                fontSize: 128,
+                color: on ? C.amber : C.cream,
+                opacity: s * (on ? 0.3 + 0.7 * lit : 0.3),
+                transform: `scale(${(0.7 + 0.3 * s) * (on ? 1 + 0.12 * lit : 1)})`,
+                textShadow: on ? `0 0 ${30 * lit}px rgba(255,182,72,.8)` : "none",
+              }}
+            >
               {b}
+              {on && (
+                <span style={{ position: "absolute", top: 6, right: -30, width: 44, height: 44, borderRadius: 999, background: GREEN, color: "#fff", fontFamily: inter, fontSize: 26, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", opacity: lit, transform: `scale(${lit})` }}>
+                  ✓
+                </span>
+              )}
             </div>
           );
         })}
       </AbsoluteFill>
       <Pad>
-        <Rise delay={30}>
-          <Big size={112}>14 Kazaks</Big>
-          <Big size={112} color={TREK}>
-            already in.
+        <Rise delay={44}>
+          <Body size={52} color={TREK} weight={800}>
+            ✓ Batches already in
+          </Body>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 24 }}>
+            <Big size={110}>Nearly</Big>
+            <div style={{ fontFamily: stencil, fontSize: 230, lineHeight: 0.95, color: C.amber, transform: `scale(${1 + 0.1 * countPop - 0.1 * Math.min(1, countPop)})`, textShadow: "0 0 40px rgba(255,182,72,.5)" }}>
+              {count}
+            </div>
+          </div>
+          <Big size={110} color={TREK}>
+            already booked.
           </Big>
         </Rise>
-        <Rise delay={50}>
-          <Body size={52}>+ family · 8 of 26 slots left</Body>
+        <Rise delay={90}>
+          <Body size={54} color={C.amber} weight={800}>
+            All ages. All batches. One team.
+          </Body>
         </Rise>
+      </Pad>
+    </AbsoluteFill>
+  );
+};
+
+// Scarcity beat: tents are limited, so slots are too
+const Hurry: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame: frame - 26, fps, config: { damping: 9, stiffness: 160 } });
+  return (
+    <AbsoluteFill>
+      <KenBurns src="trek/k-tents-night.jpg" band position="85% center" from={1} to={1.06} />
+      <Tag>Tent stay</Tag>
+      <Shade strength={0.92} from="both" />
+      <Pad>
+        <Rise delay={2}>
+          <Body size={58}>Tents are limited.</Body>
+        </Rise>
+        <Rise delay={8}>
+          <div
+            style={{
+              alignSelf: "flex-start",
+              display: "inline-block",
+              padding: "12px 34px 6px",
+              borderRadius: 22,
+              background: C.red,
+              boxShadow: `0 0 ${40 + 30 * Math.sin(frame / 5)}px rgba(227,27,35,.75)`,
+              transform: `scale(${1 + 0.035 * Math.sin(frame / 5)})`,
+              transformOrigin: "left center",
+            }}
+          >
+            <div style={{ whiteSpace: "nowrap" }}><Big size={140}>Under 10</Big></div>
+          </div>
+          <Big size={120}>slots left.</Big>
+        </Rise>
+        <div style={{ alignSelf: "flex-start", marginTop: 16, opacity: s, transform: `scale(${1.45 * (0.7 + 0.3 * s)}) rotate(-3deg)`, transformOrigin: "left center" }}>
+          <Pill bg={C.amber} color="#1b1200">BOOK FAST</Pill>
+        </div>
       </Pad>
     </AbsoluteFill>
   );
@@ -286,11 +361,11 @@ const End: React.FC = () => {
         </Rise>
       </AbsoluteFill>
       <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 60px 60px", textAlign: "center" }}>
-        <div style={{ fontFamily: inter, fontSize: 21, lineHeight: 1.4, color: "rgba(169,179,196,.75)" }}>
-          SSKZM OBA Communications Cell · Music: “Americana” Kevin MacLeod (incompetech.com), CC BY 4.0 · Siren (CC0)
+        <div style={{ fontFamily: inter, fontSize: 15, lineHeight: 1.4, color: "rgba(169,179,196,.6)" }}>
+          SSKZM OBA Communications Cell · Music: “{MUSIC.title}” Kevin MacLeod (incompetech.com), CC BY 4.0 · Siren (CC0)
           <br />
           Photos &amp; clips: Kazaks Trekking Club &amp; SSKZM OBA · Via Wikimedia Commons: Yahya, Jan J George (CC BY-SA 4.0),
-          Dharaniyakumar (CC BY 4.0), Joshua Tree National Park (public domain)
+          Musheer1999, Alok Kumar, NjaanAnoop (CC BY-SA 4.0), Dharaniyakumar (CC BY 4.0), Joshua Tree National Park (public domain)
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
@@ -317,20 +392,24 @@ export const TrekFilm: React.FC = () => (
     <Scene at={T.batches}>
       <Batches />
     </Scene>
+    <Scene at={T.hurry} edge={8}>
+      <Hurry />
+    </Scene>
     <Sequence from={T.end[0]} durationInFrames={T.end[1]}>
       <Fade edge={10} inOnly>
         <End />
       </Fade>
     </Sequence>
 
-    {/* The 05:30 mess siren opens, then the music takes over at "0400 hrs" */}
+    {/* The 05:30 mess siren opens, then upbeat music drives the rest */}
     <Sequence from={0} durationInFrames={225}>
       <Audio src={staticFile("siren.wav")} startFrom={60} volume={(f) => interpolate(f, [0, 20, 175, 225], [0, 1, 1, 0], clamp)} />
     </Sequence>
-    <Sequence from={T.turn[0] - 10}>
+    <Sequence from={T.turn[0] + 6}>
       <Audio
-        src={staticFile("americana.mp3")}
-        volume={(f) => interpolate(f, [0, 40, TREK_FRAMES - T.turn[0] - 40, TREK_FRAMES - T.turn[0] + 10], [0, 0.95, 0.95, 0], { ...clamp, easing: Easing.inOut(Easing.ease) })}
+        src={staticFile(MUSIC.src)}
+        startFrom={Math.round(MUSIC.from * 30)}
+        volume={(f) => interpolate(f, [0, 8, TREK_FRAMES - T.turn[0] - 70, TREK_FRAMES - T.turn[0] - 6], [0, 0.9, 0.9, 0], { ...clamp, easing: Easing.inOut(Easing.ease) })}
       />
     </Sequence>
   </AbsoluteFill>
