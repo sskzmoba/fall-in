@@ -38,7 +38,7 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "FALL IN, KAZAKS! 🏍️ Kazak Ghats Ride, pick your trail (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. #KazakWanderlust · Ride booking open · Trek: book by 31 Oct:";
+const shareText = "FALL IN, KAZAKS! 🏍️ Kazak Bike Ride on a new route, the Forest Trail (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. #KazakWanderlust · Ride booking open · Trek: book by 31 Oct:";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Fall In, Kazaks!", text: shareText, url: SITE_URL }); return; }

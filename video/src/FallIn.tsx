@@ -15,7 +15,7 @@ import {
 import { loadFont as loadStencil } from "@remotion/google-fonts/BlackOpsOne";
 import { loadFont as loadOswald } from "@remotion/google-fonts/Oswald";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
-import { DayLabel, MapShade, Photo, RouteHeader, RouteMap } from "./RouteTeaser";
+import { DayLabel, MapShade, Photo, RouteHeader, RouteMap, type Times } from "./RouteTeaser";
 
 const stencil = loadStencil().fontFamily;
 const oswald = loadOswald("normal", { weights: ["500", "700"] }).fontFamily;
@@ -471,144 +471,179 @@ const TrekScene: React.FC = () => (
   </AbsoluteFill>
 );
 
-// Ride: one Kazak Ghats Ride, two trails the riders choose between (510 frames)
+// Ride: the Forest Trail, a new route chosen by the riders (510 frames)
+const Stamp: React.FC<{ delay?: number }> = ({ delay = 0 }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const s = spring({ frame: frame - delay, fps, config: { damping: 9, stiffness: 160 } });
+  const o = interpolate(frame, [delay, delay + 4], [0, 1], clamp);
+  return (
+    <div
+      style={{
+        display: "inline-block",
+        opacity: o,
+        transform: `rotate(-6deg) scale(${2.4 - 1.4 * s})`,
+        transformOrigin: "left center",
+        border: `8px solid ${C.red}`,
+        borderRadius: 14,
+        padding: "4px 26px",
+        fontFamily: stencil,
+        fontSize: 92,
+        color: C.red,
+        letterSpacing: 4,
+        background: "rgba(7,11,20,.45)",
+      }}
+    >
+      NEW ROUTE
+    </div>
+  );
+};
+
 const RideIntro: React.FC = () => (
   <AbsoluteFill>
-    <KenBurns src="coonoor.jpg" wide lift={900} from={1} to={1.06} />
-    <Tag>Kazak Bikers · Ride to Coonoor, Jan 2026</Tag>
-    <Shade strength={0.88} from="both" />
-    <AbsoluteFill style={{ padding: "150px 90px", justifyContent: "flex-start" }}>
-      <Rise delay={4}>
-        <Pill bg={C.red}>Republic Day weekend</Pill>
-      </Rise>
-    </AbsoluteFill>
+    <KenBurns src="elephants-tall.jpg" from={1.02} to={1.12} />
+    <Tag>On the route · Bandipur</Tag>
+    <Shade strength={0.92} from="bottom" />
     <Pad>
       <Rise delay={0}>
-        <Eyebrow color={C.ride}>Kazak Ghats Ride</Eyebrow>
+        <Eyebrow color={C.ride}>Kazak Bike Ride · 23–25 Jan</Eyebrow>
       </Rise>
-      <Rise delay={6}>
-        <Big size={124} color={C.ride}>
-          Pick your
-        </Big>
-        <Big size={124} color={C.ride}>
-          trail
+      <div style={{ margin: "26px 0 6px" }}>
+        <Stamp delay={8} />
+      </div>
+      <Rise delay={20}>
+        <Big size={124}>The Forest</Big>
+        <Big size={124} color={C.amber}>
+          Trail
         </Big>
       </Rise>
-      <Rise delay={14}>
-        <Body size={56}>23–25 January 2027</Body>
+      <Rise delay={28}>
+        <Body size={48}>Coimbatore · Sathyamangalam · Bandipur</Body>
       </Rise>
     </Pad>
   </AbsoluteFill>
 );
 
-const FILM_ROUTE_T = { d1: [8, 48], d2: [60, 190], d3: [196, 232], zoom: [52, 80, 186, 212] } as {
-  d1: [number, number];
-  d2: [number, number];
-  d3: [number, number];
-  zoom: [number, number, number, number];
-};
+const FILM_ROUTE_T: Times = { d1: [8, 46], d2: [56, 136], d3: [140, 196], d4: [202, 236], zoom: [50, 78, 196, 218] };
 
 const ForestTrail: React.FC = () => (
   <AbsoluteFill style={{ background: C.night }}>
     <RouteMap T={FILM_ROUTE_T} />
     <MapShade />
-    <RouteHeader eyebrow="TRAIL 1 · NEW" />
-    <Sequence from={66} durationInFrames={32}>
-      <Photo src="route/sathy.jpg" caption="Forest villages & their stories" len={32} />
+    <RouteHeader eyebrow="NEW ROUTE · CHOSEN BY THE RIDERS" />
+    <Sequence from={60} durationInFrames={26}>
+      <Photo src="route/dam.jpg" caption="Bhavanisagar dam" len={26} />
     </Sequence>
-    <Sequence from={98} durationInFrames={30}>
-      <Photo src="route/dhimbam.jpg" caption="Dhimbam Ghat · 27 hairpins" len={30} />
+    <Sequence from={86} durationInFrames={26}>
+      <Photo src="route/sathy.jpg" caption="Forest villages & their stories" len={26} />
     </Sequence>
-    <Sequence from={128} durationInFrames={30}>
-      <Photo src="route/deer.jpg" caption="Bandipur · herds of spotted deer" len={30} />
+    <Sequence from={112} durationInFrames={32}>
+      <Photo src="route/ghatroad.jpg" caption="Dhimbam Ghat" len={32} count={27} />
     </Sequence>
-    <Sequence from={158} durationInFrames={32}>
-      <Photo src="route/bandipur.jpg" caption="Elephant country" len={32} />
+    <Sequence from={144} durationInFrames={28}>
+      <Photo src="route/elephants.jpg" caption="Bandipur · elephant country" len={28} />
     </Sequence>
-    <Sequence from={194} durationInFrames={46}>
-      <Photo src="route/nilambur.jpg" caption="Nilambur · world’s oldest teak" len={46} />
+    <Sequence from={172} durationInFrames={28}>
+      <Photo src="route/gudalur.jpg" caption="Gudalur · tea country" len={28} />
     </Sequence>
-    <Sequence from={20}>
-      <DayLabel text="Villages · hairpins · wildlife" sub="Sathyamangalam → Bandipur → Gudalur" stat="~220 km a day" />
+    <Sequence from={202} durationInFrames={50}>
+      <Photo src="route/nilambur.jpg" caption="Nilambur · world’s oldest teak" len={50} />
+    </Sequence>
+    <Sequence from={10} durationInFrames={46}>
+      <DayLabel text="DAY 1 · Ride in" sub="Bengaluru, Kochi & Kozhikode → Coimbatore" />
+    </Sequence>
+    <Sequence from={56} durationInFrames={84}>
+      <DayLabel text="DAY 2 · Sathyamangalam" sub="Dam, forest villages, 27 hairpins" />
+    </Sequence>
+    <Sequence from={140} durationInFrames={60}>
+      <DayLabel text="DAY 3 · Bandipur" sub="Elephant country → Gudalur" />
+    </Sequence>
+    <Sequence from={200}>
+      <DayLabel text="Home run" sub="Via Nilambur or Mysuru · +1 day optional" />
     </Sequence>
   </AbsoluteFill>
 );
 
-const MalabarTrail: React.FC = () => (
+// Wildlife checklist: tiles pop in, then each gets a tick
+const SPOTS = [
+  { src: "route/sq-elephant.jpg", label: "Elephants" },
+  { src: "route/sq-gaur.jpg", label: "Gaur" },
+  { src: "route/sq-deer.jpg", label: "Spotted deer" },
+  { src: "route/sq-peacock.jpg", label: "Peacocks" },
+];
+
+const Spotted: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(110% 60% at 50% 45%, ${C.navy}, ${C.night} 75%)`, padding: "210px 70px 0", alignItems: "center", gap: 44 }}>
+      <Rise delay={0} style={{ textAlign: "center" }}>
+        <Eyebrow color={C.ride}>On the way · if you’re lucky</Eyebrow>
+        <Big size={112}>Spot them all</Big>
+      </Rise>
+      <div style={{ display: "grid", gridTemplateColumns: "455px 455px", gap: 30 }}>
+        {SPOTS.map((sp, i) => {
+          const pop = spring({ frame: frame - 6 - i * 5, fps, config: { damping: 14 } });
+          const tick = spring({ frame: frame - 30 - i * 14, fps, config: { damping: 10, stiffness: 180 } });
+          return (
+            <div key={sp.src} style={{ position: "relative", width: 455, height: 455, borderRadius: 24, overflow: "hidden", border: `3px solid ${C.cream}`, opacity: pop, transform: `scale(${0.85 + 0.15 * pop})` }}>
+              <Img src={staticFile(sp.src)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+              <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "30px 20px 14px", background: "linear-gradient(transparent, rgba(7,11,20,.9))", fontFamily: oswald, fontWeight: 700, fontSize: 42, color: C.cream }}>
+                {sp.label}
+              </div>
+              <div style={{ position: "absolute", top: 14, right: 14, width: 84, height: 84, borderRadius: 999, background: "#2f9e5b", color: "#fff", fontFamily: inter, fontWeight: 800, fontSize: 54, display: "flex", alignItems: "center", justifyContent: "center", transform: `scale(${tick})`, boxShadow: "0 6px 20px rgba(0,0,0,.5)" }}>
+                ✓
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </AbsoluteFill>
+  );
+};
+
+const RidersChose: React.FC = () => (
   <AbsoluteFill>
-    <Slides
-      each={55}
-      items={[
-        { src: "wayanad-churam.jpg", band: true, tag: "Where we’re going · Wayanad Churam" },
-        { src: "churam-night.jpg", band: true, dur: 45, tag: "Where we’re going · Wayanad Churam" },
-        { src: "ooty-road.mp4", video: true, dur: 60, tag: "Kazak Rider Group · Nilgiris, Jan 2026" },
-      ]}
-    />
-    <Shade strength={0.88} from="both" />
+    <KenBurns src="ride-drone.mp4" video from={1} to={1.06} />
+    <Tag>Kazak Rider Group · Nilgiris, Jan 2026</Tag>
+    <Shade strength={0.9} from="both" />
     <Pad>
       <Rise delay={0}>
-        <Eyebrow color={C.ride}>Trail 2</Eyebrow>
-      </Rise>
-      <Rise delay={6}>
-        <Big size={124} color={C.ride}>
-          Malabar
-        </Big>
-        <Big size={124} color={C.ride}>
-          Days
+        <Big size={120}>Chosen by</Big>
+        <Big size={120} color={C.amber}>
+          the riders
         </Big>
       </Rise>
-      <Rise delay={16}>
-        <Body size={52}>Wayanad’s misty hills via the Churam</Body>
+      <Rise delay={10}>
+        <Body size={50}>3 days · +1 optional on Republic Day</Body>
       </Rise>
-      <Rise delay={60}>
-        <Body size={46} weight={400}>
-          Option: on to Kannur
-        </Body>
+      <Rise delay={18}>
+        <div>
+          <Pill bg={C.red}>Booking open</Pill>
+        </div>
       </Rise>
     </Pad>
   </AbsoluteFill>
 );
 
-const RidersChoose: React.FC = () => (
-  <AbsoluteFill style={{ background: `radial-gradient(110% 60% at 50% 45%, ${C.navy}, ${C.night} 75%)`, alignItems: "center", justifyContent: "center", gap: 34, padding: "0 70px", textAlign: "center" }}>
-    <Rise delay={0}>
-      <div style={{ display: "flex", gap: 22, justifyContent: "center", flexWrap: "wrap" }}>
-        <Pill bg="#2f9e5b">🐘 Forest Trail</Pill>
-        <Pill bg={C.red}>🌿 Malabar Days</Pill>
-      </div>
-    </Rise>
-    <Rise delay={6}>
-      <Big size={110}>Riders pick</Big>
-      <Big size={110} color={C.amber}>
-        the trail
-      </Big>
-    </Rise>
-    <Rise delay={14}>
-      <Body size={46} weight={400}>
-        Same dates · same form · book now
-      </Body>
-    </Rise>
-  </AbsoluteFill>
-);
-
 const RideScene: React.FC = () => (
   <AbsoluteFill>
-    <Sequence durationInFrames={72}>
+    <Sequence durationInFrames={75}>
       <RideIntro />
     </Sequence>
-    <Sequence from={60} durationInFrames={252}>
+    <Sequence from={62} durationInFrames={260}>
       <Fade edge={12} inOnly>
         <ForestTrail />
       </Fade>
     </Sequence>
-    <Sequence from={300} durationInFrames={162}>
+    <Sequence from={310} durationInFrames={112}>
       <Fade edge={12} inOnly>
-        <MalabarTrail />
+        <Spotted />
       </Fade>
     </Sequence>
-    <Sequence from={450}>
+    <Sequence from={410}>
       <Fade edge={12} inOnly>
-        <RidersChoose />
+        <RidersChose />
       </Fade>
     </Sequence>
   </AbsoluteFill>
@@ -734,8 +769,8 @@ const EndScene: React.FC = () => {
           Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0 · Bugle “Assembly” (public domain) · Siren (CC0)
           <br />
           Photos &amp; clips: Kazak Rider Group, Kazaks Trekking Club &amp; SSKZM OBA · Destination photos via Wikimedia Commons:
-          Musheer1999 (CC BY-SA 4.0), Karthick Gopalakrishnan (CC0), Sreeraj PS (CC BY-SA 3.0), Dhruvaraj S (CC BY 2.0), Murugavel.T (CC BY-SA 4.0), Jaseem Hamza (CC BY 3.0),
-          Dineshkannambadi, L. Shyamal, PP Yoonus (CC BY-SA 3.0)
+          Musheer1999, Murugavel.T, Namisharun, Partha Majumdar, LakshmiNaresh (CC BY-SA 4.0), Karthick Gopalakrishnan (CC0),
+          Pratheept2000, Jaseem Hamza (CC BY 3.0), Dineshkannambadi, PP Yoonus (CC BY-SA 3.0)
         </Body>
       </AbsoluteFill>
     </AbsoluteFill>

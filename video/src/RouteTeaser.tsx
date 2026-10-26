@@ -4,7 +4,7 @@ import { loadFont as loadStencil } from "@remotion/google-fonts/BlackOpsOne";
 import { loadFont as loadOswald } from "@remotion/google-fonts/Oswald";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 
-// 15 s teaser for the proposed "Forest Trail" ride route. Standalone; not part of FallIn yet.
+// 15 s teaser for the "Forest Trail" ride route (chosen by the riders, Oct 2026). FallIn reuses its map and cards.
 const stencil = loadStencil().fontFamily;
 const oswald = loadOswald("normal", { weights: ["500", "700"] }).fontFamily;
 const inter = loadInter("normal", { weights: ["400", "600", "800"] }).fontFamily;
@@ -29,6 +29,9 @@ const P: Record<string, LL> = {
   erode: [11.34, 77.72],
   coimbatore: [11.02, 76.96],
   kochi: [9.93, 76.26],
+  kozhikode: [11.25, 75.78],
+  malappuram: [11.07, 76.07],
+  bhavanisagar: [11.47, 77.11],
   thrissur: [10.53, 76.21],
   palakkad: [10.78, 76.65],
   annur: [11.23, 77.1],
@@ -57,9 +60,11 @@ const EASTERN_GHATS: LL[] = [[11.45, 76.95], [11.6, 77.3], [11.95, 77.6], [12.35
 const R = {
   d1a: ["bengaluru", "hosur", "krishnagiri", "salem", "erode", "coimbatore"],
   d1b: ["kochi", "thrissur", "palakkad", "coimbatore"],
-  d2: ["coimbatore", "annur", "sathy", "dhimbam", "chamarajanagar", "gundlupet", "bandipur", "mudumalai", "gudalur"],
-  d3a: ["gudalur", "nadukani", "nilambur", "perinthalmanna", "thrissur", "kochi"],
-  d3b: ["gudalur", "mudumalai", "bandipur", "gundlupet", "mysuru", "bengaluru"],
+  d1c: ["kozhikode", "malappuram", "perinthalmanna", "palakkad", "coimbatore"],
+  d2: ["coimbatore", "annur", "bhavanisagar", "sathy", "dhimbam", "chamarajanagar"],
+  d3: ["chamarajanagar", "gundlupet", "bandipur", "mudumalai", "gudalur"],
+  d4a: ["gudalur", "nadukani", "nilambur", "perinthalmanna", "thrissur", "kochi"],
+  d4b: ["gudalur", "mudumalai", "bandipur", "gundlupet", "mysuru", "bengaluru"],
 };
 const pts = (names: string[]) => names.map((n) => px(P[n]));
 
@@ -96,14 +101,16 @@ const Trail: React.FC<{ names: string[]; at: [number, number]; color: string; da
   );
 };
 
-const Town: React.FC<{ n: string; label: string; show: number; dx?: number; dy?: number; big?: boolean; dim?: boolean }> = ({ n, label, show, dx = 22, dy = 10, big, dim }) => {
+// `halt` = overnight stop: amber ring and label; `hide` fades the town out (e.g. before it leaves the frame on zoom)
+const Town: React.FC<{ n: string; label: string; show: number; hide?: number; dx?: number; dy?: number; big?: boolean; dim?: boolean; halt?: boolean }> = ({ n, label, show, hide = 1e6, dx = 22, dy = 10, big, dim, halt }) => {
   const frame = useCurrentFrame();
-  const o = interpolate(frame, [show, show + 10], [0, 1], clamp);
+  const o = interpolate(frame, [show, show + 10], [0, 1], clamp) * interpolate(frame, [hide, hide + 8], [1, 0], clamp);
   const [x, y] = px(P[n]);
   return (
     <g opacity={o * (dim ? 0.55 : 1)}>
-      <circle cx={x} cy={y} r={big ? 13 : 9} fill={dim ? C.muted : C.cream} />
-      <text x={x + dx} y={y + dy} fill={C.cream} fontFamily={oswald} fontWeight={500} fontSize={big ? 38 : 30} textAnchor={dx < 0 ? "end" : "start"} style={{ paintOrder: "stroke", stroke: C.night, strokeWidth: 8 }}>
+      {halt && <circle cx={x} cy={y} r={22} fill="none" stroke={C.amber} strokeWidth={5} />}
+      <circle cx={x} cy={y} r={big ? 13 : 9} fill={dim ? C.muted : halt ? C.amber : C.cream} />
+      <text x={x + dx} y={y + dy} fill={halt ? C.amber : C.cream} fontFamily={oswald} fontWeight={500} fontSize={big ? 38 : 30} textAnchor={dx < 0 ? "end" : "start"} style={{ paintOrder: "stroke", stroke: C.night, strokeWidth: 8 }}>
         {label}
       </text>
     </g>
@@ -119,13 +126,13 @@ const Pulse: React.FC<{ n: string; at: number }> = ({ n, at }) => {
 };
 
 // When each day's trail draws, and the zoom in/out frames; the film uses a faster version
-type Times = { d1: [number, number]; d2: [number, number]; d3: [number, number]; zoom: [number, number, number, number] };
-const TEASER_T: Times = { d1: [45, 140], d2: [160, 290], d3: [300, 385], zoom: [150, 185, 290, 320] };
+export type Times = { d1: [number, number]; d2: [number, number]; d3: [number, number]; d4: [number, number]; zoom: [number, number, number, number] };
+const TEASER_T: Times = { d1: [45, 115], d2: [125, 235], d3: [240, 320], d4: [328, 378], zoom: [120, 155, 318, 345] };
 const along = ([a, b]: [number, number], f: number) => a + (b - a) * f;
 
 export const RouteMap: React.FC<{ T?: Times }> = ({ T = TEASER_T }) => {
   const frame = useCurrentFrame();
-  // Zoom into the forest stretch on day 2, back out for day 3
+  // Zoom into the forest stretch for days 2–3, back out for the ride home
   // (k = how far into the zoom; the forest centre slides up to sit above the photo cards)
   const k = interpolate(frame, T.zoom, [0, 1, 1, 0], { ...clamp, easing: Easing.inOut(Easing.cubic) });
   const zoom = 1 + 0.9 * k;
@@ -166,22 +173,26 @@ export const RouteMap: React.FC<{ T?: Times }> = ({ T = TEASER_T }) => {
 
             <Trail names={R.d1a} at={T.d1} color={C.ride} />
             <Trail names={R.d1b} at={[along(T.d1, 0.1), T.d1[1]]} color={C.ride} />
+            <Trail names={R.d1c} at={[along(T.d1, 0.15), T.d1[1]]} color={C.ride} />
             <Trail names={R.d2} at={T.d2} color={C.amber} width={11} />
-            <Trail names={R.d3a} at={T.d3} color={C.ride} />
-            <Trail names={R.d3b} at={T.d3} color={C.ride} dashed />
+            <Trail names={R.d3} at={T.d3} color={C.amber} width={11} />
+            <Trail names={R.d4a} at={T.d4} color={C.ride} dashed />
+            <Trail names={R.d4b} at={T.d4} color={C.ride} dashed />
             <Pulse n="coimbatore" at={T.d1[1]} />
-            <Pulse n="gudalur" at={T.d2[1]} />
+            <Pulse n="chamarajanagar" at={T.d2[1]} />
+            <Pulse n="gudalur" at={T.d3[1]} />
 
             <Town n="bengaluru" label="Bengaluru" show={T.d1[0] - 15} big />
             <Town n="kochi" label="Kochi" show={T.d1[0] - 15} big />
-            <Town n="coimbatore" label="Coimbatore" show={along(T.d1, 0.8)} big dy={44} dx={-18} />
-            <Town n="sathy" label="Sathyamangalam" show={along(T.d2, 0.12)} dx={-20} dy={40} />
-            <Town n="dhimbam" label="Dhimbam Ghat" show={along(T.d2, 0.3)} dy={-16} />
-            <Town n="gundlupet" label="Gundlupet" show={along(T.d2, 0.58)} dx={-20} dy={-14} />
-            <Town n="bandipur" label="Bandipur" show={along(T.d2, 0.7)} dx={-20} />
-            <Town n="gudalur" label="Gudalur" show={along(T.d2, 0.9)} dx={-20} dy={30} />
-            <Town n="nilambur" label="Nilambur" show={along(T.d3, 0.35)} dx={-20} />
-            <Town n="mysuru" label="Mysuru" show={along(T.d3, 0.47)} dx={-20} />
+            <Town n="kozhikode" label="Kozhikode" show={T.d1[0] - 15} hide={T.zoom[0]} big />
+            <Town n="coimbatore" label="Coimbatore" show={along(T.d1, 0.8)} big halt dy={50} dx={-26} />
+            <Town n="sathy" label="Sathyamangalam" show={along(T.d2, 0.45)} dx={-20} dy={44} />
+            <Town n="dhimbam" label="Dhimbam Ghat" show={along(T.d2, 0.7)} dy={-16} dx={26} />
+            <Town n="chamarajanagar" label="Chamarajanagar" show={along(T.d2, 0.9)} halt dx={28} dy={-14} />
+            <Town n="bandipur" label="Bandipur" show={along(T.d3, 0.45)} dx={-28} />
+            <Town n="gudalur" label="Gudalur" show={along(T.d3, 0.9)} halt dx={-28} dy={36} />
+            <Town n="nilambur" label="Nilambur" show={along(T.d4, 0.35)} dx={-20} />
+            <Town n="mysuru" label="Mysuru" show={along(T.d4, 0.47)} dx={-20} />
           </g>
         </g>
       </svg>
@@ -191,7 +202,7 @@ export const RouteMap: React.FC<{ T?: Times }> = ({ T = TEASER_T }) => {
 
 // ---------- Text and photos ----------
 
-export const RouteHeader: React.FC<{ eyebrow?: string }> = ({ eyebrow = "KAZAK GHATS RIDE · 23–25 JAN 2027" }) => {
+export const RouteHeader: React.FC<{ eyebrow?: string }> = ({ eyebrow = "NEW ROUTE · 23–25 JAN 2027" }) => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [5, 25], [0, 1], clamp);
   const y = interpolate(frame, [5, 25], [30, 0], { ...clamp, easing: Easing.out(Easing.cubic) });
@@ -224,8 +235,10 @@ export const DayLabel: React.FC<{ text: string; sub: string; stat?: string }> = 
 };
 
 // A photo card that rises in over the lower part of the map
-export const Photo: React.FC<{ src: string; caption: string; len: number }> = ({ src, caption, len }) => {
+// `count` ticks a badge from 1 up to that number (hairpins) while the card is up
+export const Photo: React.FC<{ src: string; caption: string; len: number; count?: number }> = ({ src, caption, len, count }) => {
   const frame = useCurrentFrame();
+  const n = count ? Math.round(interpolate(frame, [4, len - 8], [1, count], clamp)) : 0;
   const o = interpolate(frame, [0, 8, len - 6, len], [0, 1, 1, 0], clamp);
   const y = interpolate(frame, [0, 10], [40, 0], { ...clamp, easing: Easing.out(Easing.cubic) });
   const s = interpolate(frame, [0, len], [1, 1.08], clamp);
@@ -236,6 +249,11 @@ export const Photo: React.FC<{ src: string; caption: string; len: number }> = ({
         <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "40px 28px 18px", background: "linear-gradient(transparent, rgba(7,11,20,.9))", fontFamily: oswald, fontWeight: 700, fontSize: 40, color: C.cream }}>
           {caption}
         </div>
+        {count && (
+          <div style={{ position: "absolute", top: 18, right: 18, padding: "8px 18px", borderRadius: 14, background: C.red, fontFamily: oswald, fontWeight: 700, fontSize: 40, color: C.cream, letterSpacing: 2 }}>
+            HAIRPIN {n}/{count}
+          </div>
+        )}
       </div>
     </AbsoluteFill>
   );
@@ -247,10 +265,10 @@ const EndPanel: React.FC = () => {
   return (
     <AbsoluteFill style={{ top: 1470, padding: "0 70px", opacity: o }}>
       <div style={{ fontFamily: stencil, fontSize: 66, color: C.cream }}>
-        3 days · 2 Ghats · <span style={{ color: C.red }}>1 squad</span>
+        2 Ghats · 3 days · <span style={{ color: C.red }}>1 squad</span>
       </div>
       <div style={{ fontFamily: inter, fontWeight: 600, fontSize: 36, color: C.muted, marginTop: 14, lineHeight: 1.35 }}>
-        Two routes: <span style={{ color: C.amber }}>Forest Trail via Sathyamangalam</span> or Malabar Days via Wayanad. Riders decide.
+        <span style={{ color: C.amber }}>Chosen by the riders.</span> Stay on for Republic Day (26 Jan) if you like.
       </div>
       <div style={{ fontFamily: inter, fontWeight: 800, fontSize: 40, color: C.amber, marginTop: 18 }}>adventures.sskzmoba.org</div>
     </AbsoluteFill>
@@ -268,43 +286,49 @@ export const RouteTeaser: React.FC = () => (
     <MapShade />
     <RouteHeader />
 
-    <Sequence from={45} durationInFrames={105}>
-      <DayLabel text="DAY 1" sub="Bengaluru & Kochi groups ride in to Coimbatore" />
+    <Sequence from={45} durationInFrames={80}>
+      <DayLabel text="DAY 1 · Ride in" sub="Bengaluru, Kochi & Kozhikode → Coimbatore" />
     </Sequence>
-    <Sequence from={150} durationInFrames={150}>
-      <DayLabel text="DAY 2 · Into the wild" sub="Sathyamangalam → Gundlupet → Bandipur → Gudalur" stat="~220 km · 5–6 h in the saddle" />
+    <Sequence from={125} durationInFrames={115}>
+      <DayLabel text="DAY 2 · Sathyamangalam" sub="Bhavanisagar, forest villages, Dhimbam hairpins" />
     </Sequence>
-    <Sequence from={300} durationInFrames={90}>
-      <DayLabel text="DAY 3 · Home run" sub="Via Nilambur to Kochi · via Mysuru to Bengaluru" />
+    <Sequence from={240} durationInFrames={85}>
+      <DayLabel text="DAY 3 · Bandipur" sub="Elephant country → Gudalur" />
     </Sequence>
-    <Sequence from={390}>
+    <Sequence from={325} durationInFrames={60}>
+      <DayLabel text="Home run" sub="Via Nilambur or Mysuru · +1 day optional" />
+    </Sequence>
+    <Sequence from={385}>
       <EndPanel />
     </Sequence>
 
-    <Sequence from={166} durationInFrames={36}>
-      <Photo src="route/sathy.jpg" caption="Sathyamangalam · forest villages & their stories" len={36} />
+    <Sequence from={128} durationInFrames={30}>
+      <Photo src="route/dam.jpg" caption="Bhavanisagar dam" len={30} />
     </Sequence>
-    <Sequence from={202} durationInFrames={32}>
-      <Photo src="route/dhimbam.jpg" caption="Dhimbam Ghat · 27 hairpins" len={32} />
+    <Sequence from={158} durationInFrames={34}>
+      <Photo src="route/sathy.jpg" caption="Sathyamangalam · forest villages & their stories" len={34} />
     </Sequence>
-    <Sequence from={234} durationInFrames={32}>
-      <Photo src="route/deer.jpg" caption="Bandipur · herds of spotted deer" len={32} />
+    <Sequence from={192} durationInFrames={46}>
+      <Photo src="route/ghatroad.jpg" caption="Dhimbam Ghat" len={46} count={27} />
     </Sequence>
-    <Sequence from={266} durationInFrames={32}>
-      <Photo src="route/bandipur.jpg" caption="Bandipur–Mudumalai · elephant country" len={32} />
+    <Sequence from={242} durationInFrames={30}>
+      <Photo src="route/elephants.jpg" caption="Bandipur · elephant country" len={30} />
     </Sequence>
-    <Sequence from={302} durationInFrames={40}>
-      <Photo src="route/gudalur.jpg" caption="Gudalur · tea country" len={40} />
+    <Sequence from={272} durationInFrames={26}>
+      <Photo src="route/deer.jpg" caption="Herds of spotted deer" len={26} />
     </Sequence>
-    <Sequence from={342} durationInFrames={46}>
-      <Photo src="route/nilambur.jpg" caption="Nilambur · world’s oldest teak plantation" len={46} />
+    <Sequence from={298} durationInFrames={28}>
+      <Photo src="route/gudalur.jpg" caption="Gudalur · tea country" len={28} />
+    </Sequence>
+    <Sequence from={330} durationInFrames={52}>
+      <Photo src="route/nilambur.jpg" caption="Nilambur · world’s oldest teak plantation" len={52} />
     </Sequence>
 
     <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 60px 34px", textAlign: "center" }}>
       <div style={{ fontFamily: inter, fontSize: 19, color: "rgba(169,179,196,.7)", lineHeight: 1.4 }}>
-        Proposed route · map illustrative · Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0
+        Map illustrative · Music: “Intended Force” Kevin MacLeod (incompetech.com), CC BY 3.0
         <br />
-        Photos via Wikimedia Commons: Murugavel.T, Jaseem Hamza, Dineshkannambadi, L. Shyamal, LakshmiNaresh, PP Yoonus (CC BY / BY-SA)
+        Photos via Wikimedia Commons: Pratheept2000, Murugavel.T, Jaseem Hamza, Namisharun, Dineshkannambadi, LakshmiNaresh, PP Yoonus (CC BY / BY-SA)
       </div>
     </AbsoluteFill>
 

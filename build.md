@@ -96,7 +96,19 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       v4 preview at https://adventures.sskzmoba.org/v2/ (two-trail ride card, Forest Trail tile,
       film v4 `film/fall-in-kazaks-v2.mp4`, 56.7 s: ride section 17 s). Built with
       `subsite.js`-style copy: same files with `../` asset paths. (2026-10-25)
-- [ ] Switch the main page to v2 after the user approves (copy `v2/` changes into root files,
+- [x] Route decided (2026-10-26): riders chose the **Forest Trail** only (Wayanad dropped). Dates
+      23–25 Jan + optional 26 Jan (Republic Day); groups from Bangalore, Kochi, Calicut meet at
+      Coimbatore; halts Coimbatore, Chamarajanagar, Gudalur; cost and ₹2,500 advance unchanged;
+      ride stays "Booking open". Site/film keep the itinerary light (no day-by-day plan on the site).
+- [x] v5 preview at /v2/ (2026-10-26): ride card "Kazak Bike Ride · NEW ROUTE · The Forest Trail"
+      (elephant-crossing photo `img/ride-forest.jpg`, calendar `forest-trail.ics`); film ride
+      section = NEW ROUTE stamp over elephants → 3+1-day map with halts, hairpin counter 1→27 →
+      "Spot them all" wildlife checklist → "Chosen by the riders" over the drone clip; teaser
+      redone for the same route. Form text drafted for the form owner (title, route note,
+      Calicut group, return-plan question).
+- [ ] Ride form updated by its owner (text drafted 2026-10-26)
+- [ ] Message riders already registered for the Wayanad plan (change or withdraw)
+- [ ] Switch the main page to v2 after the user approves; also refresh `img/og.jpg` (copy `v2/` changes into root files,
       point the film at the v4 file)
 - [ ] Ride public list (later, same pattern as the trek)
 - [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
@@ -182,7 +194,11 @@ Avoided: shirtless swimming close-ups (public promo), duplicates, blurry clips.
   and the film): Sathyamangalam landscape — Murugavel.T (CC BY-SA 4.0); Sathyamangalam TR
   panoramio — Jaseem Hamza (CC BY 3.0); Bandipur road — L. Shyamal (CC BY-SA 3.0); chital herd
   at Bandipur — Dineshkannambadi (CC BY-SA 3.0); Gudalur tea estate — LakshmiNaresh
-  (CC BY-SA 4.0); Conolly Plot, Nilambur — PP Yoonus (CC BY-SA 3.0).
+  (CC BY-SA 4.0); Conolly Plot, Nilambur — PP Yoonus (CC BY-SA 3.0). Added 2026-10-26:
+  elephants crossing at Bandipur — Namisharun (CC BY-SA 4.0); gaur herd at Bandipur —
+  Dineshkannambadi (CC BY-SA 3.0); peacock in Bandipur — Partha Majumdar (CC BY-SA 4.0);
+  Bhavanisagar dam — Pratheept2000 (CC BY 3.0); Sathyamangalam ghat road — Jaseem Hamza (CC BY 3.0).
+  The Wayanad Churam photos are no longer in the film or on /v2/ (still on the live main page).
 - Clips are pre-trimmed to 1080×1920 / 30 fps / no audio in `video/public/`
   (source originals stay in Drive). Video file for the site lives in `film/`.
 
