@@ -42,7 +42,8 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 20px 20px calc(72px + env(safe-area-inset-bottom));
+  /* top padding keeps the absolutely placed logo clear of the text on short screens */
+  padding: calc(96px + env(safe-area-inset-top)) 20px calc(72px + env(safe-area-inset-bottom));
   overflow: hidden;
   isolation: isolate;
 }
@@ -346,3 +347,20 @@ details > *:not(summary) { margin-top: 0; color: #d9d4ca; font-size: .95rem; }
   .hero__bg, .marquee__track, .scroll-cue { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* Two separate adventures: season strip, section headers, cross-links */
+.season { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; }
+.season__item { flex: 0 0 auto; display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; color: #fff; text-decoration: none; line-height: 1.2; }
+.season__item b { font: 700 1rem var(--head); letter-spacing: 1px; text-transform: uppercase; }
+.season__item span { font-size: .85rem; opacity: .9; }
+.season__item--trek { background: linear-gradient(135deg, #2f9e5b, #1f7a43); }
+.season__item--ride { background: linear-gradient(135deg, #e31b23, #a90f15); }
+.season__line { flex: 1; height: 0; border-top: 2px dashed rgba(255,255,255,.35); }
+.season__note { margin: 0; font-size: .9rem; color: var(--muted); }
+.adventure { padding-top: 8px; }
+.adv-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 0 14px; padding-bottom: 10px; font: 700 1.5rem var(--head); letter-spacing: 1px; text-transform: uppercase; border-bottom: 3px solid; }
+.adv-head small { font: 600 .85rem var(--body); letter-spacing: .5px; text-transform: none; color: var(--muted); }
+.adventure--trek .adv-head { color: #8fe0ae; border-color: var(--trek); }
+.adventure--ride .adv-head { color: #ff7a7f; border-color: var(--ride); }
+.cross { display: block; margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line); font-size: .9rem; color: var(--muted); text-decoration: none; }
+.cross b { color: var(--amber); }

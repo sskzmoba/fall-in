@@ -17,12 +17,12 @@ import { loadFont as loadOswald } from "@remotion/google-fonts/Oswald";
 import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
 import { DayLabel, MapShade, Photo, RouteHeader, RouteMap, type Times } from "./RouteTeaser";
 
-const stencil = loadStencil().fontFamily;
-const oswald = loadOswald("normal", { weights: ["500", "700"] }).fontFamily;
-const inter = loadInter("normal", { weights: ["400", "600", "800"] }).fontFamily;
+export const stencil = loadStencil().fontFamily;
+export const oswald = loadOswald("normal", { weights: ["500", "700"] }).fontFamily;
+export const inter = loadInter("normal", { weights: ["400", "600", "800"] }).fontFamily;
 
 // Colours from the OBA logo (same tokens as the website)
-const C = {
+export const C = {
   night: "#070b14",
   navy: "#12385e",
   red: "#e31b23",
@@ -47,11 +47,11 @@ const S = {
 } as const;
 export const TOTAL_FRAMES = 1780;
 
-const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
+export const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 
 // ---------- Building blocks ----------
 
-const KenBurns: React.FC<{
+export const KenBurns: React.FC<{
   src: string;
   from?: number;
   to?: number;
@@ -134,7 +134,7 @@ const KenBurns: React.FC<{
 };
 
 // Fades a scene in and out over `edge` frames
-const Fade: React.FC<{ children: React.ReactNode; edge?: number; inOnly?: boolean }> = ({
+export const Fade: React.FC<{ children: React.ReactNode; edge?: number; inOnly?: boolean }> = ({
   children,
   edge = 12,
   inOnly,
@@ -148,7 +148,7 @@ const Fade: React.FC<{ children: React.ReactNode; edge?: number; inOnly?: boolea
 };
 
 // Text that rises into place with a spring, starting at `delay` frames
-const Rise: React.FC<{ delay?: number; children: React.ReactNode; style?: React.CSSProperties }> = ({
+export const Rise: React.FC<{ delay?: number; children: React.ReactNode; style?: React.CSSProperties }> = ({
   delay = 0,
   children,
   style,
@@ -161,7 +161,7 @@ const Rise: React.FC<{ delay?: number; children: React.ReactNode; style?: React.
   );
 };
 
-const Shade: React.FC<{ strength?: number; from?: "bottom" | "top" | "both" }> = ({
+export const Shade: React.FC<{ strength?: number; from?: "bottom" | "top" | "both" }> = ({
   strength = 0.85,
   from = "bottom",
 }) => {
@@ -175,7 +175,7 @@ const Shade: React.FC<{ strength?: number; from?: "bottom" | "top" | "both" }> =
 };
 
 // Film grain + vignette for the nostalgia scenes
-const OldFilm: React.FC = () => {
+export const OldFilm: React.FC = () => {
   const frame = useCurrentFrame();
   const flicker = 0.9 + 0.1 * Math.sin(frame * 1.7) * Math.sin(frame * 0.43);
   return (
@@ -189,13 +189,13 @@ const OldFilm: React.FC = () => {
   );
 };
 
-const Eyebrow: React.FC<{ children: React.ReactNode; color?: string }> = ({ children, color = C.amber }) => (
+export const Eyebrow: React.FC<{ children: React.ReactNode; color?: string }> = ({ children, color = C.amber }) => (
   <div style={{ fontFamily: oswald, fontWeight: 700, fontSize: 40, letterSpacing: 10, textTransform: "uppercase", color, textShadow: "0 2px 16px rgba(0,0,0,.9)" }}>
     {children}
   </div>
 );
 
-const Big: React.FC<{ children: React.ReactNode; size?: number; color?: string }> = ({
+export const Big: React.FC<{ children: React.ReactNode; size?: number; color?: string }> = ({
   children,
   size = 128,
   color = C.cream,
@@ -214,7 +214,7 @@ const Big: React.FC<{ children: React.ReactNode; size?: number; color?: string }
   </div>
 );
 
-const Body: React.FC<{ children: React.ReactNode; size?: number; color?: string; weight?: number }> = ({
+export const Body: React.FC<{ children: React.ReactNode; size?: number; color?: string; weight?: number }> = ({
   children,
   size = 52,
   color = C.cream,
@@ -225,7 +225,7 @@ const Body: React.FC<{ children: React.ReactNode; size?: number; color?: string;
   </div>
 );
 
-const Pill: React.FC<{ children: React.ReactNode; bg: string; color?: string }> = ({ children, bg, color = "#fff" }) => (
+export const Pill: React.FC<{ children: React.ReactNode; bg: string; color?: string }> = ({ children, bg, color = "#fff" }) => (
   <span
     style={{
       display: "inline-block",
@@ -244,7 +244,7 @@ const Pill: React.FC<{ children: React.ReactNode; bg: string; color?: string }> 
   </span>
 );
 
-const Pad: React.FC<{ children: React.ReactNode; justify?: "flex-end" | "center" | "flex-start" }> = ({
+export const Pad: React.FC<{ children: React.ReactNode; justify?: "flex-end" | "center" | "flex-start" }> = ({
   children,
   justify = "flex-end",
 }) => (
@@ -253,7 +253,7 @@ const Pad: React.FC<{ children: React.ReactNode; justify?: "flex-end" | "center"
 
 // A slideshow of photos/clips inside one scene, crossfading. `dur` overrides `each` per item.
 type Slide = { src: string; filter?: string; position?: string; video?: boolean; band?: boolean; print?: boolean; wide?: boolean; lift?: number; dur?: number; tag?: string };
-const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ items, each, overlap = 12 }) => {
+export const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ items, each, overlap = 12 }) => {
   let at = 0;
   return (
     <>
@@ -287,7 +287,7 @@ const Slides: React.FC<{ items: Slide[]; each: number; overlap?: number }> = ({ 
 };
 
 // Small corner tag so real footage from past events isn't mistaken for the venue
-const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+export const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AbsoluteFill style={{ alignItems: "flex-start", padding: "250px 90px", justifyContent: "flex-start" }}>
     <div style={{ fontFamily: inter, fontWeight: 600, fontSize: 26, color: "rgba(244,239,230,.85)", background: "rgba(7,11,20,.55)", padding: "8px 16px", borderRadius: 8 }}>
       {children}
@@ -299,7 +299,7 @@ const Tag: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 
 const SEPIA = "sepia(.85) contrast(1.1) brightness(.85) saturate(.9)";
 // Faded, warm "memory" grade for the real school photos
-const MEMORY = "sepia(.4) contrast(1.05) brightness(.95) saturate(.85)";
+export const MEMORY = "sepia(.4) contrast(1.05) brightness(.95) saturate(.85)";
 
 const BugleScene: React.FC = () => {
   const frame = useCurrentFrame();

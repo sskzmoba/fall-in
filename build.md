@@ -115,8 +115,24 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       Avoid calling the trek a "trail" (the ride is the Forest Trail).
 - [ ] Ride form updated by its owner (text drafted 2026-10-26)
 - [ ] Message riders already registered for the Wayanad plan (change or withdraw)
-- [ ] Switch the main page to v2 after the user approves; also refresh `img/og.jpg` (copy `v2/` changes into root files,
-      point the film at the v4 file)
+- [x] Split trek and ride (decided 2026-10-26: the groups found the combined promo confusing).
+      One site, two sections, trek first (`#trek`, `#ride`). Short links with their own WhatsApp
+      previews: /trek and /trekking → `#trek` (`img/og-trek.jpg`), /ride and /bike → `#ride`
+      (`img/og-ride.jpg`); pages in `trek/`, `trekking/`, `ride/`, `bike/`. `app.js` scrolls to the hash
+      on load, because some in-app browsers skip the jump. The combined page stays archived at /v1/; the main ride
+      card is still the old Malabar/Wayanad one (switch it to the Forest Trail later).
+- [x] Trek film (2026-10-26): `TrekFilm` composition (`video/src/TrekFilm.tsx`, reuses FallIn helpers), 45 s:
+      school 0530 siren intro → "0400 hrs, by choice" → Kolukkumalai order of the day (stock: jeep, tents,
+      torch-lit climb, sunrise) → last year at Neyyar → batches already in → end card with /trek link.
+      Music "Americana" (Kevin MacLeod, CC BY 4.0) after the siren. Share copy
+      `video/out/Kazak-Trek-Kolukkumalai-film.mp4` (9.3 MB); web copy `film/trek-kolukkumalai.mp4` (4.7 MB),
+      the hero button and the trek-card tile play it. Batch/slot counts are from the public list on 26 Oct;
+      re-render if they go stale.
+- [ ] Ride film (45 s): no school intro; Kazak Riders logo, banner, bandana, stickers, flag from
+      `ride-photos/` (not committed); wildlife/sunflower stock; easy-rider style royalty-free music
+      (suggested "Neo Western", Kevin MacLeod); ends by pointing to the trek too
+- [ ] Ride section redesign with the Kazak Riders artefacts; switch the main ride card to the Forest Trail
+      after the user approves (v2 has the card); also refresh `img/og.jpg`
 - [ ] Ride public list (later, same pattern as the trek)
 - [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
 

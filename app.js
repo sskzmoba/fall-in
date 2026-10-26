@@ -32,13 +32,22 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+// ---- Short links (/trek, /ride) land on /#trek or /#ride: make sure we scroll there,
+// some in-app browsers (WhatsApp) skip the jump ----
+function goToHash() {
+  const el = location.hash && document.getElementById(location.hash.slice(1));
+  if (el) el.scrollIntoView({ behavior: "instant", block: "start" });
+}
+window.addEventListener("load", () => setTimeout(goToHash, 50));
+window.addEventListener("hashchange", goToHash);
+
 // ---- Sticky register dock: show after the hero ----
 const dock = document.getElementById("dock");
 new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersecting), { threshold: 0.1 })
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "FALL IN, KAZAKS! 🏍️ Malabar Days bike ride (23–25 Jan) & 🥾 Dawn @ Kolukkumalai trek (5–6 Dec). Every batch, one road. #KazakWanderlust · Ride booking open · Trek: book by 31 Oct:";
+const shareText = "FALL IN, KAZAKS! Two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, book by 31 Oct) & 🏍️ Kazak bike ride (23–25 Jan, booking open). #KazakWanderlust";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Fall In, Kazaks!", text: shareText, url: SITE_URL }); return; }
