@@ -188,6 +188,29 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
 - [x] Ride film v4 (Big Rock) published on /ride (2026-10-27): web copy film/ride-forest-trail.mp4 (720p, 6.6 MB), new poster +
       thumbnail from the sticker opening, labels "63 s". Sample-music version kept for group sharing only (music source unknown;
       ride-music-sample.mp3 and the unused sample clips are git-ignored).
+- [x] Ride film v5 (2026-10-27, local, Big Rock only), 63.1 s, story in order: sticker opening → archive parade print
+      "We marched under one flag." (bugle "Assembly") → riders' flag "Now we ride under one." (Big Rock enters) → "Our last
+      ride · Jan 2026": riders at the SSKZM gate "Out the same gate." (match cut), banner, roll-out, Coonoor, group "Back for
+      more." → "This time · January 2027" misty road → Forest Trail (kicker "Kazak Bike Ride") → route map restyled in the
+      film's type → chital, elephants, peacocks, hairpins (kept for the group's "show the attractions" ask) → one quick
+      viewfinder (tiger, bear, gaur) → "All batches. One road." then "Lead. Or keep pace." → end card + #KazakWanderlust.
+      Kit section removed; no ₹ on the end card (form and site show it). Scene cuts on Big Rock onsets. No free Dhimbam
+      hairpin photo on Commons, so the hairpin clip stays (illustrative). Share copy video/out/Kazak-Ride-Forest-Trail-v5.mp4
+      (15.2 MB). Not published. Next: 30 s Status cut after approval.
+- [x] Ride film v6 (2026-10-28, local), 61.1 s: no bugle, music starts on the parade; riders' real flag (cut out of
+      ride/flag.jpg → ride/flag-cut.png, on its stick, gentle sway + light pass) instead of the drawn one; last ride = gate →
+      roll-out → "Ride to Coonoor." (red shirts) → "Back for more." (banner dropped); "Jan 2026" → "Jan 2027" date flip
+      (kicker "Our last ride" → "This time") → "The forest roads are calling." → Forest Trail; route map ~7 s; elephant
+      gets the peacock's saddle pan. Two copies: video/out/Kazak-Ride-Forest-Trail-v6-WhatsApp.mp4 (ride sample's music,
+      group sharing only) and -v6-website.mp4 (Big Rock, for /ride). The "kolukkumalai-1.mp4" hairpin clip is
+      CYMATICS-watermarked internet footage (and the trek venue), not used. Not published.
+- [x] Ride film v7 (2026-10-28, local), 62 s: last ride = "Out the gates, Trivandrum." (school gate) → "Out the gates,
+      Bengaluru." (roll-out clip, confirmed Bengaluru start) → "One ride to Coonoor." → the group's drone pull-away
+      (ride-drone.mp4, sped up) fades out, then "Back for more." on its own; engine rev as 2026 rolls to 2027 (a muffled
+      "memory" version of the last ride's music was tried and dropped: it sounded like the music went missing); chital → elephant → peacocks as one continuous saddle pass on a single strip (soft 500 px
+      joins, clips slowed to stay on screen); hairpin count lands on a beat with a pop. Copies -v7-WhatsApp.mp4 (sample
+      music) and -v7-website.mp4 (Big Rock). Published on /ride 2026-10-28 (web copy film/ride-forest-trail.mp4, 720p,
+      6.7 MB; labels "62 s").
 - [x] Main page updated and published (2026-10-26): Forest Trail ride card (from v2), trek film v3,
       trek badge "Under 10 slots left", "nobody left behind" wording gone, batch strip gold = registered
       batches ('76 '82 '96 '98 '06 '07 '11 '16), new `img/og.jpg` (trek | ride split). Old versions moved to
