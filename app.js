@@ -32,6 +32,30 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
+// ---- Remember photos: move on one photo every 3.5 s and loop round; a touch pauses it for a few seconds ----
+const mem = document.querySelector(".memories");
+if (mem && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const copy = mem.firstElementChild.cloneNode(true); // a copy of photo 1 after photo 4, so the loop never jumps back visibly
+  copy.setAttribute("aria-hidden", "true");
+  mem.append(copy);
+  // fixed-width photos centred with equal side space, so every photo (and the copy) stops at the same place
+  mem.classList.add("loop");
+  const pad = () => { mem.style.paddingLeft = mem.style.paddingRight = (mem.clientWidth - copy.offsetWidth) / 2 + "px"; };
+  pad();
+  addEventListener("resize", pad);
+  const loopLen = () => copy.offsetLeft - mem.firstElementChild.offsetLeft;
+  const step = () => mem.children[1].offsetLeft - mem.children[0].offsetLeft;
+  let onScreen = false, holdUntil = 0, settle;
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; }, { threshold: 0.4 }).observe(mem);
+  ["pointerdown", "touchstart", "wheel"].forEach(ev => mem.addEventListener(ev, () => { holdUntil = Date.now() + 6000; }, { passive: true }));
+  // once scrolling stops on the copy of photo 1, swap to the real photo 1 without animation
+  mem.addEventListener("scroll", () => {
+    clearTimeout(settle);
+    settle = setTimeout(() => { if (mem.scrollLeft >= loopLen() - 4) mem.scrollTo({ left: mem.scrollLeft - loopLen(), behavior: "instant" }); }, 160);
+  }, { passive: true });
+  setInterval(() => { if (onScreen && Date.now() > holdUntil && !document.hidden) mem.scrollBy({ left: step(), behavior: "smooth" }); }, 3500);
+}
+
 // ---- One adventure at a time: ?a=trek or ?a=ride (from /trek and /ride) hides the other one ----
 const only = new URLSearchParams(location.search).get("a");
 if (only === "trek" || only === "ride") {

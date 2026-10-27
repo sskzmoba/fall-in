@@ -131,6 +131,7 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
   margin: 0 -24px 28px; padding: 0 24px 6px; scrollbar-width: none;
 }
 .memories::-webkit-scrollbar { display: none; }
+.memories.loop figure { flex: 0 0 min(76vw, 340px); }
 .memories figure { flex: 0 0 78%; max-width: 340px; margin: 0; scroll-snap-align: center; }
 .memories img { width: 100%; height: auto; border-radius: 12px; display: block; }
 .memories figcaption { margin-top: 10px; font: 500 1.15rem/1.25 var(--head); }
@@ -350,13 +351,6 @@ details > *:not(summary) { margin-top: 0; color: #d9d4ca; font-size: .95rem; }
 }
 
 /* Two separate adventures: season strip, section headers, cross-links */
-.season { display: flex; align-items: center; gap: 10px; margin: 0 0 6px; }
-.season__item { flex: 0 0 auto; display: flex; flex-direction: column; padding: 10px 14px; border-radius: 12px; color: #fff; text-decoration: none; line-height: 1.2; }
-.season__item b { font: 700 1rem var(--head); letter-spacing: 1px; text-transform: uppercase; }
-.season__item span { font-size: .85rem; opacity: .9; }
-.season__item--trek { background: linear-gradient(135deg, #2f9e5b, #1f7a43); }
-.season__item--ride { background: linear-gradient(135deg, #e31b23, #a90f15); }
-.season__line { flex: 1; height: 0; border-top: 2px dashed rgba(255,255,255,.35); }
 .season__note { margin: 0; font-size: .9rem; color: var(--muted); }
 .adventure { padding-top: 8px; }
 .adv-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin: 0 0 14px; padding-bottom: 10px; font: 700 1.5rem var(--head); letter-spacing: 1px; text-transform: uppercase; border-bottom: 3px solid; }
