@@ -55,10 +55,10 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "FALL IN, KAZAKS! Two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, book by 31 Oct) & 🏍️ Kazak bike ride (23–25 Jan, booking open). #KazakWanderlust";
+const shareText = "LET’S GO, KAZAKS! Saddle & Sole: two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, book by 31 Oct) & 🏍️ Kazak bike ride (23–25 Jan, booking open). #KazakWanderlust";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
-    try { await navigator.share({ title: "Fall In, Kazaks!", text: shareText, url: SITE_URL }); return; }
+    try { await navigator.share({ title: "Let’s go, Kazaks!", text: shareText, url: SITE_URL }); return; }
     catch (err) { if (err.name === "AbortError") return; }
   }
   window.open("https://wa.me/?text=" + encodeURIComponent(shareText + " " + SITE_URL), "_blank", "noopener");

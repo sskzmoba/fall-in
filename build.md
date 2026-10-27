@@ -7,8 +7,12 @@ Get more alumni (Kazaks) across all batches to sign up for the OBA trek and bike
 ride. One vertical, phone-first page plus a 9:16 promo video, circulated mainly on
 WhatsApp.
 
-## Theme (decided 2026-10-24)
-- Name: **FALL IN, KAZAKS — Adventures 2026–27**
+## Theme (decided 2026-10-24; renamed 2026-10-28)
+- Name: **LET'S GO, KAZAKS! — Saddle & Sole · Adventures 2026–27** (renamed 2026-10-28: "Fall in" read as an
+  order; "Saddle & Sole" = the bike seat and the trekking boot, with a hint of "soul"; always singular "Saddle & Sole").
+  Closing line "Saddle & Sole, here we come!". Trek film end card "Let's go · chase the dawn". Code and repo names
+  (fall-in, FallIn.tsx) unchanged on purpose. Avoid lines that can read as death ("be in the photo").
+- Old name: FALL IN, KAZAKS — Adventures 2026–27
 - Series label (decided 2026-10-24): **Kazak Wanderlust** (not used elsewhere before; meant to
   last beyond this season). Payoff line: site "The bugle is calling again — for the Kazak Wanderlust that never left us."; video "The Kazak Wanderlust never left us." Hashtag #KazakWanderlust.
 - Story: bonding across generations of batches; relive school-day dawns and

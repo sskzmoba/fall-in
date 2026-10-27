@@ -343,9 +343,9 @@ const End: React.FC = () => {
           <Img src={staticFile("oba-logo.png")} style={{ position: "relative", width: 280, height: 280, transform: `scale(${logo * pop}) rotate(${(1 - logo) * -40}deg)` }} />
         </div>
         <Rise delay={10}>
-          <Big size={124}>Fall in</Big>
+          <Big size={124}>Let’s go</Big>
           <Big size={124} color={C.amber}>
-            for the dawn
+            chase the dawn
           </Big>
         </Rise>
         <Rise delay={24}>

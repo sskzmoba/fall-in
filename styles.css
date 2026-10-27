@@ -75,6 +75,7 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
 }
 .hero .eyebrow { text-shadow: 0 1px 2px #000, 0 2px 12px rgba(0,0,0,.9); }
 .hero h1 { font-size: clamp(3.1rem, 15vw, 5.6rem); text-shadow: 0 4px 24px rgba(0,0,0,.5); }
+.hero__sub { margin: 8px 0 0; font: 600 clamp(1.05rem, 5vw, 1.35rem) var(--head); letter-spacing: 1.5px; color: #f4efe6; text-shadow: 0 2px 12px rgba(0,0,0,.8); }
 .hero__tag { margin: 14px 0 18px; font-size: 1.1rem; color: #e6e1d6; }
 
 .countdown {
