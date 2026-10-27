@@ -224,7 +224,7 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       switcher "Trek · Ride · Both"); /ride and /bike open `?a=ride#ride` (countdown hidden, hero plays the
       Forest Trail route teaser). CSS classes: `both-only`, `trek-only`, `ride-only`, `not-trek`, `not-ride`.
 - [x] Page tidy-up (2026-10-28): home hero has both "Watch the trek film · 46 s" and "Watch the bike ride film · 62 s";
-      Remember photos auto-advance every 3.5 s and loop (a copy of photo 1 after photo 4; pauses 6 s on touch; only while
+      Remember photos drift continuously (40 px/s, a second set of the photos for a seamless loop; pauses 4 s on touch; only while
       on screen; off for reduced-motion); card headers trimmed (trek: "Under 10 slots left" only, "By the Kazaks Trekking
       Club" moved under the title; ride: badges removed, "New route" tag kept); season chips removed (one note line
       left); Bengaluru/Kozhikode spelling; short month names (Dec 2026, Jan 2027) in headers, facts and hero tags.

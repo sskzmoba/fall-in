@@ -131,7 +131,7 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
   margin: 0 -24px 28px; padding: 0 24px 6px; scrollbar-width: none;
 }
 .memories::-webkit-scrollbar { display: none; }
-.memories.loop figure { flex: 0 0 min(76vw, 340px); }
+.memories.loop { scroll-snap-type: none; } /* drifting continuously, so no snapping */
 .memories figure { flex: 0 0 78%; max-width: 340px; margin: 0; scroll-snap-align: center; }
 .memories img { width: 100%; height: auto; border-radius: 12px; display: block; }
 .memories figcaption { margin-top: 10px; font: 500 1.15rem/1.25 var(--head); }

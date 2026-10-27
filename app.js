@@ -32,28 +32,30 @@ const io = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-// ---- Remember photos: move on one photo every 3.5 s and loop round; a touch pauses it for a few seconds ----
+// ---- Remember photos: a slow, continuous drift that loops round; a touch pauses it and lets people swipe ----
 const mem = document.querySelector(".memories");
 if (mem && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const copy = mem.firstElementChild.cloneNode(true); // a copy of photo 1 after photo 4, so the loop never jumps back visibly
-  copy.setAttribute("aria-hidden", "true");
-  mem.append(copy);
-  // fixed-width photos centred with equal side space, so every photo (and the copy) stops at the same place
+  // a second set of the photos after the first, so the drift can jump back by one set without anything visibly moving
+  const real = [...mem.children];
+  real.forEach(f => { const c = f.cloneNode(true); c.setAttribute("aria-hidden", "true"); mem.append(c); });
   mem.classList.add("loop");
-  const pad = () => { mem.style.paddingLeft = mem.style.paddingRight = (mem.clientWidth - copy.offsetWidth) / 2 + "px"; };
-  pad();
-  addEventListener("resize", pad);
-  const loopLen = () => copy.offsetLeft - mem.firstElementChild.offsetLeft;
-  const step = () => mem.children[1].offsetLeft - mem.children[0].offsetLeft;
-  let onScreen = false, holdUntil = 0, settle;
-  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; }, { threshold: 0.4 }).observe(mem);
-  ["pointerdown", "touchstart", "wheel"].forEach(ev => mem.addEventListener(ev, () => { holdUntil = Date.now() + 6000; }, { passive: true }));
-  // once scrolling stops on the copy of photo 1, swap to the real photo 1 without animation
-  mem.addEventListener("scroll", () => {
-    clearTimeout(settle);
-    settle = setTimeout(() => { if (mem.scrollLeft >= loopLen() - 4) mem.scrollTo({ left: mem.scrollLeft - loopLen(), behavior: "instant" }); }, 160);
-  }, { passive: true });
-  setInterval(() => { if (onScreen && Date.now() > holdUntil && !document.hidden) mem.scrollBy({ left: step(), behavior: "smooth" }); }, 3500);
+  const loopLen = () => mem.children[real.length].offsetLeft - mem.children[0].offsetLeft;
+  const SPEED = 40; // px per second: about one photo every 7 s
+  let onScreen = false, holdUntil = 0, pos = 0, last = 0;
+  new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; }, { threshold: 0.2 }).observe(mem);
+  ["pointerdown", "touchstart", "wheel"].forEach(ev => mem.addEventListener(ev, () => { holdUntil = performance.now() + 4000; }, { passive: true }));
+  const drift = now => {
+    const dt = last ? Math.min(now - last, 100) / 1000 : 0;
+    last = now;
+    if (now < holdUntil) pos = mem.scrollLeft; // someone is swiping: carry on from wherever they leave it
+    else if (onScreen && !document.hidden) {
+      pos += SPEED * dt;
+      if (pos >= loopLen()) pos -= loopLen();
+      mem.scrollLeft = pos;
+    }
+    requestAnimationFrame(drift);
+  };
+  requestAnimationFrame(drift);
 }
 
 // ---- One adventure at a time: ?a=trek or ?a=ride (from /trek and /ride) hides the other one ----
