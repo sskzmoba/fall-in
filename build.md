@@ -209,12 +209,15 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       group sharing only) and -v6-website.mp4 (Big Rock, for /ride). The "kolukkumalai-1.mp4" hairpin clip is
       CYMATICS-watermarked internet footage (and the trek venue), not used. Not published.
 - [x] Ride film v7 (2026-10-28, local), 62 s: last ride = "Out the gates, Trivandrum." (school gate) → "Out the gates,
-      Bengaluru." (roll-out clip, confirmed Bengaluru start) → "One ride to Coonoor." → the group's drone pull-away
+      Bengaluru." (roll-out clip; later found to be the Ooty guest house, see v8) → "One ride to Coonoor." → the group's drone pull-away
       (ride-drone.mp4, sped up) fades out, then "Back for more." on its own; engine rev as 2026 rolls to 2027 (a muffled
       "memory" version of the last ride's music was tried and dropped: it sounded like the music went missing); chital → elephant → peacocks as one continuous saddle pass on a single strip (soft 500 px
       joins, clips slowed to stay on screen); hairpin count lands on a beat with a pop. Copies -v7-WhatsApp.mp4 (sample
       music) and -v7-website.mp4 (Big Rock). Published on /ride 2026-10-28 (web copy film/ride-forest-trail.mp4, 720p,
       6.7 MB; labels "62 s").
+- [x] Ride film v8 (2026-10-28): one fix, the roll-out clip is riders leaving the Ooty guest house, not Bengaluru:
+      "Out the gates, Ooty." (credit "Ooty, Jan 2026"); "Out the gates" kept on both lines. Copies -v8-WhatsApp.mp4
+      (sample music) and -v8-website.mp4 (Big Rock); published on /ride 2026-10-28 (film/ride-forest-trail.mp4).
 - [x] Main page updated and published (2026-10-26): Forest Trail ride card (from v2), trek film v3,
       trek badge "Under 10 slots left", "nobody left behind" wording gone, batch strip gold = registered
       batches ('76 '82 '96 '98 '06 '07 '11 '16), new `img/og.jpg` (trek | ride split). Old versions moved to

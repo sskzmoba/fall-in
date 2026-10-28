@@ -7,7 +7,7 @@ import { Sticker } from "./RideKit";
 import { MapShade, RouteMap, type Times } from "./RouteTeaser";
 
 // v7, ~62 s ride-only film, in story order: the sticker on the bike → "We marched under one flag" (school parade) →
-// "Now we ride under one" (the riders' real flag) → our last ride, Jan 2026 (out the gates at Trivandrum and Bengaluru,
+// "Now we ride under one" (the riders' real flag) → our last ride, Jan 2026 (out the gates at Trivandrum and Ooty,
 // one ride to Coonoor, the drone pulling away, "Back for more.") → the date flips to 2027 with an engine rev → misty road, THE FOREST TRAIL → route → one continuous pass from the saddle (chital, elephant,
 // peacocks) → 27 hairpins → if you're lucky → riders → book. One grade and grain over everything; cuts sit on Big Rock onsets.
 const T = {
@@ -252,7 +252,7 @@ const Drone: React.FC = () => (
   </AbsoluteFill>
 );
 
-// Our last ride: out the gates at Trivandrum (the school gate, a match cut from the parade) and Bengaluru, one ride to
+// Our last ride: out the gates at Trivandrum (the school gate, a match cut from the parade) and Ooty, one ride to
 // Coonoor, then the drone pulls away and fades; "Back for more." comes up on its own and is the last thing to go
 const LAST = { roll: 75, coonoor: 149, drone: 216, words: 300 };
 const LastYear: React.FC = () => (
@@ -273,9 +273,9 @@ const LastYear: React.FC = () => (
           <Band>
             <Clip src="ride/gate-rollout.mp4" dur={LAST.coonoor - LAST.roll + 10} startFrom={13 * 30} rate={1.5} position="55% center" from={1.02} to={1.06} />
           </Band>
-          <Credit>Kazak Rider Group · Bengaluru, Jan 2026</Credit>
+          <Credit>Kazak Rider Group · Ooty, Jan 2026</Credit>
           <Low>
-            <Words delay={6} a="Out the gates," b="Bengaluru." />
+            <Words delay={6} a="Out the gates," b="Ooty." />
           </Low>
         </AbsoluteFill>
       </Fade>
