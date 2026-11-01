@@ -1,5 +1,5 @@
-// Trek booking deadline: 31 Oct 2026, 11:59 PM IST (the ride has no fixed deadline: "Booking open")
-const DEADLINE = new Date("2026-10-31T23:59:59+05:30");
+// Trek booking deadline: 7 Nov 2026, 11:59 PM IST (final extension; was 31 Oct) (the ride has no fixed deadline: "Booking open")
+const DEADLINE = new Date("2026-11-07T23:59:59+05:30");
 const SITE_URL = "https://adventures.sskzmoba.org/";
 
 // ---- Countdown ----
@@ -63,7 +63,7 @@ const only = new URLSearchParams(location.search).get("a");
 if (only === "trek" || only === "ride") {
   document.body.classList.add("only-" + only);
   if (only === "ride") document.getElementById("dock-label").textContent = "Forest Trail · booking open";
-  else if (DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "Under 10 slots left · trek closes 31 Oct";
+  else if (DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "6 seats left · trek closes 7 Nov";
 }
 
 // ---- Short links (/trek, /ride) land on /#trek or /#ride: make sure we scroll there,
@@ -81,7 +81,7 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "LET’S GO, KAZAKS! Saddle & Sole: two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, book by 31 Oct) & 🏍️ Kazak bike ride (23–25 Jan, booking open). #KazakWanderlust";
+const shareText = "LET’S GO, KAZAKS! Saddle & Sole: two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, final extension: book by 7 Nov) & 🏍️ Kazak bike ride (23–25 Jan, booking open). #KazakWanderlust";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Let’s go, Kazaks!", text: shareText, url: SITE_URL }); return; }

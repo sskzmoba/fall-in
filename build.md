@@ -24,7 +24,7 @@ WhatsApp.
 | | Trek — Dawn @ Kolukkumalai | Ride — Malabar Days |
 |---|---|---|
 | Dates | 5–6 Dec 2026 | 23–25 Jan 2027 |
-| Book by | 31 Oct 2026 (balance by 7 Nov) | Shown as "Booking open", no date (decided 2026-10-25; form unchanged) |
+| Book by | Final extension to 7 Nov 2026 (was 31 Oct; decided 2026-11-01), full balance also by 7 Nov | Shown as "Booking open", no date (decided 2026-10-25; form unchanged) |
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
 | Form | https://forms.gle/KUhAgv8AGcXqcKAm6 | https://forms.gle/ZjN7RkG1J6H9Q6247 |
@@ -117,7 +117,10 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       "Two adventures · Join one, or both" split card after "calling again", chapter eyebrows,
       red→green wipe into the trek, end card "Book one, or both · Separate forms on the site".
       Avoid calling the trek a "trail" (the ride is the Forest Trail).
-- [ ] Ride form updated by its owner (text drafted 2026-10-26)
+- [x] Ride form updated (2026-10-31): title "Kazak Bike Ride | The Forest Trail" (file "… | Jan 2027 | Booking"), Forest Trail
+      route + halts, "Wayanad dropped, booking carries over" note, Kozhikode group option, "Room preference at the halts",
+      Wayanad/Kannur question deleted (old answers stay in responses), new required "optional 4th day (26 Jan)" question,
+      no booking deadline anywhere (31 Oct removed). Form link unchanged.
 - [ ] Message riders already registered for the Wayanad plan (change or withdraw)
 - [x] Split trek and ride (decided 2026-10-26: the groups found the combined promo confusing).
       One site, two sections, trek first (`#trek`, `#ride`). Short links with their own WhatsApp
@@ -234,7 +237,14 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       Font sizes kept: audience includes batch '65.
 - [ ] Ride section redesign with the Kazak Riders artefacts (ride-photos/)
 - [ ] Ride public list (later, same pattern as the trek)
-- [ ] After 31 Oct: switch the trek card to "Bookings closed / waitlist" (countdown does this automatically)
+- [x] Trek final extension (2026-11-01, organiser Manu: 20 booked = 16 Kazaks + 4 spouses, 6 of 26 seats left): deadline 7 Nov
+      everywhere (countdown "Final extension · trek bookings close 7 Nov", card "Final extension: book & pay by 7 Nov", badge
+      "6 seats left", dock, share text, /trek + /trekking previews); WhatsApp preview images re-made (`img/og.jpg`, `img/og-trek.jpg`,
+      linked with `?v=7nov` so WhatsApp fetches them again); trek card links the Kazaks Trekking Club WhatsApp group
+      (chat.whatsapp.com/IkI6djTVhYu0gOq3FESk1K); batch '89 added (gold) on the site and in the trek film; trek film v4 end card
+      "FINAL EXTENSION · Book by 7 Nov" (share copy `video/out/Kazak-Trek-Kolukkumalai-film-v4.mp4`). The countdown switches to
+      "closed / waitlist" by itself after 7 Nov.
+- [ ] Trek form: owner (Vinod) to change the 31 Oct rule to 7 Nov and add payment details (UPI to Manu) in the form description
 
 ## Registration sheets (trek, set up 2026-10-25)
 - Form responses: workbook `1JqRSsMf_n9MePiLzTsrc-KPZ4M_pqlTBrKXJB6yMJUA` (tab "Form Responses 1";

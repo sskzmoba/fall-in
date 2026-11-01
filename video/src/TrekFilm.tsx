@@ -214,10 +214,10 @@ const LastYear: React.FC = () => (
   </AbsoluteFill>
 );
 
-// Batch years on screen: those already registered for the trek (public list, 26 Oct) light up in gold.
+// Batch years on screen: those already registered for the trek (public list, 1 Nov) light up in gold.
 // Only batches known to exist (see build.md).
-const ALL_BATCHES = ["’65", "’76", "’82", "’93", "’96", "’98", "’99", "’06", "’07", "’11", "’16"];
-const IN_BATCHES = new Set(["’76", "’82", "’98", "’06", "’07"]);
+const ALL_BATCHES = ["’65", "’76", "’82", "’89", "’93", "’96", "’98", "’99", "’06", "’07", "’11", "’16"];
+const IN_BATCHES = new Set(["’76", "’82", "’89", "’98", "’06", "’07"]);
 
 const Batches: React.FC = () => {
   const frame = useCurrentFrame();
@@ -352,7 +352,8 @@ const End: React.FC = () => {
           <Pill bg={GREEN}>🥾 Kazak Trek · 5–6 Dec</Pill>
         </Rise>
         <Rise delay={36}>
-          <Big size={72}>Book by 31 Oct</Big>
+          <Body size={44} color={C.amber} weight={800}>FINAL EXTENSION</Body>
+          <Big size={72}>Book by 7 Nov</Big>
         </Rise>
         <Rise delay={48}>
           <Body size={50} color={C.amber}>
