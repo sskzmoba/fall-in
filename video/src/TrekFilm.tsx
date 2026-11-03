@@ -353,7 +353,7 @@ const End: React.FC = () => {
         </Rise>
         <Rise delay={36}>
           <Body size={44} color={C.amber} weight={800}>FINAL EXTENSION</Body>
-          <Big size={72}>Book by 7 Nov</Big>
+          <Big size={72}>Book by 15 Nov</Big>
         </Rise>
         <Rise delay={48}>
           <Body size={50} color={C.amber}>

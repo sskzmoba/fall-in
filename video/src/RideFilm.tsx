@@ -648,7 +648,7 @@ const End: React.FC<{ credit: string }> = ({ credit }) => {
           </div>
         </Rise>
         <Rise delay={48}>
-          <Kick color={C.cream}>Booking open</Kick>
+          <Kick color={C.cream}>Book by 15 Nov</Kick>
           <div style={{ marginTop: 14, fontFamily: barlow, fontWeight: 600, fontSize: 44, color: C.amber }}>adventures.sskzmoba.org/ride</div>
           <div style={{ marginTop: 22, fontFamily: barlow, fontWeight: 500, fontSize: 30, letterSpacing: 3, color: "rgba(244,239,230,.7)" }}>#KazakWanderlust</div>
         </Rise>

@@ -24,7 +24,7 @@ WhatsApp.
 | | Trek — Dawn @ Kolukkumalai | Ride — Malabar Days |
 |---|---|---|
 | Dates | 5–6 Dec 2026 | 23–25 Jan 2027 |
-| Book by | Final extension to 7 Nov 2026 (was 31 Oct; decided 2026-11-01), full balance also by 7 Nov | Shown as "Booking open", no date (decided 2026-10-25; form unchanged) |
+| Book by | Final extension to 15 Nov 2026 (was 31 Oct, then 7 Nov; decided 2026-11-03), full balance also by 15 Nov | 15 Nov 2026 (decided 2026-11-03; was "Booking open") |
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
 | Form | https://forms.gle/KUhAgv8AGcXqcKAm6 | https://forms.gle/ZjN7RkG1J6H9Q6247 |
@@ -244,7 +244,11 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       (chat.whatsapp.com/IkI6djTVhYu0gOq3FESk1K); batch '89 added (gold) on the site and in the trek film; trek film v4 end card
       "FINAL EXTENSION · Book by 7 Nov" (share copy `video/out/Kazak-Trek-Kolukkumalai-film-v4.mp4`). The countdown switches to
       "closed / waitlist" by itself after 7 Nov.
-- [ ] Trek form: owner (Vinod) to change the 31 Oct rule to 7 Nov and add payment details (UPI to Manu) in the form description
+- [x] Both bookings close 15 Nov (decided 2026-11-03): site (countdown, cards, dock, share text, short-link previews), preview
+      images (`?v=15nov`), trek and ride forms; after 15 Nov the countdown shows "Bookings closed" for both. Trek film v5 end card
+      "Book by 15 Nov" (share `video/out/Kazak-Trek-Kolukkumalai-film-v5.mp4`); ride film v9 end card "Book by 15 Nov" (share
+      `-v9-WhatsApp.mp4`, sample music; `-v9-website.mp4`, Big Rock). "6 seats left" is still the 1 Nov figure.
+- [ ] Trek form: add payment details (UPI to Manu) in the form description; needs the UPI ID from Manu
 
 ## Registration sheets (trek, set up 2026-10-25)
 - Form responses: workbook `1JqRSsMf_n9MePiLzTsrc-KPZ4M_pqlTBrKXJB6yMJUA` (tab "Form Responses 1";
