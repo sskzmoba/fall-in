@@ -63,7 +63,7 @@ const only = new URLSearchParams(location.search).get("a");
 if (only === "trek" || only === "ride") {
   document.body.classList.add("only-" + only);
   if (only === "ride" && DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "Forest Trail · book by 15 Nov";
-  else if (only === "trek" && DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "6 seats left · trek closes 15 Nov";
+  else if (only === "trek" && DEADLINE > Date.now()) document.getElementById("dock-label").textContent = "Trek full · join the waitlist";
 }
 
 // ---- Short links (/trek, /ride) land on /#trek or /#ride: make sure we scroll there,
@@ -81,7 +81,7 @@ new IntersectionObserver(([e]) => dock.classList.toggle("show", !e.isIntersectin
   .observe(document.querySelector(".hero"));
 
 // ---- Share ----
-const shareText = "LET’S GO, KAZAKS! Saddle & Sole: two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, final extension: book by 15 Nov) & 🏍️ Kazak bike ride (23–25 Jan, book by 15 Nov). #KazakWanderlust";
+const shareText = "LET’S GO, KAZAKS! Saddle & Sole: two adventures, join one or both: 🥾 Dawn @ Kolukkumalai trek (5–6 Dec, full: waitlist open) & 🏍️ Kazak bike ride (23–26 Jan, book by 15 Nov). #KazakWanderlust";
 document.getElementById("share-btn").addEventListener("click", async () => {
   if (navigator.share) {
     try { await navigator.share({ title: "Let’s go, Kazaks!", text: shareText, url: SITE_URL }); return; }

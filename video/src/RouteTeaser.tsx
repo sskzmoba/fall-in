@@ -184,7 +184,6 @@ export const RouteMap: React.FC<{ T?: Times }> = ({ T = TEASER_T }) => {
 
             <Town n="bengaluru" label="Bengaluru" show={T.d1[0] - 15} big />
             <Town n="kochi" label="Kochi" show={T.d1[0] - 15} big />
-            <Town n="kozhikode" label="Kozhikode" show={T.d1[0] - 15} hide={T.zoom[0]} big />
             <Town n="coimbatore" label="Coimbatore" show={along(T.d1, 0.8)} big halt dy={50} dx={-26} />
             <Town n="sathy" label="Sathyamangalam" show={along(T.d2, 0.45)} dx={-20} dy={44} />
             <Town n="dhimbam" label="Dhimbam Ghat" show={along(T.d2, 0.7)} dy={-16} dx={26} />
@@ -202,7 +201,7 @@ export const RouteMap: React.FC<{ T?: Times }> = ({ T = TEASER_T }) => {
 
 // ---------- Text and photos ----------
 
-export const RouteHeader: React.FC<{ eyebrow?: string }> = ({ eyebrow = "NEW ROUTE · 23–25 JAN 2027" }) => {
+export const RouteHeader: React.FC<{ eyebrow?: string }> = ({ eyebrow = "NEW ROUTE · 23–26 JAN 2027" }) => {
   const frame = useCurrentFrame();
   const o = interpolate(frame, [5, 25], [0, 1], clamp);
   const y = interpolate(frame, [5, 25], [30, 0], { ...clamp, easing: Easing.out(Easing.cubic) });
@@ -265,10 +264,10 @@ const EndPanel: React.FC = () => {
   return (
     <AbsoluteFill style={{ top: 1470, padding: "0 70px", opacity: o }}>
       <div style={{ fontFamily: stencil, fontSize: 66, color: C.cream }}>
-        2 Ghats · 3 days · <span style={{ color: C.red }}>1 squad</span>
+        2 Ghats · 4 days · <span style={{ color: C.red }}>1 squad</span>
       </div>
       <div style={{ fontFamily: inter, fontWeight: 600, fontSize: 36, color: C.muted, marginTop: 14, lineHeight: 1.35 }}>
-        <span style={{ color: C.amber }}>Chosen by the riders.</span> Stay on for Republic Day (26 Jan) if you like.
+        <span style={{ color: C.amber }}>Chosen by the riders.</span> Bengaluru and Kochi groups, 23–26 Jan.
       </div>
       <div style={{ fontFamily: inter, fontWeight: 800, fontSize: 40, color: C.amber, marginTop: 18 }}>adventures.sskzmoba.org</div>
     </AbsoluteFill>
@@ -287,7 +286,7 @@ export const RouteTeaser: React.FC = () => (
     <RouteHeader />
 
     <Sequence from={45} durationInFrames={80}>
-      <DayLabel text="DAY 1 · Ride in" sub="Bengaluru, Kochi & Kozhikode → Coimbatore" />
+      <DayLabel text="DAY 1 · Ride in" sub="Bengaluru & Kochi → Coimbatore" />
     </Sequence>
     <Sequence from={125} durationInFrames={115}>
       <DayLabel text="DAY 2 · Sathyamangalam" sub="Bhavanisagar, forest villages, Dhimbam hairpins" />
@@ -296,7 +295,7 @@ export const RouteTeaser: React.FC = () => (
       <DayLabel text="DAY 3 · Bandipur" sub="Elephant country → Gudalur" />
     </Sequence>
     <Sequence from={325} durationInFrames={60}>
-      <DayLabel text="Home run" sub="Via Nilambur or Mysuru · +1 day optional" />
+      <DayLabel text="Home run" sub="Day 4 · back home, 26 Jan" />
     </Sequence>
     <Sequence from={385}>
       <EndPanel />

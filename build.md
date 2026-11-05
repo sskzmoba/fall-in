@@ -23,7 +23,7 @@ WhatsApp.
 ## Events
 | | Trek — Dawn @ Kolukkumalai | Ride — Malabar Days |
 |---|---|---|
-| Dates | 5–6 Dec 2026 | 23–25 Jan 2027 |
+| Dates | 5–6 Dec 2026 | 23–26 Jan 2027, 4 days (decided 2026-11-03; site and film updated 2026-11-06) |
 | Book by | Final extension to 15 Nov 2026 (was 31 Oct, then 7 Nov; decided 2026-11-03), full balance also by 15 Nov | 15 Nov 2026 (decided 2026-11-03; was "Booking open") |
 | Advance | ₹2,000 | ₹2,500 |
 | Cost | ₹5,000 (₹3,600 direct) | ₹13,000–15,000 |
@@ -235,6 +235,14 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       Club" moved under the title; ride: badges removed, "New route" tag kept); season chips removed (one note line
       left); Bengaluru/Kozhikode spelling; short month names (Dec 2026, Jan 2027) in headers, facts and hero tags.
       Font sizes kept: audience includes batch '65.
+- [x] Ride form (2026-11-03): 23–26 Jan, 4 days; Bengaluru and Kochi groups only, Kozhikode option removed (others use "Other", e.g.
+      travel from Kozhikode and join at Sathyamangalam, or start from Chennai); optional 4th-day question deleted.
+- [x] 23–26 Jan + trek full (2026-11-06): site, short-link previews, `forest-trail.ics`, ride film v10 (share `-v10-WhatsApp.mp4`, sample
+      music; `-v10-website.mp4`, Big Rock; web `film/ride-forest-trail.mp4`) and route teaser say 23–26 Jan, 4 days, Bengaluru & Kochi
+      groups (Kozhikode marker gone from the map). Trek form 2026-11-06: 21 Kazaks + 5 family = 26 of 26, 10 report payment, 11 "Not paid";
+      site now says "Full · waitlist open" (badge, card, countdown, dock, previews `?v=6nov`); form stays open as the waitlist.
+      Trek film still says "Under 10 slots left · BOOK FAST" (not re-rendered).
+- [ ] Trek organisers: chase the 11 unpaid; release unpaid seats to the waitlist after 15 Nov.
 - [ ] Ride section redesign with the Kazak Riders artefacts (ride-photos/)
 - [ ] Ride public list (later, same pattern as the trek)
 - [x] Trek final extension (2026-11-01, organiser Manu: 20 booked = 16 Kazaks + 4 spouses, 6 of 26 seats left): deadline 7 Nov
@@ -248,7 +256,7 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       images (`?v=15nov`), trek and ride forms; after 15 Nov the countdown shows "Bookings closed" for both. Trek film v5 end card
       "Book by 15 Nov" (share `video/out/Kazak-Trek-Kolukkumalai-film-v5.mp4`); ride film v9 end card "Book by 15 Nov" (share
       `-v9-WhatsApp.mp4`, sample music; `-v9-website.mp4`, Big Rock). "6 seats left" is still the 1 Nov figure.
-- [ ] Trek form: add payment details (UPI to Manu) in the form description; needs the UPI ID from Manu
+- [x] Trek form: payment line added to the description (2026-11-03): UPI to Manu Mohan on Manu's phone number, ₹2,000 advance or full cost
 
 ## Registration sheets (trek, set up 2026-10-25)
 - Form responses: workbook `1JqRSsMf_n9MePiLzTsrc-KPZ4M_pqlTBrKXJB6yMJUA` (tab "Form Responses 1";

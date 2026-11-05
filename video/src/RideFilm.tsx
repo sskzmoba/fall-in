@@ -330,7 +330,7 @@ const Intro: React.FC = () => (
         </Title>
       </Rise>
       <Rise delay={26}>
-        <div style={{ marginTop: 18, fontFamily: barlow, fontWeight: 500, fontSize: 40, letterSpacing: 2, color: C.cream }}>23–25 January · +1 optional day on the 26th</div>
+        <div style={{ marginTop: 18, fontFamily: barlow, fontWeight: 500, fontSize: 40, letterSpacing: 2, color: C.cream }}>23–26 January 2027 · 4 days</div>
       </Rise>
     </Low>
   </AbsoluteFill>
@@ -408,7 +408,7 @@ const RideRoute: React.FC = () => (
       <RouteCard src="route/nilambur.jpg" caption="Nilambur · world’s oldest teak" len={50} />
     </Sequence>
     <Sequence from={8} durationInFrames={37}>
-      <RouteDay day="Day 1" title="Ride in" sub="Bengaluru, Kochi & Kozhikode → Coimbatore" />
+      <RouteDay day="Day 1" title="Ride in" sub="Bengaluru & Kochi → Coimbatore" />
     </Sequence>
     <Sequence from={45} durationInFrames={67}>
       <RouteDay day="Day 2" title="Sathyamangalam" sub="Dam, forest villages, 27 hairpins" />
@@ -417,7 +417,7 @@ const RideRoute: React.FC = () => (
       <RouteDay day="Day 3" title="Bandipur" sub="Elephant country → Gudalur" />
     </Sequence>
     <Sequence from={160}>
-      <RouteDay day="Home run" title="Nilambur or Mysuru" sub="+1 optional day on the 26th" />
+      <RouteDay day="Day 4" title="Home run" sub="Back home on the 26th" />
     </Sequence>
   </AbsoluteFill>
 );
@@ -644,7 +644,7 @@ const End: React.FC<{ credit: string }> = ({ credit }) => {
         </Rise>
         <Rise delay={36}>
           <div style={{ margin: "34px 0 26px" }}>
-            <Pill bg={C.red}>The Forest Trail · 23–25 Jan</Pill>
+            <Pill bg={C.red}>The Forest Trail · 23–26 Jan</Pill>
           </div>
         </Rise>
         <Rise delay={48}>
