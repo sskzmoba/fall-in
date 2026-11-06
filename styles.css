@@ -192,6 +192,7 @@ h1, h2, h3 { margin: 0; line-height: 1.05; }
 .facts li { position: relative; padding-left: 30px; }
 .facts li > span:first-child { position: absolute; left: 0; top: 0; }
 .facts small { color: var(--muted); }
+.facts small.hi { color: #fff; }
 .card__pitch { margin: 18px 0 14px; padding-left: 14px; border-left: 3px solid var(--amber); color: #e6e1d6; }
 
 details {
