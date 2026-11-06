@@ -242,6 +242,10 @@ Nostalgia facts: 5:30 AM mess siren (not a bugle); bugle was for drill; "Morning
       groups (Kozhikode marker gone from the map). Trek form 2026-11-06: 21 Kazaks + 5 family = 26 of 26, 10 report payment, 11 "Not paid";
       site now says "Full · waitlist open" (badge, card, countdown, dock, previews `?v=6nov`); form stays open as the waitlist.
       Trek film still says "Under 10 slots left · BOOK FAST" (not re-rendered).
+- [x] Ride cost wording (2026-11-06, EC call): ~₹6,000 pooled with the group (3 nights' stay, standard meals, basic amenities; the
+      ₹2,500 token counts towards it) + personal spends (fuel, travel, personal) = estimated total ₹13,000–15,000 per head. Same
+      wording on the ride form description, the site ride card and the community email. Ride form confirmation message fixed
+      (was "Malabar Days", "31 October").
 - [ ] Trek organisers: chase the 11 unpaid; release unpaid seats to the waitlist after 15 Nov.
 - [ ] Ride section redesign with the Kazak Riders artefacts (ride-photos/)
 - [ ] Ride public list (later, same pattern as the trek)
